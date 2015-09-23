@@ -1,0 +1,183 @@
+'use strict';
+
+(function(){
+
+  var app = angular.module('74App');
+  var quickList = function fxPanel_($templateRequest, $compile, $interpolate, transcludeHelper) {
+
+    var utils = transcludeHelper;
+
+    function link(scope, element, attrs){
+      $templateRequest('scripts/core/quicklist.dir.html').then(
+        function(html){
+          var templateContent = angular.element(html);
+          utils.templateContent = templateContent;
+          utils.userTemplateContent = templateOriginal;
+          utils.userContent = element;
+          utils.copyContentGroup("header", '#headerContent');
+          //utils.copyContentGroup("content", '#bodyContent');
+          utils.copyContentGroup("footer", '#footerContent');
+
+          var showPanel = utils.ifDefinedAddTo(attrs.title, '#headerContent');
+
+          utils.copyContentGroup("subHeaderContent", '#subHeaderContent');
+          utils.ifDefinedAddTo(attrs.subtitle, '#subHeaderContent');
+
+          utils.copyContentGroup2("list", '#listContent');
+          //$interpolate(attrs.items)($scope);
+
+
+          var wrapList = '<md-list-item class="md-3-line" ng-repeat="item in items" ng-click="goTo(item)"></md-list-item>'
+          utils.ifContentDefinedAddTo('item-renderer', '#listContent', wrapList);
+
+          html = utils.templateContent[0];
+
+
+          var selectedItem = scope.items[parseInt(attrs.selectedIndex)];
+          if ( selectedItem )
+            selectedItem.selected = true;
+
+          element.append($compile(html)(scope));
+
+
+
+          element.bind('click', function (event) {
+            if ( event.target.id === 'btnC') {
+              controllerReference.$scope.selectIndex(3);
+            }
+            //console.log(event.target.id, event);
+            return;
+            scope.model[attrs.selectedIndex] = "New value";
+            scope.$apply();
+          });
+
+
+
+        }
+      )
+
+      controllerReference.directiveScope = scope;
+
+      scope.$watch('selectedIndex', function(a,b) {
+        var item = scope.items[b];
+        console.log('controllerReference', controllerReference.inited, item);
+        if ( controllerReference.inited != true ) {
+          return;
+        }
+        controllerReference.$scope.select(item);
+      });
+
+      scope.$watch('items', function(a,b) {
+        console.log('top items set', scope.$id, scope.items, scope.items2, 'to' , b );
+        controllerReference.$scope.items = b;
+      });
+
+
+      console.log('init test', scope.$id, controllerReference.$id );
+      //scope.$id = Math.random();
+      controllerReference.$id = Math.random();
+      console.log('top', scope.$id, scope.title, scope.items, scope.items2 );
+
+
+    };
+
+    var templateOriginal = null;
+    var controllerReference = null;
+    var compile = function (tElem, attrs) {
+
+      templateOriginal = tElem.clone();
+
+      function defineDirectiveDefaults() {
+        if ( attrs.selectedIndex === null  ) {
+          attrs['selectedIndex'] = "-1";
+        };
+      }
+      defineDirectiveDefaults();
+
+      return {
+        pre: function(scope, element, attrs, controller){
+          controllerReference = controller;
+          return;
+        },
+        post: link
+      };
+    }
+    return {
+      scope: {
+        name: '@',
+        items2:'@',
+        items: '=',
+        fxSelectItem: '&',
+        fxItemSelected: '&',
+        selectedIndex: '='
+      },
+      controller: 'AppCtrl',
+      controllerAs: 'vmC',
+        bindToController:true,
+      // button ng-click="fxSelectItem"
+      //link: link ,
+      compile: compile
+      // templateUrl: 'scripts/core/header.menu.html'
+    };
+  };
+
+  app.directive('quickList', quickList);
+
+  var AppCtrl = function AppCtrl_ ($scope) {
+    var ctrl = this;
+
+    var imagePath = 'https://material.angularjs.org/img/list/60.jpeg';
+    $scope.phones = [
+      { type: 'Home', number: '(555) 251-1234' },
+      { type: 'Cell', number: '(555) 786-9841' },
+    ];
+
+    $scope.goTo=function (item) {
+      console.log('input', item);
+      if ( item === $scope.selectedItem ) {
+        return;
+      }
+      item.selected = true;
+      if ( $scope.selectedItem != null ) {
+        $scope.selectedItem.selected = false;
+      }
+      $scope.selectedItem = item;
+      if ( ctrl.directiveScope )
+        if (ctrl.directiveScope.fxItemSelected()==null) {
+          return;
+        }
+      ctrl.directiveScope.fxItemSelected()(item); //onSelectMenuItem
+    }
+
+
+    $scope.test = function () {
+      console.log('test','...')
+    }
+
+    $scope.select = function selectItem(item) {
+      console.log('select', item, '...change')
+      $scope.goTo(item);
+    }
+
+
+    $scope.selectIndex = function selectIndex(index) {
+      $scope.$apply(function () {
+        console.log('selectIndex', index);
+        var item = $scope.items[index];
+        $scope.goTo(item);
+      });
+    }
+
+    this.$scope = $scope;
+
+    this.inited = true;
+  }
+
+  //angular.module('listDemo1', ['ngMaterial'])
+  app
+    .config(function($mdIconProvider) {
+      $mdIconProvider
+        .iconSet('communication', 'img/icons/sets/communication-icons.svg', 24);
+    })
+    .controller('AppCtrl', AppCtrl);
+}());

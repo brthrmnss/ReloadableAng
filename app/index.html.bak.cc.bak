@@ -1,0 +1,205 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css"/>
+
+  <!-- endbuild -->
+  <!-- #build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/list_styles.css"/>
+  <!-- endbuild -->
+  <!-- #build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/material_styles.css"/>
+  <!-- endbuild -->
+</head>
+<body ng-app="74App">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div style="height: 0px" >
+  <img src="images/campaign_content.png" />
+</div>
+
+<div ng-controller="MainCCCtrl" id="holderMainApp"  layout="vertical"  class="mainArea ddoc-content demo-container _md-whiteframe-z1">
+  <div ng-controller="MainDialogController as dialogCtrl"  layout="vertical" class="mainArea2"  >
+    <section layout="row" flex  style="align-items: stretch; align-content: stretch; min-height:-webkit-min-content;">
+      <md-sidenav id="sideNav1" class="sideNav1 _md-sidenav-left _md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-theme-indigo">
+
+        </md-toolbar>
+        <md-content layout-padding ng-controller="LeftCtrl">
+          <md-button ng-click="close()" class="md-primary" hide-gt-md>
+            Close Sidenav Left
+          </md-button>
+          <p hide-md show-gt-md>
+            This sidenav is locked open on your device. To go back to the default behavior,
+            narrow your display.
+            <md-button ng-click="close()" class="md-primary"  >
+              Close Sidenav Left
+            </md-button>
+          </p>
+        </md-content>
+      </md-sidenav>
+
+      <md-sidenav class="sideNav2 md-sidenav-left md-whiteframe-z2" md-component-id="left2" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-theme-indigo">
+          <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        </md-toolbar>
+        <md-content layout-padding ng-controller="LeftCtrl">
+          <md-button ng-click="close()" class="md-primary" hide-gt-md>
+            Close Sidenav Left
+          </md-button>
+          <p hide-md show-gt-md>
+            This sidenav is locked open on your device. To go back to the default behavior,
+            narrow your display.
+
+          </p>
+          <md-button ng-click="hideApp()" class="md-primary"  >
+            Hide App
+          </md-button>
+        </md-content>
+      </md-sidenav>
+  <!--    <div id="sidebar1Holder" ></div>
+
+      <div id="sidebar2Holder" ></div>-->
+
+      <!--
+      <div flex   >
+
+      </div>
+      -->
+      <div flex  class="blue">
+        <!-- ntested to prevent content stretching rows -->
+        <div _flex_ id="mainContentArea" class="mainContentAreaLayout"  >
+          <div class="flex-item"   >
+            <!--
+            heading
+            -->
+            <img src="images/logo.png" />
+          </div>
+          <div class="flex-item" >
+            <span class="md-display-2 uppercase">Brietling</span>
+          </div>
+          <div class="flex-item" >
+            right
+          </div>
+
+          <div class="flex-item" style="height: 90px;">
+            <!--
+            spacer
+            -->
+          </div>
+
+          <div class="flex-item" style="height: 50px;">
+            toolbar 1
+          </div>
+
+          <div class="flex-item" style="height: 130px;">
+            vSpacer
+          </div>
+          <div class="flex-item" >
+            [flex]
+          </div>
+
+          <div class="flex-item" >
+            clear row
+          </div>
+
+          <div class="flex-item" >
+            content area
+            {{lorem(5000)}} {{5+5}}
+            {{lorem}}
+          </div>
+        </div>
+
+      </div>
+
+      <!--
+       <div flex id="mainContentArea" layout="row" layout-wrap>
+        <div flex>
+          heading
+        </div>
+        <div flex>
+          space
+        </div>
+        <div flex="20">
+          right
+        </div>
+
+        <div flex="100" style="height: 40px;">
+          toolbar
+        </div>
+
+        <div flex="100" style="height: 40px;">
+          toolbar2
+        </div>
+
+        <div flex="66">
+          [flex]
+        </div>
+        <div flex="33">
+          [flex]
+        </div>
+      </div>
+      -->
+
+    </section>
+
+  </div>
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+      r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+    }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <!-- endbuild -->
+
+
+  <!-- entry point -->
+
+  <!--include everything in scripts/ except files directly inside scripts (without subdirectory) -->
+  <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js"] -->
+
+  <!-- endbuild -->
+
+</div>
+</body>
+</html>

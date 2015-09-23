@@ -1,0 +1,67 @@
+ <div  id="headermenu">
+     
+    HEader
+<br />
+
+     ertrt
+     {{name}} {{vmC.name}}
+     {{items}}
+     1{{menuItems}}
+     2{{vmC}} {vmC}
+
+
+     <ul class="list-inline">
+         <li ng-repeat="customer in menuItems">
+             <span>{{customer |  uppercase }}</span>
+         </li>
+
+     </ul>
+
+     <tr ng-repeat="customer in menuItems | filter:customerFilter | orderBy:'name'">
+         <td>{{customer.name |  uppercase }}</td>
+         <td>{{customer.city}}</td>
+         <td>{{customer.joined | date }}</td>
+         <td>{{customer.orderTotal }}</td>
+         <td><a href="#/orders/{{customer.id}}"> View Orders </a></td>
+     </tr>
+
+
+
+
+        <br />
+       Filter: <input type="text" ng-model="customerFilter.name" />       
+       <!--
+        <ul>
+        <li ng-repeat="customer in customers">{{customer.name}}</li>
+       </ul>
+        -->
+       <br />
+       <table>
+       <tr>
+           <th ng-click="doSort('name')">Name</th>
+           <th>City</th>
+           <th>Join Date</th>
+           <th>Total</th>
+           <th>&nbsp;</th>
+           
+           
+        </tr>
+           
+           <tr ng-repeat="customer in customers | filter:customerFilter | orderBy:'name'">
+               <td>{{customer.name |  uppercase }}</td>
+                <td>{{customer.city}}</td>
+                <td>{{customer.joined | date }}</td>
+                <td>{{customer.orderTotal }}</td>
+                <td><a href="#/orders/{{customer.id}}"> View Orders </a></td>
+               
+           
+           </tr>
+        
+       
+       </table>
+       
+       <span>Total Customers: {{customers.length}}</span>
+     
+     <footer>{{appSettings.version}}</footer>
+            </div>
+

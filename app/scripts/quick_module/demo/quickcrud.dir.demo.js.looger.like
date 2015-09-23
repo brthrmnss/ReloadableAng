@@ -1,0 +1,263 @@
+'use strict';
+
+(function(){
+
+  var app = angular.module('com.sync.quick');
+  /*
+   Example Usage:
+   This component lets the user define different content
+   group areas
+
+   <div id="testComp"  class="_hide" >
+   <test-comp></test-comp>
+   </div>
+   <div id="testComp2"  class="_hide" >
+   move here:
+   </div>
+   */
+
+  /**
+   * Component verifies directive can be moved, and bindings will still work
+   * @param $templateRequest
+   * @param $compile
+   * @param $interpolate
+   * @param transcludeHelper
+   * @returns {{scope: {title: string, fxItemSelected: string}, controller: string, controllerAs: string, bindToController: boolean, compile: Function}}
+   * @private
+   */
+  var quickCrudDemo = function quickCrudDemo($templateRequest, $compile, $interpolate, transcludeHelper) {
+    var utils = transcludeHelper.new();
+
+    function link(scope, element, attrs){
+      $templateRequest('scripts/quick_module/demo/quickcrud.dir.demo.html').then(
+        function(html){
+          var ctrl = scope.vmC;
+          var templateContent = angular.element(html);
+          utils.templateContent = templateContent;
+          utils.userTemplateContent = templateOriginal;
+          utils.userTemplateContent = dictTemplates[attrs.title]
+          utils.userContent = element;
+
+          html = utils.templateContent[0];
+
+          element.append($compile(html)(scope));
+
+          scope.element = element;
+          console.log('html output', html);
+
+
+        }
+      )
+
+
+      controllerReference.$id = Math.random();
+      console.log('top', controllerReference.$id,
+        controllerReference.title, controllerReference.items, controllerReference.items2 );
+    };
+
+    var templateOriginal = null;
+    var dictTemplates = {};
+    var controllerReference = null;
+    var compile = function (tElem, attrs) {
+
+      templateOriginal = tElem.clone();
+      dictTemplates[attrs.title] = templateOriginal;
+      function defineDirectiveDefaults() {
+        if ( attrs.selectedIndex === null  ) {
+          attrs['selectedIndex'] = "-1";
+        };
+        if ( attrs.views == null  ) {
+          attrs['views'] = {
+            'a': 'comp:#viewA',
+            'b': '<test-comp id="viewB">View B</test-comp>',
+            'c': 'dom:#viewC'
+          };
+        };
+
+
+      }
+      defineDirectiveDefaults();
+
+      return {
+        pre: function(scope, element, attrs, controller){
+          controllerReference = controller;
+          return;
+        },
+        post: link
+      };
+    }
+    return {
+      scope: {
+        title: '@',
+        fxItemSelected: '&',
+        id: '@',
+        views: '@',
+        views2: '@',
+
+      },
+      controller: 'QuickCrudDemoController',
+      controllerAs: 'vm',
+      bindToController:true,
+      compile: compile
+    };
+  };
+
+
+  app.directive('quickCrudDemo', quickCrudDemo);
+
+  var QuickCrudDemoController =
+    function QuickCrudDemoController ($scope,  dialogService
+    ) {
+
+
+      dialogService.newDialog = function () {
+        //wtf
+
+      };
+
+      setTimeout(function setupDialog() {
+        var opts = {}
+        opts.elementQuery = '#crudDialog'
+        opts.name = 'testCrudDialog';
+        opts.title = 'test'
+        opts.content = 'test'
+        opts.contentJquery = angular.element('#crudDialog');
+        dialogService.createDialog2(opts);
+        /*
+         create new method
+         takes the content area and make it look like a dialog
+         don't need angularjs styling
+         or if you launch dialog ...
+         */
+
+        opts.contentJquery.find('#btnClose')
+
+        dialogService.openDialog(opts);
+
+
+        $scope.showPopup = function showPopup() {
+          dialogService.openDialog(opts);
+        }
+      }, 1000);
+
+
+
+
+
+      var formObject = {}
+      $scope.formObject = formObject
+      //formObject.firstName = {};
+      //formObject.lastName = {};
+      formObject.first_name = {label:'First Name'};
+      formObject.last_name = {};
+
+
+      var formObject2 = {}
+      $scope.formObject2 = formObject2
+      formObject2.first_name = {label:'First Name'};
+      formObject2.start = {
+        label:'start_date2',
+        type:'stepper',
+        min:0,
+        max:3000
+      };
+      formObject2.last_name = {};
+
+
+      var dataObject2 = {};
+      $scope.dataObject4 = dataObject2
+      dataObject2.first_name = 'Data';
+      dataObject2.start = 1500
+      dataObject2.last_name = 'Object 2';
+
+
+      var qC2 = {} ;
+      $scope.quickCrud2 = qC2;
+      qC2.name = '';
+      qC2.showForm = false;
+      qC2.title = 'test title';
+      qC2.canCreate = false;
+
+
+      var qC3 = {} ;
+      $scope.quickCrud3 = qC3;
+      qC3.name = '';
+      qC3.refresh = false
+      qC3.title = 'test title';
+      qC3.canCreate = false;
+      qC3.dataObject =
+      {first_name:'Rachel2'};
+
+      qC3.remote = false;
+      qC3.list = [
+        {first_name:'Annette', last_name:"Bruce"},
+        {first_name:'Mark', last_name:"Toblin"},
+        {first_name:'John', last_name:"Hook"}
+      ]
+
+      qC3.formObject = angular.copy(formObject2);
+
+      qC3.fxClick = function (o ) {
+        qC4.dataObject = o;
+        console.log('fxClick-->---qc4', o)
+        qC4.refresh = Math.random();
+        qC4.name = Math.random();
+        qC4.fxRefresh();
+      }
+
+      var qFC = {};
+      qC3.quickFormConfig = qFC;
+      qFC.fxSave = function(o) {
+        console.log('saved', o)
+      }
+      qC3.quickFormConfig.showFooter = false;
+
+
+
+      var qC4 = {} ;
+      $scope.quickCrud4 = qC4;
+      qC4.name = '';
+      qC4.refresh = false
+      qC4.title = 'test title';
+      qC4.canCreate = false;
+      qC4.showList = false;
+      qC4.dataObject = {};
+      qC4.remote = false;
+
+      qC4.formObject = angular.copy(formObject2);
+
+      qC4.fxClick = function (o ) {
+       // qC2.dataObject = o;
+      }
+
+      var qFC = {};
+      qFC.fxSave = function(o) {
+        console.log('saved---qc4', o)
+      }
+      qC4.quickFormConfig = qFC;
+
+      setTimeout(function() {
+        console.log('change config')
+        qC3.dataObject = {first_name:'Rachel'}
+        qC3.formObject = formObject2;
+      }, 2500)
+
+      setTimeout(function() {
+        $scope.$apply(function () {
+          qC3.dataObject = {first_name:'Donny'};
+          qC3.refresh = true;
+          qC3.formObject = formObject2;
+          qC3.name = 'dddd';
+          qC3.fxRefresh();
+          //$scope.quickCrud3 = qC3;
+          console.log(qC3)
+          // $scope.quickCrud3 = qC2;
+        })
+      }, 5000)
+    };
+
+  app
+    .controller('QuickCrudDemoController', QuickCrudDemoController);
+
+
+}());

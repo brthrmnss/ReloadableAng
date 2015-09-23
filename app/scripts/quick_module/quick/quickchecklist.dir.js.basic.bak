@@ -1,0 +1,164 @@
+//'use strict';
+
+(function(){
+
+  var app = angular.module('com.sync.quick');
+
+  /**
+   * Component take data form and data object
+   * @param $templateRequest
+   * @param $compile
+   * @param $interpolate
+   * @param transcludeHelper
+   * @returns {{scope: {title: string, fxItemSelected: string}, controller: string, controllerAs: string, bindToController: boolean, compile: Function}}
+   * @private
+   */
+  var quickChecklist = function quickChecklist_($templateRequest, $compile, $interpolate, transcludeHelper) {
+
+    var utilsParent = transcludeHelper.new();
+
+    function link(scope, element, attrs){
+      $templateRequest('scripts/quick_module/quick/quickChecklist.dir.html').then(
+        function(html){
+          //var utilsParentDict = utils.dictTemplates;
+          var utils = transcludeHelper.new();
+          utils.dictTemplates = utilsParent.dictTemplates; //copy over dictionary of templates
+          utils.$compile = $compile;
+          utils.loadTemplate(html, element, attrs);
+
+          scope.render(utils);
+
+          scope.$watch('vm.refresh',
+            function (v, oldVal) {
+              console.log('quickform.refresh',
+                scope.vm.dataObject,
+                scope.vm, scope,
+                'scope.vm.dataObject... changed: ')
+
+              if ( scope.dataObject != scope.vm.dataObject ) {
+                console.error('scope diff',
+                  scope.vm.dataObject,
+                  scope.dataObject)
+                // scope.dataObject = scope.vm.dataObject;
+              }
+
+              if ( scope.vm.formObject.reload == true ) {
+                console.log('quickform', 'refreshing', scope.vm.config.name)
+                delete scope.vm.formObject['reload'];
+
+                scope.render(null, element);
+              }
+            });
+
+          scope.$watch('vm.config',
+            function (v, oldVal) {
+              console.log('quickform.vm.config',
+                'scope.vm.dataObject... changed: ')
+                scope.render();
+            });
+        }
+
+      )
+
+    };
+
+    var controllerReference = null;
+    var compile = function (tElem, attrs) {
+      utilsParent.storeTemplate(tElem, attrs);
+      function defineDirectiveDefaults() {
+        if ( attrs.selectedIndex === null  ) {
+          attrs['selectedIndex'] = "-1";
+        };
+        //utils.defaultAttr('dataObject', "{}", attrs);
+      }
+      defineDirectiveDefaults();
+      return {
+        pre: function(scope, element, attrs, controller){
+          controllerReference = controller;
+          return;
+        },
+        post: link
+      };
+    }
+    return {
+      scope: {
+        config:'=',
+        refresh: '='
+      },
+      controller: 'QuickChecklistController',
+      controllerAs: 'vm',
+      bindToController:true,
+      compile: compile
+    };
+  };
+  app.directive('quickChecklist', quickChecklist);
+
+  var QuickChecklistController = function QuickChecklistController_ ($scope,
+                                                           transcludeHelper,
+                                                           sh,
+                                                           dialogService) {
+
+    var config = $scope.vm.config;
+    if ( config == null ) { config = {} };
+
+    this.$scope = $scope;
+
+    $scope.onSaveList = function saveFormData(fxSave2) {
+
+      if ( $scope.errors.length > 0 ) {
+        console.error('error on form');
+        alert('errors')
+        return;
+      }
+
+      //remove transient properties ....
+
+      if ( $scope.vm.fxSave != null ){
+        //$scope.vm.fxSave()($scope.dataObject);
+        $scope.vm.fxSave()($scope.dataObject);
+        //console.log('...')
+
+      }
+      var config = $scope.vm.config;
+      if ( config == null ) { config = {} };
+      if ( config.fxSave != null ) {
+        config.fxSave($scope.dataObject);
+      };
+
+      sh.callIfDefined(fxSave2)
+    }
+
+
+    $scope.onCancelList = function cancelFormData() {
+      sh.callIfDefined(config.fxCancel, $scope.dataObject );
+      sh.callIfDefined(config.fxCancel2, $scope.dataObject );
+    }
+
+    $scope.render = function render( utils ) {
+      if ($scope.utils == null) {
+        $scope.utils = utils;
+        $scope.templateContent = utils.templateContent.clone()
+        $scope.userTemplateContent = utils.userTemplateContent.clone()
+
+      } else {
+        utils = $scope.utils;
+      }
+
+      $scope.errors = [];
+      var element = utils.element;
+      var $compile = utils.$compile;
+
+      var scope = $scope;
+
+      utils.templateContent = $scope.templateContent.clone()
+      utils.userTemplateContent = $scope.userTemplateContent.clone()
+
+      var list = config.list;
+    }
+  }
+  app
+    .controller('QuickChecklistController',
+    QuickChecklistController);
+
+
+}());

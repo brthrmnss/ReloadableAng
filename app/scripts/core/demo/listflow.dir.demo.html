@@ -1,0 +1,93 @@
+
+<div    id="contianer"  >
+  <!--
+
+Demo specifies how to use the component
+
+-->
+  <div class="container_stack_layout" >
+    <div class="container_stack_col1">
+
+
+      <md-button ng-click="onAddItem()" >
+        Add
+      </md-button>
+
+      <div class="list-flow-stack-container">
+      <list-flow items="items"
+                 items2="items_concerns"
+                 scale="day"
+                 show-label-lane="true"
+                 show-tick-lane="true"
+                 fx-ticks="fxLabel"
+                 showScale="true">
+      </list-flow>
+      <list-flow items="items2"
+                 show-label-lane="false"
+                 show-tick-lane="false"
+                 scale="day"
+                 fx-ticks="fxLabel"
+                 showScale="false">
+      </list-flow>
+      <list-flow items="items3"
+                 show-label-lane="false"
+                 show-tick-lane="false"
+                 scale="day"
+                 fx-ticks="fxLabel"
+                 showScale="false">
+      </list-flow>
+      <list-flow items="items4"
+                 show-label-lane="false"
+                 show-tick-lane="false"
+                 scale="day"
+                 update-flag="updateFlag"
+                 config="config"
+                 fx-ticks="fxLabel"
+                 showScale="false">
+      </list-flow>
+      </div>
+      <div id="rowBottomDivider" class="  rowBottomDivider" ></div>
+
+
+      <div id="stack-footer-area" class="lines_row_content_box">
+        Planned statistic {{range_start}} - {{range_end}}
+        <quick-col config="statsConfig" />
+      </div>
+    </div>
+    <div class="container_stack_col2 lines_row_col ">
+      <div class="lines_row_header">
+
+      </div>
+      <div class="lines_row_content_box">
+        <quick-crud id="itemDialog"
+                    url-src="httpasdf"
+                    show-list="false"
+                    _datainput_="dataObject4"
+                    _data-object-b="dataObject4"
+                    data-object-b="dataObject4"
+                    title="xO2"
+                    can-create="true"
+                    form-object="formObject2"
+                    fx-item-saved="createItem"
+                    _fx-item-saved="createItem"
+                    config="crudConfig"
+          >
+        </quick-crud>
+      </div>
+
+
+    </div>
+
+    <div class="container_stack_col3 lines_row_col" >
+      <div class="lines_row_header">
+        <span class="lines_row_title">Stack of needs</span>
+      </div>
+      <div class="lines_row_content_box">
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+

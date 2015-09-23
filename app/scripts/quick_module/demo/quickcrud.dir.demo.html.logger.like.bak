@@ -1,0 +1,99 @@
+
+
+<div    id="container"  >
+  <label>Quick Demo</label>
+  <br />
+
+  <!--  <md-button ng-click="showPopup()">
+      Show Popup
+    </md-button>-->
+  <br />
+
+  <div   id="holder" layout="horizontal" >
+
+    <quick-crudd
+      title="xO"
+      url-src="httpasdf2"
+
+      form-object="formObject" >
+    </quick-crudd>
+
+
+    <quick-crudd
+      title="xO"
+      url-src="httpasdf2"
+
+      config="quickCrud2"
+      form-object="formObject" >
+    </quick-crudd>
+
+    <quick-crud
+      title="xO6" id="col3"
+      url-src="httpasdf2"
+      config="quickCrud3"
+      asdf-form-object="formObject" >
+      <item-renderer>
+
+        <!--
+        <div >Size: {{vmC.items.length}}</div>
+        -->
+        <li ng-repeat="item in vmC.items" class="" >
+          {{item.name}}
+          <div ng-click="goTo(item)"
+               class="sideNavTextRow2">{{item.first_name}}
+            {{item.last_name}}
+          </div>
+
+            <span layout="horizonal">
+
+            <div ng-click="vmC.$scope.$parent.deleteItem(item)">x</div>
+|
+            <div ng-click="vmC.$scope.$parent.editItem(item)">x</div>
+|
+            <div ng-click="vmC.$scope.$parent.addItem(item)">yx</div>
+            <div ng-if="item.selected==true"> $</div>
+
+                 </span>
+        </li>
+
+
+      </item-renderer>
+      <!--
+       <item-renderer>
+        <div >GGGGGGGGg</div>
+       </item-renderer>
+       -->
+    </quick-crud>
+
+    <quick-crud id="col4"
+                title="xO6"
+                config="quickCrud4"  >
+    </quick-crud>
+
+
+    <!--
+
+        <div >
+          <br />
+          quickCrud3: <br />
+          {{quickCrud3}} <br />
+          {{name2}} <br />
+          {{vm.name2}} <br />
+        </div>
+
+    -->
+
+  </div>
+
+
+  <quick-crudd id="crudDialog"
+               url-src="httpasdf"
+               show-list="false"
+               _datainput_="dataObject4"
+               _data-object-b="dataObject4"
+               title="xO2"
+               can-create="false"
+               form-object="formObject2" >
+  </quick-crudd>
+
+</div>

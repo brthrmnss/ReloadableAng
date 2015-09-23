@@ -1,0 +1,5 @@
+Title:List Prompts
+
+#create a list
+List:Prompt .name | X | Edit | Add
+

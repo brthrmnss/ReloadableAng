@@ -1,0 +1,492 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/videogular-themes-default/videogular.css" />
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.css" />
+  <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+  <link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css" />
+  <link rel="stylesheet" href="bower_components/angular-notify/dist/angular-notify.css" />
+  <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
+  <link rel="stylesheet" href="bower_components/summernote/dist/summernote.css" />
+  <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-tour/build/css/bootstrap-tour-standalone.css" />
+  <link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
+  <link rel="stylesheet" href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+  <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+  <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+  <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.css" />
+  <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery-indicator.css" />
+  <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery-video.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css"/>
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/prod-plan-css.css"/>
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/filemon.css"/>
+  <!-- endbuild -->
+  <!-- #build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/list_styles.css"/>
+  <!-- endbuild -->
+  <!-- #build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/material_styles.css"/>
+  <!-- endbuild -->
+</head>
+<body ng-app="74App">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<quick-crud-demo>
+</quick-crud-demo>
+
+<!-- Search container -->
+<div class="search-container" ng-controller="TileSearchController as vm" >
+  <div class="search-header-row" >
+    <div class="search-header-row-container" >
+      <div class="search-header-col1" >
+        &nbsp;
+        Mixing Blog
+      </div>
+      <div class="search-header-col2" >
+
+        <div class="search-header-txtbox">
+          <input class="search-header-txtinput"
+                  id="txtSearch"
+             placeholder="search..."
+                 ng-keydown="$event.which === 13 && vm.action()"
+            >
+        </div>
+        <!--
+        <button class="search-header-button">&nbsp;</button>
+        -->
+        <a href="#"
+           ng-click="vm.action()"
+           class="btn btn-primary search-header-button">
+          <span class="glyphicon glyphicon-ok"></span></a>
+      </div>
+    </div>
+
+  </div>
+
+
+  <tile-search-demo  >
+
+  </tile-search-demo>
+
+  <div id="holder-dialog" ></div>
+</div>
+
+
+<div  layout="vertical" flex
+
+      class="hide cpp_mainContentAreaLayout mainArea" >
+  <div class="lyt-row1 cpp-main-lyt-row  " >
+     row1
+  </div>
+  <div class="lyt-row2 cpp-main-lyt-row  " >
+
+
+    <span>Creating Production Plan</span>
+  </div>
+
+
+
+  <div class="lyt-row3 cpp-main-lyt-row " >
+    <div class="cpp_row3Container">
+      <div class="lyt-cpp-row3-col1">
+        <list-flow-demo>
+        </list-flow-demo>
+
+        <div class="cpp-box-container" >
+          Planned static: October 03, 2014 - October 07, 2014
+          <br />
+          Loading: <br />
+          95.5%
+        </div>
+
+
+      </div>
+      <div class="lyt-cpp-row3-col2">
+        row2
+      </div>
+    </div>
+   <!-- <list-flow-demo>
+    </list-flow-demo>-->
+
+
+  </div>
+  <div class="lyt-row4 cpp-main-lyt-row " >
+
+  </div>
+
+
+</div>
+
+<div style="height: 0px" class="hide" >
+  <img id="backgroundImage" src="ximages/campaign_content.png" />
+</div>
+
+<div ng-controller="MainCCCtrl" id="holderMainApp"  layout="vertical"
+     class="hide mainArea ddoc-content demo-container _md-whiteframe-z1">
+  <div ng-controller="MainDialogController as dialogCtrl"  layout="vertical" class="mainArea2"  >
+
+
+
+    <section layout="row" flex  style="align-items: stretch; align-content: stretch; min-height:-webkit-min-content;">
+      <md-sidenav id="sideNav1" class=" sideNav1 _md-sidenav-left _md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-theme-indigo md-toolbar-plain">
+
+        </md-toolbar>
+        <md-content xlayout-padding ng-controller="LeftCtrl" class="sideNavIcons">
+          <md-button ng-click="close()" class="md-primary" hide-gt-md>
+            Close Sidenav Left
+          </md-button>
+
+
+          <quick-list id="sideNavMenuIcons"
+                      title="sideNavMenu2"
+                      show-title="false"
+                      items="sideNavMenu2Items"
+                      selected-index="2"
+                      fx-item-selected="onSelectMenuItemX"
+                      panel="false"
+                      plain-list="true"
+                      fx-select-item="click()" >
+            <list>
+              <ul>
+                <li ng-repeat="item in vmC.items"
+                     class="text-center"
+                    ng-click="goTo(item)">
+                    <span class="glyphicon {{item.icon}}" aria-hidden="true"></span>
+
+                 <!-- <div class="sideNavTextRow2">{{item.name}}</div>-->
+
+                </li>
+              </ul>
+            </list>
+
+          </quick-list>
+
+          <p hide-md show-gt-md>
+
+
+
+          </p>
+        </md-content>
+      </md-sidenav>
+
+      <md-sidenav class="sideNav2 md-sidenav-left md-whiteframe-z1" md-component-id="left2" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-theme-indigo md-toolbar-plain">
+         <!-- <h1 class="md-toolbar-tools">Sidenav Left</h1>-->
+          <md-button ng-click="hideApp()" class="md-fab md-mini"  ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></md-button>
+          <md-button ng-click="hideImg()" class="md-fab md-mini"  ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></md-button>
+
+        </md-toolbar>
+        <md-content xlayout-padding ng-controller="LeftCtrl">
+          <md-button ng-click="close()" class="md-primary" hide-gt-md>
+            Close Sidenav Left
+          </md-button>
+
+
+
+          <quick-list id="sideNavMenu"
+                      title="sideNavItems"
+                      show-title="false"
+                      items="navMenuItems"
+                      selected-index="2"
+                      fx-item-selected="onSelectMenuItemX"
+                      panel="false"
+                      plain-list="true"
+                      fx-select-item="click()" >
+            <list>
+              <ul>
+                <li class="sideNavItem"   ng-repeat="item in vmC.items"
+                      ng-click="goTo(item)">
+                  {{item.name}}
+                  <div class="sideNavTextRow2">{{item.name}}</div>
+                </li>
+              </ul>
+            </list>
+
+          </quick-list>
+
+
+
+          <p hide-md show-gt-md>
+           <!-- This sidenav is locked open on your device. To go back to the default behavior,
+            narrow your display.
+-->
+          </p>
+
+
+
+        </md-content>
+      </md-sidenav>
+      <!--    <div id="sidebar1Holder" ></div>
+
+          <div id="sidebar2Holder" ></div>-->
+
+      <!--
+      <div flex   >
+
+      </div>
+      -->
+      <div flex  class="blue">
+        <!-- ntested to prevent content stretching rows -->
+        <div _flex_ id="mainContentArea" class="mainContentAreaLayout"  >
+          <div class="flex-item-logo-box text-left layout-left-edge-padding"   >
+            <!--
+            heading
+            -->
+            <img src="images/logo.png" />
+          </div>
+          <div class="flex-item-title-box" >
+            <span class="md-display-2 uppercase">Brietling</span>
+          </div>
+          <div class="flex-item-row1-right-box layout-right-edge-padding topEditorHolder" >
+            <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+            <md-button class="btnEditor">Editor</md-button>
+          </div>
+
+          <div class="flex-item-row1-height-spacer" >
+            <!--
+            spacer
+            -->
+          </div>
+          <div class="flex-item-clear-row" >
+
+          </div>
+
+          <div class="flex-item-row2-toolbox layout-right-edge-padding"  >
+            <div style="padding-left: 0px;">
+            <quick-list id="row2Menu"
+                        title="navTabs"
+                        show-title="false"
+                        items="navMenuItems"
+                        selected-index="2"
+                        fx-item-selected="onSelectMenuItemX"
+                        panel="false"
+                        plain-list="true"
+                        fx-select-item="click()" >
+              <list>
+                <ul>
+                  <li   ng-repeat="item in vmC.items"
+                        ng-click="goTo(item)">
+                    {{item.name}}
+                  </li>
+                </ul>
+              </list>
+
+            </quick-list>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+          <div class="flex-item-row2-height-spacer"  >
+
+          </div>
+          <div class="flex-item-clear-row" >
+
+          </div>
+
+          <div class="flex-item-row3-toolbox-push-right"  >
+            &nbsp;
+          </div>
+
+          <div class="flex-item-row3-toolbox text-right layout-right-edge-padding"  >
+            <md-button class="btnPlain leftBookEnd btnToolbarBtnControls"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            </md-button><!--
+            --><md-button class="btnMiddle btnToolbarBtnControls" style="margin-right: -5px; max-width: none;">19/10/2014 to 20/10/2014</md-button><!--
+            --><md-button class="btnPlain rightBookEnd btnToolbarBtnControls">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          </md-button>
+            &nbsp;
+
+            <md-button class="btnPlain leftBookEnd btnToolbarBtnControls">
+              Heure
+            </md-button>
+            <md-button class="btnEditor btnToolbarBtnControls btnMiddle">Hour</md-button>
+            <md-button class="btnPlain rightBookEnd btnToolbarBtnControls">
+              Mois
+            </md-button>
+          </div>
+          <div class="flex-item-row3-height-spacer"  >
+
+          </div>
+
+
+          <div class="flex-item-clear-row" >
+          </div>
+
+          <div class="flex-item-content-body" >
+         <!--   <div style="width: 100%; margin-left: 4em; margin-right: 4em; position: absolute;">
+              <canvas id="myChart"  style="margin: 100px; width:100%; height:250px;" _height="300"></canvas>
+            </div>-->
+            <div style="width: 100%; padding-left: 4.5em; padding-right: 4.5em; height:250px;">
+              <canvas id="myChart"  style="width: 100%;  height:280px;" ></canvas>
+            </div>
+
+            <div class="md-padding" >
+              {{xlorem(5000)}} {{5+5}}
+              {{lorem}}
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!--
+       <div flex id="mainContentArea" layout="row" layout-wrap>
+        <div flex>
+          heading
+        </div>
+        <div flex>
+          space
+        </div>
+        <div flex="20">
+          right
+        </div>
+
+        <div flex="100" style="height: 40px;">
+          toolbar
+        </div>
+
+        <div flex="100" style="height: 40px;">
+          toolbar2
+        </div>
+
+        <div flex="66">
+          [flex]
+        </div>
+        <div flex="33">
+          [flex]
+        </div>
+      </div>
+      -->
+
+    </section>
+
+  </div>
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+      r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+    }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/es5-shim/es5-shim.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/Chart.js/Chart.js"></script>
+  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+  <script src="bower_components/videogular/videogular.js"></script>
+  <script src="bower_components/videogular-controls/vg-controls.js"></script>
+  <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
+  <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/metisMenu/dist/metisMenu.js"></script>
+  <script src="bower_components/jquery-flot/jquery.flot.js"></script>
+  <script src="bower_components/angular-flot/angular-flot.js"></script>
+  <script src="bower_components/flot/jquery.flot.js"></script>
+  <script src="bower_components/flot.curvedlines/curvedLines.js"></script>
+  <script src="bower_components/iCheck/icheck.min.js"></script>
+  <script src="bower_components/jquery.flot.spline/index.js"></script>
+  <script src="bower_components/sparkline/index.js"></script>
+  <script src="bower_components/chartjs/Chart.min.js"></script>
+  <script src="bower_components/angles/angles.js"></script>
+  <script src="bower_components/peity/jquery.peity.js"></script>
+  <script src="bower_components/angular-peity/angular-peity.js"></script>
+  <script src="bower_components/sweetalert/lib/sweet-alert.js"></script>
+  <script src="bower_components/angular-notify/dist/angular-notify.js"></script>
+  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+  <script src="bower_components/angular-ui-map/ui-map.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+  <script src="bower_components/summernote/dist/summernote.js"></script>
+  <script src="bower_components/angular-summernote/dist/angular-summernote.js"></script>
+  <script src="bower_components/ng-grid/build/ng-grid.js"></script>
+  <script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
+  <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+  <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.js"></script>
+  <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour-standalone.js"></script>
+  <script src="bower_components/angular-bootstrap-tour/dist/angular-bootstrap-tour.js"></script>
+  <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+  <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
+  <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+  <script src="bower_components/ui-select/dist/select.js"></script>
+  <script src="bower_components/blueimp-gallery/js/blueimp-helper.js"></script>
+  <script src="bower_components/blueimp-gallery/js/blueimp-gallery.js"></script>
+  <script src="bower_components/blueimp-gallery/js/blueimp-gallery-fullscreen.js"></script>
+  <script src="bower_components/blueimp-gallery/js/blueimp-gallery-indicator.js"></script>
+  <script src="bower_components/blueimp-gallery/js/blueimp-gallery-video.js"></script>
+  <script src="bower_components/blueimp-gallery/js/blueimp-gallery-vimeo.js"></script>
+  <script src="bower_components/blueimp-gallery/js/blueimp-gallery-youtube.js"></script>
+  <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+  <script src="bower_components/angular.pubsub/src/angular-pubsub.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/quick_module/quick.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <!-- endbuild -->
+
+
+  <!-- entry point -->
+
+  <!--include everything in scripts/ except files directly inside scripts (without subdirectory) -->
+  <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js"] -->
+
+  <!-- endbuild -->
+
+</div>
+</body>
+</html>

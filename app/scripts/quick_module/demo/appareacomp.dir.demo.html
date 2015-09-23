@@ -1,0 +1,34 @@
+
+<div    id="contianer"  >
+  <!--
+
+Demo specifies how to use the component
+
+-->
+
+  <test-comp id="viewA" ng-non-bindable >View A</test-comp>
+  <test-comp id="viewB">View B</test-comp>
+  <test-comp id="viewC">View C</test-comp>
+
+  <app-area-comp id="topA" label="Area A"
+                 dirty-check="true"
+                 init-view="a"
+                 views="{{vm.views}}"
+                   >
+
+  </app-area-comp>
+
+  <app-area-comp id="topB" label="Area B">
+
+  </app-area-comp>
+
+
+    <section layout="row" layout-sm="column" layout-align="center center">
+      <md-button class="md-raised" ng-click="viewA()">View A</md-button>
+      <md-button class="md-raised" ng-click="viewB()">View B</md-button>
+      <md-button class="md-raised" ng-click="viewC()">View C</md-button>
+
+      <div class="label">Raised</div>
+    </section>
+
+</div>

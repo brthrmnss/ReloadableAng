@@ -1,0 +1,113 @@
+
+<div    id="container"  >
+
+  <div    id="listContainer"
+          infinite-scroll='search.nextPage()'
+          infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1'
+    >
+    <quick-list ng-dp="headerMenuItems"
+                xtitle="Tile List Test"
+                items="vm.tiles"
+                selected-index="2"
+                show-panel="false"
+                grid="true"
+                fx-item-selected="onSelectTileItem"
+                name="yyy"
+                  plain-list="true"
+                fx-select-item="click()"
+      >
+      <list-content>
+        <md-grid-list
+          md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+          md-row-height-gt-md="1:1" md-row-height="6:3"
+          md-gutter="8px" md-gutter-gt-sm="4px" >
+          <md-grid-tile ng-repeat="tile in vm.tiles"
+                        ng-mouseenter="mouseEnter(tile, $event)"
+                        ng-mouseleave="mouseLeave(tile, $event)"
+                        md-rowspan="{{tile.span.row}}"
+                        md-colspan="{{tile.span.col}}"
+                        md-colspan-sm="1"
+
+                        ng-class="tile.background" >
+
+            <div class="search-tile-container" ng-if="tile.divider!=true" >
+
+              <div flex3 class="search-tile-image-holder">
+                <img src="{{tile.image}}"
+                     ng-if="tile.image!=null"
+                     class="search-title-image" />
+                <!-- images/sopranos.jpg -->
+              </div>
+              <div flex3 class="search-tile-footer" >
+                <div  class="search-tile-row1"  >
+                  {{tile.type}}
+                  <!--Library update-->
+                </div>
+                <div  class="search-tile-row2"  >
+                  {{tile.name}}
+                  <!--Leveraging Social Proof for Growth-->
+                </div>
+                <div  class="search-tile-row3"  >
+                  {{lorem(25)}}
+                  {{tile.desc}}
+                </div>
+                <div  class="search-tile-row4"  >
+                  <!--
+                  <span class="glyphicon glyphicon-ok"></span>
+                  Library
+                  <span class="glyphicon glyphicon-ok"></span>
+                  update
+                  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="search-tile-container" style="opacity: 0.6;" ng-if="tile.divider==true" >
+              <div flex class="search-tile-footer" style="background-color: transparent;" >
+                <div class="search-tile-page-number text-right" >
+                  {{tile.page}}
+                </div>
+              </div>
+            </div>
+
+          </md-grid-tile>
+        </md-grid-list>
+      </list-content>
+    </quick-list>
+
+  </div>
+
+
+  <div id="holderDialogs" >
+    <div id="dialogMovieHolder" class="hide">
+      <div id="dialogMovieHover" class="dialog-movie-hover">
+        <span id="markerpaper" />
+        <!--
+        'hover' {{controller.config.theme}} {{config.theme}}
+        -->
+        <videogular vg-theme="controller.config.theme">
+          <vg-media vg-src="controller.config.sources"
+                    vg-tracks="controller.config.tracks">
+          </vg-media>
+
+          <vg-controls>
+            <vg-play-pause-button></vg-play-pause-button>
+            <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+            <vg-scrub-bar>
+              <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            </vg-scrub-bar>
+            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+            <vg-volume>
+              <vg-mute-button></vg-mute-button>
+              <vg-volume-bar></vg-volume-bar>
+            </vg-volume>
+            <vg-fullscreen-button></vg-fullscreen-button>
+          </vg-controls>
+
+          <vg-overlay-play></vg-overlay-play>
+          <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+        </videogular>
+      </div>
+    </div>
+  </div>
+</div>

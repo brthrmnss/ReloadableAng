@@ -1,0 +1,166 @@
+<div    id="quickCheckList"  > <!-- class="panel panel-default" -->
+  <div id="headerContent" class="hide panel-heading" >
+  </div>
+  <!--
+  Quickchecklist
+  {{settings}} <br />
+  {{vm.config.settings}} <br />
+  -->
+
+  <md-button ng-show="settings.showSettingsButton"
+             ng-click="onSettings()">Settings</md-button>
+
+  <div ng-show="settings.showViewSwitcher"
+       layout="row" layout-align="center center" >
+
+    <div class="btn-group">
+      <a class="btn btn-primary"
+         ng-click="onText()">Text</a>
+      <a class="btn btn-primary"
+         ng-click="onOrateList()">TextList</a>
+      <a class="btn btn-primary"
+         ng-click="onTextList()">List</a>
+    </div>
+  </div>
+
+  <!--
+  scope: {{vm}} <br />
+  -->
+
+  <div id="bodyContent" >
+
+    <div layout="row" >
+
+          <textarea id="txtArea" ng-model="textContents"
+                    ng-change="onChangeText(true)"
+                    ng-show="settings.showText"
+
+            >
+
+    </textarea>
+
+      <div id="col1" ng-show="settings.showList" >
+
+        <ul>
+          <li ng-repeat="item in taskList | filter:dyanmicFilterForIncomplete" class="" layout="row">
+            <div flex>
+              <md-checkbox
+
+                aria-label="complete"
+                ng-model="item.complete" ng-change="onChangeList()" >
+
+              </md-checkbox>
+            </div>
+            <div layout="row" layout-align="center center" >
+            <span ng-click="goTo(item)" >
+              {{item.name}}
+            </span>
+              <span flex/>
+
+              <div ng-click="goTo(item)"
+                   class="sideNavTextRow2">{{item.first_name}}
+                {{item.last_name}}
+              </div>
+              <div  ng-show="settings.showBringToTop"
+                    ng-click="bringToTop(item)" >
+              <span class="glyphicon glyphicon-triangle-top"
+                    aria-hidden="true"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <ul ng-show=" settings.showCompletedSeperate==true">
+          <li ng-repeat="item in taskList | filter:{complete:true}" class="" layout="row">
+            <div flex>
+              <md-checkbox
+                aria-label="complete"
+                ng-model="item.complete" ng-change="onChangeList()" >
+              </md-checkbox>
+            </div>
+            <div layout="row"  layout-align="center center" >
+            <span ng-click="goTo(item)" >
+              {{item.name}}
+            </span>
+              <span flex/>
+              <div ng-click="goTo(item)"
+                   class="sideNavTextRow2">{{item.first_name}}
+                {{item.last_name}}
+              </div>
+              <div id="btnGoToTop3" ng-show="false"
+                   ng-show="settings.showBringToTop"
+                   ng-click="bringToTop(item)" >Bring Up</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div id="col2" ng-show="settings.showTextList" >
+        <ul id="col2_list">
+          <li ng-repeat="item in taskList" class="" layout="row">
+            <div flex>
+              <md-checkbox
+                aria-label="complete"
+                ng-model="item.complete" ng-change="onChangeList()" >
+
+              </md-checkbox>
+            </div>
+            <div layout="row"  layout-align="center center" >
+              <input ng-model="item.name" ng-change=" onChangeList(item) " >
+              </input>
+              <div ng-click="goTo(item)"
+                   class="sideNavTextRow2">{{item.first_name}}
+                {{item.last_name}}
+              </div>
+
+              <div  ng-click="bringToTop(item)"
+                    ng-show="settings.showBringToTop" >
+              <span class="glyphicon glyphicon-triangle-top"
+                    aria-hidden="true"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+      <div id="containerSettings" >
+        <!--    <div >
+              <label>Settings</label>
+              <md-checkbox
+                aria-label="s"
+                ng-model="settings.showCompletedSeperate"
+                >
+              </md-checkbox>
+              show seperate tasks
+            </div>-->
+
+        <quick-form
+          config="settingsForm"
+          >
+        </quick-form>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div id="footerContent" class="hide panel-footer clearfix" >
+
+  </div>
+
+
+  <section
+    ng-show="settings.showBottomRow"
+    layout="row"
+    id="btnRow"
+    layout-sm="column" layout-align="center center">
+    <md-button  ng-click="cancelFormData()"
+                class="md-raised">Cancel</md-button>
+    <md-button id="btnSave"  ng-click="saveFormData()"
+               ng-disabled="errors.length > 0"
+               class="md-raised md-primary">Save</md-button>
+
+  </section>
+</div>

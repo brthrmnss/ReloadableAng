@@ -1,0 +1,39 @@
+ <div  id="panel" class="bold"  >
+     <!-- Panel Comp -->
+     <div id="headerContent" class="panel-heading" ></div>
+     <div id="bodyContent" class="panel-body" ></div>
+    <div id="lblDayCount" class="md-subhead" layout="row" layout-align="center center"></div>
+   <br />
+   <div ng-repeat="blockset in vm.data.sets" >
+     <div  id="div_{{blockset.name}}" ng-style="set_color(blockset)" ></div>
+   </div>
+   <br />
+   <div id="lblTotal" class="md-subhead grayLine" layout="row" layout-align="center center">100%</div>
+   <br />
+
+   <div ng-repeat="blockset in vm.data.sets" >
+
+     <div layout="row" layout-wrap>
+       <div flex="15" class="md-headline" flex-shrink ng-style="setTextColor(blockset)" >
+         {{blockset.name.slice(0,1).toUpperCase();}}
+       </div>
+       <div flex >
+         <div ng-style="setTextColor(blockset)" >{{blockset.name.toUpperCase()}}</div>
+         <div class="md-title">{{blockset.count | number}}</div>
+       </div>
+       <div flex="25">
+         <div   ng-style="setTextColor(blockset)" >&nbsp; </div>
+         <div class="md-title" >{{(100*blockset.count/vm.data.totalCount).toFixed(0)}}%</div>
+       </div>
+     </div>
+
+   </div>
+
+
+
+
+   <div id="lblPostCount"></div>
+
+     <div id="footerContent" class="panel-footer clearfix"></div>
+ </div>
+

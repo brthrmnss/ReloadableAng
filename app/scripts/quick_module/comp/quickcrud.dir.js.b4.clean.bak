@@ -1,0 +1,328 @@
+'use strict';
+
+(function(){
+
+  var app = angular.module('com.sync.quick');
+  /*
+   Example Usage:
+   This component lets the user define different content
+   group areas
+
+   <div id="testComp"  class="_hide" >
+   <test-comp></test-comp>
+   </div>
+   <div id="testComp2"  class="_hide" >
+   move here:
+   </div>
+   */
+
+  /**
+   * Component verifies directive can be moved, and bindings will still work
+   * @param $templateRequest
+   * @param $compile
+   * @param $interpolate
+   * @param transcludeHelper
+   * @returns {{scope: {title: string, fxItemSelected: string}, controller: string, controllerAs: string, bindToController: boolean, compile: Function}}
+   * @private
+   */
+  var quickCrud = function quickCrud($templateRequest, $compile, $interpolate, transcludeHelper) {
+
+    var utils = transcludeHelper.new();
+
+
+
+    function link(scope, element, attrs){
+      $templateRequest('scripts/quick_module/comp/quickcrud.dir.html').then(
+        function(html){
+          var $scope = scope;
+
+          console.log('url', 'fxLink', $scope.vm);
+
+          var templateContent = angular.element(html);
+          utils.templateContent = templateContent;
+          utils.userTemplateContent = templateOriginal;
+          utils.userTemplateContent = dictTemplates[attrs.title]
+          utils.userContent = element;
+
+          html = utils.templateContent[0];
+
+          utils.ifFalseHide(attrs.showList, '#quick-crud-leftcol');
+          utils.ifFalseHide(attrs.showList, '#btnRefresh');
+          utils.ifFalseHide(attrs.canCreate, '#btnNew');
+
+          element.append($compile(html)(scope));
+
+          scope.element = element;
+          console.log('html output', html);
+
+          scope.$watch('vm.formObject', function (v, oldVal) {
+            if (scope.vm.formObject != null) {
+              console.log('scope.vm.formObject... changed: ',
+                scope.vm.formObject, v);
+            }
+            console.log('quickCrud',
+              'scope.vm.formObject... changed: ',
+              scope.vm, v,oldVal);
+          });
+
+          scope.$watch('vm.formObject2', function (v, oldVal) {
+            if (scope.vm.formObject2 != null) {
+              console.log('scope.vm.formObject2... changed: ',
+                scope.vm.formObject2, v);
+            }
+            console.log('quickCrud',
+              'scope.vm.formObject2... changed: ',
+              scope.vm, v,oldVal);
+          });
+
+          //when data input is from parent ... copy object to
+          //scope
+          scope.$watch('vm.datainput', function (v, oldVal) {
+            if (scope.vm.datainput != null) {
+              console.log('scope.vm.datainput... changed: ',
+                scope.vm.datainput, v);
+              //scope.vm.dataObject = v;
+              scope.dataObject = v;
+            }
+            console.log('quickCrud',
+              'scope.vm.datainput... changed: ',
+              scope.vm, v,oldVal);
+          });
+
+          scope.$watch('vm.dataObjectB', function (v, oldVal) {
+            if (scope.vm.dataObjectB != null) {
+              console.log('scope.vm.dataObject... changed: ',
+                scope.vm.dataObjectB, v);
+              //scope.vm.dataObject = v;
+              scope.dataObject = v;
+            }
+            console.log('quickCrud',
+              'scope.vm.dataObjectB... changed: ',
+              scope.vm, v,oldVal);
+          });
+        }
+      )
+
+    };
+
+    var templateOriginal = null;
+    var dictTemplates = {};
+
+    var compile = function (tElem, attrs) {
+      function defineDirectiveDefaults() {
+        if ( attrs.selectedIndex === null  ) {
+          attrs['selectedIndex'] = "-1";
+        };
+        if ( attrs.views == null  ) {
+          attrs['views'] = {
+            'a': 'comp:#viewA',
+            'b': '<test-comp id="viewB">View B</test-comp>',
+            'c': 'dom:#viewC'
+          };
+        };
+      }
+      defineDirectiveDefaults();
+      utils.defaultAttr('testAttr', '5', attrs)
+      utils.storeUserContent(tElem);
+      console.log('fxCompile','url',attrs);
+      return {
+        pre: function(scope, element, attrs, controller){
+          return;
+        },
+        post: link
+      };
+    }
+    return {
+      scope: {
+        urlSrc:'@',
+        title: '@',
+        fxItemSelected: '&',
+        fxItemSaved: '&',
+        fxsaved: '&',
+        testAttr: '@',
+        datainput: '=',
+        dataObjectB:'=',
+        config: '=',
+        //id: '@',
+        formObject: '=',
+        //where objects come from
+      },
+      controller: 'QuickCrudController',
+      controllerAs: 'vm',
+      bindToController:true,
+      compile: compile
+    };
+  };
+
+  app.directive('quickCrud', quickCrud);
+
+  var QuickCrudController =
+    function QuickCrudController ($scope,
+                                  $log,
+                                  $http
+                                   ) {
+      this.$scope = $scope;
+
+      var ctrl = this;
+
+      this.$scope = $scope;
+
+      var ctrl = this;
+
+      console.log('QuickCrudController', 'url', $scope.vm);
+
+
+
+
+     // dialogService.openDialog('testCrudDialog')
+
+      $scope.url = 'http://127.0.0.1:10001/api/test_contacts';
+      function loadUrl() {
+        if ( $scope.vm.urlSrc != null ) {
+          $scope.url = $scope.vm.urlSrc;
+        }
+      }
+      loadUrl();
+
+
+      $scope.dataObject = {test:'y'};
+      $scope.selectedIndex = 0;
+
+
+      var restHelper = {}
+      //restHelper.get();
+      restHelper.get = function get(page) {
+        var url =  '';
+        url = $scope.url //+ '/get'
+        if ( page != null ) {
+
+        };
+        return $http.get(url);
+      };
+
+      restHelper.save = function save(obj) {
+        var url =  '';
+        url = $scope.url  + '/create'
+        //params: { 'foobar': new Date().getTime() }
+        obj.timestamp += '?'+new Date().getTime();
+        return $http.get(url, {params:obj});
+      };
+
+      restHelper.update = function update(obj) {
+        var url =  '';
+        url = $scope.url  + '/update'
+        //params: { 'foobar': new Date().getTime() }
+        obj.timestamp += '?'+new Date().getTime();
+        return $http.get(url, {params:obj});
+      };
+
+      restHelper.delete = function deleteId(id) {
+        var url =  '';
+        url = $scope.url  + '/delete'
+        var obj = {}
+        obj.id = id;
+        obj.timestamp += '?'+new Date().getTime();
+        return $http.get(url, {params:obj});
+      };
+
+
+      function initList() {
+        restHelper.get().success(function (data) {
+          /* data = [{
+           first_name: 'sean'
+           }, {
+           first_name: 'daktos'
+           }];*/
+          $scope.listData = data;
+          $scope.selectedIndex = 0;
+        })
+      }
+      initList();
+
+
+      $scope.clickListItem = function (item ) {
+        scope.item = item;
+        //update quick-form;
+      }
+
+      $scope.onRefresh = function onRefresh() {
+        initList();
+      }
+
+      $scope.onNew = function onNew() {
+        //restHelper.get();
+        console.log('new');
+        $scope.newMode = true;
+        $scope.dataObject = {};
+        $scope.selectedIndex = -1;
+
+      }
+
+
+
+      $scope.saveFormObject = function saveFormObject(o) {
+        $log.log('save', o);
+
+        if (  $scope.newMode == true || o.id == null ) {
+
+          restHelper.save(o).success(function onSaved(data) {
+            console.log('saved');
+            initList();
+            $scope.newMode = false
+          }).error(function oError(data) {
+            console.log('error', data)
+          })
+        } else {
+          restHelper.update(o).success(function onSaved(data) {
+            console.log('updated');
+            initList();
+          }).error(function oError(data) {
+            console.log('error', data)
+          })
+        }
+
+        if ( $scope.vm.fxItemSaved != null ){
+          $scope.vm.fxItemSaved()(o);
+        }
+      }
+
+      $scope.deleteItem = function deleteItem(item) {
+        console.log('delete', item)
+        restHelper.delete(item.id).success(function onSaved(data) {
+          console.log('deleted');
+          initList();
+        }).error(function oError(data, status) {
+          if ( status== 410 ) { //(gone)
+            initList();
+            return;
+          }
+          console.log('error', data)
+        })
+      };
+
+
+      $scope.onSelectListItem = function onSelectListItem(item) {
+        //$scope.dataObject=item;
+        //$scope.formObject2 = item;
+        console.log('on selected', 'quick', item);
+        $scope.testBind = {test:'y99'};
+        var yyy = angular.copy(item);
+        yyy = item;
+        //delete yyy['$$hashKey'];
+        //var yyy = {};
+        // angular.extend(yyy, item);
+        $scope.testBind = yyy;
+        $scope.dataObject = yyy;
+      }
+
+
+    }
+
+
+
+
+  app
+    .controller('QuickCrudController', QuickCrudController);
+
+
+}());

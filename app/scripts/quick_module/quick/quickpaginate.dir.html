@@ -1,0 +1,30 @@
+<div    id="quickPaginate"  > <!-- class="panel panel-default" -->
+
+  <div id="debugPanel" class="hide">
+    Total Count
+    {{vm.config.paginator.count}}
+    Pages
+    {{vm.config.paginator.pages}}
+    Page #:
+    {{vm.config.paginator.page_index}}
+  </div>
+
+  <span id="btns" >
+
+    <a ng-repeat="item in buttons"
+       class="btn btn-primary"
+       ng-class="{'active': isActive(item)}"
+       ng-click="goToPage(item)">{{item}}</a>
+
+  </span>
+  &nbsp;
+  <a ng-disabled="morePages==false"
+     ng-show="morePages" id="btnNext"
+    class="btn btn-primary"
+    ng-click="goToNextPage()">Next</a>
+
+  <div class="hidex" >
+
+  </div>
+
+</div>

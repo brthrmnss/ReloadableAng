@@ -1,0 +1,101 @@
+<div    id="quickListTemplate" class="panel panel-default">
+  <!-- Panel Comp -->
+  <div id="headerContent" class="panel-heading" ></div>
+  <md-toolbar id="subHeaderContent" class="md-theme-light md-default-theme">
+    <!--<h2 class="md-toolbar-tools">
+      <span>Full Bleed</span>
+    </h2>-->
+  </md-toolbar>
+
+  <span class="debugInfo hide">
+     SelIndex: {{vmC.selectedIndex}}
+  </span>
+
+  <!--
+  {{vmC.title}} {{vmC.selectedItem}}
+  -->
+
+  <!--<button ng-click="test()" id="btnC"  >Test Select Click</button>-->
+  <!--
+    {{$id}} {{items.length}} {{vmC}}
+    -->
+  <div id="bodyContent" class="panel-bodyx" >
+    <md-grid-list id="grid" class="gridListdemoDynamicTiles" ng-non-bindable=""
+                  md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+                  md-row-height-gt-md="1:1" md-row-height="4:3"
+                  md-gutter="8px" md-gutter-gt-sm="4px" >
+      <md-grid-tile ng-repeat="tile in vmC.items"
+                    md-rowspan="{{tile.span.row}}"
+                    md-colspan="{{tile.span.col}}"
+                    md-colspan-sm="1"
+                    ng-class="tile.background" >
+        <md-icon md-svg-icon="{{tile.icon}}"></md-icon>
+        <md-grid-tile-footer><h3>{{tile.title}}</h3></md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+
+    <md-content>
+      <md-list id="listContent" class="no-padding">
+        <!--  <md-subheader class="md-no-sticky">3 line item</md-subheader>-->
+        <!--
+        <md-list-item class="md-3-line" ng-repeat="item in todos" ng-click="goTo(item)">
+          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+          <div class="md-list-item-text">
+            <h3>{{ item.who }}</h3>
+            <h4>{{ item.what }}</h4>
+            <p>{{ item.notes }}</p>
+            <p>{{ item.selected ? "---" : '' }}</p>
+          </div>
+        </md-list-item>
+        -->
+
+        <!--
+                <md-list-item class="md-3-line" ng-repeat="item in todos" ng-click="goTo(item)">
+                  <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+                  <div class="md-list-item-text">
+                    <h3>{{ item.who }}</h3>
+                    <h4>{{ item.what }}</h4>
+                    <p>{{ item.notes }}</p>
+                    <p>{{ item.selected ? "---" : '' }}</p>
+                  </div>
+                </md-list-item>
+        -->
+
+
+
+        <!--
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">2 line item</md-subheader>
+        <md-list-item class="md-2-line">
+          <img ng-src="{{todos[0].face}}?20" class="md-avatar" alt="{{todos[0].who}}" />
+          <div class="md-list-item-text">
+            <h3>{{ todos[0].who }}</h3>
+            <p>Secondary text</p>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">3 line item, long paragraph (see on mobile)</md-subheader>
+        <md-list-item class="md-3-line">
+          <img ng-src="{{todos[0].face}}?25" class="md-avatar" alt="{{todos[0].who}}" />
+          <div class="md-list-item-text">
+            <h3>{{ todos[0].who }}</h3>
+            <p>Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.</p>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        <md-subheader class="md-no-sticky">md-offset class</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="phone in phones">
+          <md-icon md-svg-icon="communication:phone" ng-if="$index === 0"></md-icon>
+          <div class="md-list-item-text" ng-class="{'md-offset': $index != 0 }">
+            <h3> {{ phone.number }} </h3>
+            <p> {{ phone.type }} </p>
+          </div>
+        </md-list-item>
+        -->
+      </md-list>
+    </md-content>
+  </div>
+
+
+  <div id="footerContent" class="panel-footer clearfix"></div>
+</div>

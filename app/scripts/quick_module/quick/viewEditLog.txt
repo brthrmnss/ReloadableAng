@@ -1,0 +1,12 @@
+#Title:Edit Prompt
+
+Name: Label=Prompt Name, > 3, < 30, required
+Description
+Color
+Every Hours: field=everyXminutes, type=select, options=5,15,60,
+  tooltip=how many often to prompt
+Prompt: tooltip=Ask me to fill this in
+Once a Day: tooltip=This only appears once a day. Any subsequence changes modify the whole day
+Data
+#List
+List: xskip UI_ Prompt .name | X | Edit | Add

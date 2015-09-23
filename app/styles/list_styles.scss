@@ -1,0 +1,246 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+
+/*
+.appList {
+  background-color: #F7F9FB;
+}
+
+
+.appList > .md-list-item.inner {
+  background-color: #F7F9FB;
+}
+
+
+.appList  .md-list-item.inner {
+  background-color: #F7F9FB;
+}
+
+#tabMenu .md-list-item.inner {
+  background-color: #F7F9FB;
+}
+
+
+  .test-background {
+  background-color: #F7F9FB;
+}
+*/
+
+/*
+#tabMenu .md-list-item-inner div {
+  background-color: red;
+}
+
+
+#tabMenu md-list-item {
+  background-color: blue;
+}
+
+#tabMenu .test-background {
+  background-color: orange;
+}
+*/
+
+#tabMenu .md-button {
+  background-color: #F3F6F7;
+}
+
+#tabMenu .md-selected .md-button{
+  background-color: #FFFFFF;
+}
+
+#tabMenu .md-tab {
+  background-color: #F3F6F7;
+  color: #8D99A6;
+  border-top:    1px solid  #E4E8ED;
+  /*border-top:    1px solid  red;*/
+  border-right:  0px solid #E4E8ED;
+  border-bottom: 2px solid #E4E8ED;
+  border-left:   2px solid  #E4E8ED;
+
+  font-weight: bold;
+}
+
+#tabMenu .md-active {
+  background-color: #FFFFFF;
+  color: #161620;
+  border-bottom: 0px solid #E4E8ED;
+}
+
+#tabMenu md-list {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#tabMenu md-ink-bar {
+  top: -0px;
+  bottom: auto;
+  height: 4px;
+}
+#tabMenu md-ink-bar {
+  background-color: #41B4E5;
+}
+
+#tabMenu md-ink-bar {
+  background-color: #41B4E5;
+}
+
+#tabMenuHolder {
+  margin-left: -2px;
+  _border-right: 2px solid #E4E8ED;
+}
+
+/**
+#tabMenu md-pagination-wrapper {
+  height: 88px;
+}
+
+#tabMenu md-tabs-canvas {
+  height: 88px;
+}
+
+#tabMenu .md-tab {
+  margin-top: 10px;
+}
+
+*/
+
+
+
+
+#row1Top {
+  background-color: #F3F6F7;
+  border-top: 1px solid #E4E8ED;
+  width: 257px;
+  height: 48px;
+  border-bottom: 1px solid #E4E8ED;
+}
+
+#leftMenuHolder {
+  margin-top: 0px;
+  width: 257px;
+  background-color: #F3F6F7;
+}
+
+#leftMenu #listContent {
+  padding: 0px 0px 0px 0px;
+}
+
+#leftMenu .md-button {
+  background-color: #F3F6F7;
+  border-bottom: 1px solid #E4E8ED;
+  border-right: 2px solid #E4E8ED;
+
+  border-radius: 0px;
+
+}
+
+
+#leftMenu .md-selected .md-button{
+  background-color: #FFFFFF;
+  border-top: 1px solid #E4E8ED;
+  border-bottom: 2px solid #E4E8ED;
+
+  border-right: 0px solid #E4E8ED;
+}
+
+
+
+
+#headerRow {
+  border-top: 2px solid #E4E8ED;
+  height: 84px;
+  position: relative;
+}
+
+
+#navMenu ul {
+  float: left;
+  width: 100%;
+  padding: 0;
+  padding-bottom: 5px;
+  margin: 0;
+  list-style-type: none;
+}
+
+#navMenu a {
+  float: left;
+  width: 6em;
+  text-decoration: none;
+  color: white;
+  background-color: purple;
+  padding: 0.2em 0.8em;
+  border-right: 10px solid white;
+}
+
+#navMenu a:hover {
+  background-color: fuchsia;
+}
+#navMenu li:focus,
+#navMenu li:active,
+#navMenu li:hover {
+  border-bottom: 4px solid #41B4E5;
+  /*border-right: 2px solid indianred;*/
+}
+
+#navMenu li.active a,
+#navMenu li.active a:hover,
+#navMenu li.active a:active {
+  background: #323637;
+}
+
+
+#navMenu li {
+  display: inline;
+  text-transform: uppercase;
+
+  padding: 0.2em 1.1em;
+  font-weight: bold;
+
+  outline:0 !important;
+}
+
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+}
+
+#navMenuHolder {
+  overflow-y:hidden;
+  padding-right: 1em;
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: flex-start;
+}
+
+.logo {
+  padding-left: 15px;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: center;
+}
+
+.menu {
+  order: 0;
+  flex: 8 1 auto;
+  align-self: center;
+}

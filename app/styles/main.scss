@@ -1,0 +1,689 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "font-awesome/scss/font-awesome.scss";
+@import "awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.scss";
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+}
+
+  /* Everything but the jumbotron gets side spacing for mobile first views */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Custom page header */
+  .header {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+
+    /* Make the masthead heading the same height as the navigation */
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: 40px;
+      padding-bottom: 19px;
+    }
+  }
+
+  /* Custom page footer */
+  .footer {
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .container-narrow > hr {
+    margin: 30px 0;
+  }
+
+  /* Main marketing message and sign up button */
+  .jumbotron {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+
+    .btn {
+      font-size: 21px;
+      padding: 14px 24px;
+    }
+  }
+
+  /* Supporting marketing content */
+  .marketing {
+    margin: 40px 0;
+
+    p + h4 {
+      margin-top: 28px;
+    }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+.contentHolder {
+  _background-color: #0040D0;
+  width: 100vw;
+  height: 100vh;
+  /*
+  float: right;
+  /*
+  width: 100%;
+  height: 100%;
+  display: inline;
+  /*
+  position: absolute;;
+  left: 200px;
+  top: 50px;
+  */
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+}
+
+.menu-container {
+  order: 0;
+  flex: 1 1 175px;
+
+  flex: 1 1 255px;
+  flex: 1 1 300px;
+}
+
+.freesize-container {
+  order: 0;
+  flex: 8 1 auto;
+  align-self: center;
+}
+
+.analyticContainer {
+  border-right: 2px dashed #DAE0E8;
+  padding: 1em;
+}
+
+
+.grayLine {
+  color: #DAE0E8;
+}
+
+.mainArea {
+    height: 100%;
+    opacity: 0.8;
+  }
+
+
+.sideNav1 {
+  width: 60px !important;
+  min-width: 60px !important;
+  background-color: #60B1D1;
+
+}
+
+.sideNav2 {
+  width: 260px !important;
+  min-width: 260px !important;
+}
+
+//decrease height of toolbar
+md-toolbar {
+  min-height: 50px;
+  max-height: 50px;
+}
+
+
+.mainArea2 {
+  height: 100vh;
+  width: 100%;
+}
+
+/** Colorize divs **/
+/*
+#mainContentArea > div:nth-child(1) {
+  background-color: #009688;
+}
+#mainContentArea > div:nth-child(2) {
+  background-color: #3949ab;
+}
+#mainContentArea > div:nth-child(3) {
+  background-color: #9c27b0;
+}
+#mainContentArea > div:nth-child(4) {
+  background-color: #8bc34a;
+}
+#mainContentArea > div:nth-child(5) {
+  background-color: #009688;
+}
+#mainContentArea > div:nth-child(6) {
+  background-color: #3949ab;
+}
+#mainContentArea > div:nth-child(7) {
+  background-color: #9c27b0;
+}
+#mainContentArea > div:nth-child(8) {
+  background-color: #009688;
+}
+*/
+
+
+.mainContentAreaLayout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+}
+
+.flex-item {
+  height: 100%;
+}
+.flex-item-logo-box {
+  order: 0;
+  flex: 0 1 200px;
+  align-self: auto;
+}
+
+.flex-item-title-box {
+  order: 0;
+  flex: 2 1 auto;
+  align-self: auto;
+}
+
+.flex-item-row1-right-box {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+
+}
+
+.flex-item-row1-height-spacer {
+  order: 0;
+  flex: 0 1 1px;
+  align-self: auto;
+  height: 90px;
+}
+
+
+.flex-item-row2-toolbox {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+  border-bottom: 1px solid #e5e5e5;
+  margin: 0px 35px 0px 35px;
+}
+
+/*
+* Space our 2nd row
+*/
+.flex-item-row2-height-spacer {
+  order: 0;
+  flex: 0 1 1px;
+  align-self: auto;
+  height: 40px;
+}
+
+.flex-item-row3-toolbox {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.flex-item-row3-toolbox-push-right {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+}
+
+/*
+* Space our 3rd row
+*/
+.flex-item-row3-height-spacer {
+  order: 0;
+  flex: 0 1 1px;
+  align-self: auto;
+  height: 130px;
+}
+
+/**
+takes up entire row
+*/
+.flex-item-clear-row {
+  order: 0;
+  flex: 0 1 100%;
+  align-self: auto;
+  height: 1px;
+ /* background-color: #004444; */
+}
+
+.flex-item-content-body {
+  order: 0;
+  flex: 0 1 100%;
+  align-self: auto;
+}
+
+.flex-item:nth-child(5) {
+  order: 0;
+  flex: 0 1 100%;
+  align-self: auto;
+}
+
+.flex-item:nth-child(6) {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.flex-item:nth-child(7) {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+}
+
+.flex-item:nth-child(8) {
+  order: 0;
+  flex: 0 1 100%;
+  align-self: auto;
+}
+
+.flex-item:nth-child(9) {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+
+.btnEditor {
+  border: 2px solid #60B1D1;
+  color: #60B1D1;
+  text-transform: capitalize;
+}
+
+
+.btnPlain {
+  border: 2px solid #e5e5e5;
+  padding: 0px !important;
+  margin: 0px !important;
+  text-transform: capitalize;
+}
+.btnMiddle {
+  border-top: 2px solid #e5e5e5;
+  border-bottom: 2px solid #e5e5e5;
+  padding: 0px !important;
+  margin: 0px !important;
+  text-transform: capitalize;
+
+  border-radius: 0px !important;
+  border: 2px solid #e5e5e5;
+  /*
+  border-right: 0px solid #e5e5e5;
+  border-left: 0px solid #e5e5e5;
+  */
+}
+
+.leftBookEnd {
+  border-right: 0px solid #e5e5e5;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+
+.rightBookEnd {
+  border-left: 0px solid #e5e5e5;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.btnToolbarBtnControls {
+  min-height: 1.4em !important;
+  min-width: 1.4em !important;
+  line-height: 1.4em !important;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+  padding-top: 0.5em !important;
+  padding-bottom: 0.5em !important;
+}
+
+.topEditorHolder {
+  color: #c1c1c1;
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+
+
+#row2Menu ul {
+  float: left;
+  width: 100%;
+  padding: 0;
+  padding-bottom: 5px;
+  font-size: 0.9em;
+  margin: 0;
+  list-style-type: none;
+}
+
+#row2Menu a {
+  float: left;
+  width: 6em;
+  text-decoration: none;
+
+  background-color: purple;
+  padding: 0.2em 0.8em 0.6em;
+  border-right: 10px solid white;
+}
+
+#row2Menu a:hover {
+  background-color: fuchsia;
+}
+#row2Menu li:focus,
+#row2Menu li:active,
+#row2Menu li:hover {
+  border-bottom: 2px solid #41B4E5;
+  /*border-right: 2px solid indianred;*/
+}
+
+#row2Menu li.active a,
+#row2Menu li.active a:hover,
+#row2Menu li.active a:active {
+  background: #323637;
+}
+
+
+#row2Menu li {
+  display: inline;
+  text-transform: uppercase;
+
+  padding: 0.0em;
+  margin-right: 3em;
+  font-weight: normal;
+
+  outline:0 !important;
+}
+
+
+
+.sideNavTextRow2 {
+  font-size: 0.8em;
+  padding-top: 5px;
+  color: #c8c8c8;
+}
+
+
+#sideNavMenu ul {
+  width: 100%;
+  padding: 0;
+  padding-bottom: 5px;
+  font-size: 1em;
+  margin: 0;
+  list-style-type: none;
+}
+
+#sideNavMenu a {
+  color: white;
+  background-color: purple;
+  padding: 0.2em 0.8em;
+  border-right: 10px solid white;
+}
+
+#sideNavMenu li:focus,
+#sideNavMenu li:active,
+#sideNavMenu li:hover {
+  border-right: 2px solid #41B4E5;
+  /*border-right: 2px solid indianred;*/
+}
+
+#sideNavMenu li.active a,
+#sideNavMenu li.active a:hover,
+#sideNavMenu li.active a:active {
+  background: #323637;
+  border-bottom: 2px solid #41B4E5;
+}
+
+#sideNavMenu li {
+  height: 72px;
+  /*border-bottom: 1px solid #323637;*/
+
+  text-transform: capitalize;
+
+  padding: 1em 1.6em;
+  font-weight: normal;
+
+  outline:0 !important;
+}
+
+
+
+.sideNavIcons {
+  background-color: #60B1D1 !important;
+  padding-top: 10px;
+  color: #447c93 !important;
+}
+
+
+#sideNavMenuIcons ul {
+  width: 100%;
+  padding: 0;
+  padding-bottom: 5px;
+  font-size: 1em;
+  margin: 0;
+  list-style-type: none;
+}
+
+#sideNavMenuIcons a {
+  text-decoration: none;
+  color: white;
+  margin:auto;
+  border-right: 10px solid white;
+}
+
+#sideNavMenuIcons li:focus,
+#sideNavMenuIcons li:active,
+#sideNavMenuIcons li:hover {
+  border-right: 2px solid #41B4E5;
+  border-right: 2px solid #323637;
+}
+
+#sideNavMenuIcons li.active a,
+#sideNavMenuIcons li.active a:hover,
+#sideNavMenuIcons li.active a:active {
+  background: #323637;
+}
+
+#sideNavMenuIcons li {
+  height: 45px;
+  text-transform: capitalize;
+  padding: 0px;
+  padding-top: 10px;
+  font-weight: normal;
+  font-size: 1.3em;
+  outline:0 !important;
+}
+
+
+.md-toolbar-plain {
+  background-color: inherit !important;
+}
+
+/**
+* Used by flex-box-layout to organize content against right edge
+*/
+.layout-right-edge-padding {
+  padding-right: 30px;
+}
+
+.layout-left-edge-padding {
+  padding-left: 35px;
+}
+
+
+
+/*
+**
+*/
+.quick-crud-list {
+  list-style-type: none;
+  padding-left: 0px;
+  padding-top: 0px;
+}
+.quick-crud-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: flex-start;
+}
+
+.quick-crud-leftcol {
+  order: 0;
+  flex: 0 1 20%;
+  align-self: auto;
+  min-width: 150px;
+}
+
+.quick-crud-rightcol {
+  order: 0;
+  flex: 0 1 80%;
+  align-self: auto;
+}
+
+
+.quick-dialog-bg {
+  position: absolute;
+  background-color: rgba(0,0,0,0.45);
+  border: 1px solid #DDDDDD;
+
+  top: 0;
+  left: 0;
+
+  width:100%;
+  height:100%;
+
+
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+
+  z-index:90;
+}
+
+
+.quick-dialog-bg-inner {
+
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+
+  background: white;
+  border: 1px solid #DDDDDD;
+/*
+  max-width:80%;
+  max-height:80%;
+
+  min-width: 50%;
+*/
+  border-radius: 4px;
+
+}
+
+.quick-close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2em;
+}
+
+/**
+* Quick col
+*/
+.quick-col-col-lyt-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+}
+
+.quick-col-data {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+}
+
+.quick-col-divider {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+
+  border-right: 1px solid #e5e5e5;
+  min-height: 80%;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+/*
+.no-padding {
+  padding: 0 !important;
+}
+*/
+
+/*
+Nav list button for evernote
+Makes large target area for finger click
+*/
+.btn-nav-list {
+  margin: 3px 3px !important;
+  font-size: 1.6em !important;
+}
+
+.prompt-notification-icons {
+  font-size: 1.6em !important;
+}
+
+.prompt-title {
+  font-size: 1.2em !important;
+}

@@ -1,0 +1,40 @@
+<div    id="quickForm"  > <!-- class="panel panel-default" -->
+  <div id="headerContent" class="hide panel-heading" >
+  </div>
+  <!--
+  scope: {{vm}} <br />
+  -->
+  <!--
+  scope-dataObject: {{vm.dataObject}} <br />
+  scope-dataObject:  {{dataObject}} <br />
+  scope-formObject:  {{formObject}} <br />
+  scope-dataObjectB:  {{vm.formData}} <br />
+  scope-refresh: {{vm.refresh}}
+  <br /><br />
+  scope: {{vm}} <br />
+  -->
+  <!--
+  {{dataObject}} <br />
+  ++++ <br />
+  {{dataObject.prompt.prompt_type}}
+  -->
+  <!-- class="panel panel-default" -->
+  <div id="bodyContent" >
+  </div>
+
+  <div id="footerContent" class="hide panel-footer clearfix" >
+
+  </div>
+
+
+  <section layout="row"
+           id="btnRow"
+           layout-sm="column" layout-align="center center">
+    <md-button  ng-click="cancelFormData()"
+                class="md-raised">Cancel</md-button>
+    <md-button id="btnSave"  ng-click="saveFormData()"
+                ng-disabled="errors.length > 0"
+               class="md-raised md-primary">Save</md-button>
+
+  </section>
+</div>

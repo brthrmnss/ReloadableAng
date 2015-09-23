@@ -1,0 +1,41 @@
+<div    id="quickView"  >
+  <div id="areaTitle" >
+
+  </div>
+  <div id="areaHeader" >
+
+  </div>
+  <div id="areaContent" >
+
+  </div>
+
+  <div id="areaForm" class="hide" >
+<!--do:{{vm.config.quickForm.dataObject}}
+    do:{{vm.config.quickForm.formObject}}-->
+    <quick-form
+      title="formForCrud"
+      data-object="vm.config.quickForm.dataObject"
+      form-object="vm.config.quickForm.formObject"
+      config="vm.config.quickForm"
+      fx-save="saveFormObject"
+      ></quick-form>
+
+  </div>
+
+  <div id="areaQuickCrud" class="hide" >
+    <quick-crud id="crudDialog"
+                config="vm.config.quickCrud"
+                  >
+    </quick-crud>
+  </div>
+
+  <div id="areaFooter" >
+
+  </div>
+  <!--<div id="testArea" >
+    <md-button class="md-primary" ng-click="vm.identify()">
+      Identify
+    </md-button>
+
+  </div>-->
+</div>

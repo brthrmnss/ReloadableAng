@@ -1,0 +1,200 @@
+<div id="container">
+
+
+  <!--
+  1 {{dataObject}} <br />
+  2 {{vm.dataObject}} <br />
+  3 {{datainput}} <br />
+  4 {{vm.datainput}} <br />
+  5 {{vm}} <br />
+  6 {{vm.$scope}} <br />
+  -->
+  <!-- <label>Quick Crud</label>-->
+  <!--
+  <md-button id="btnRefresh" ng-click="onRefresh()">refresh</md-button>
+  -->
+  <div layout="row" layout-align="center center" >
+    <!-- todo, remove and put as child of container, if title on newLine -->
+    <div id="qCTitle" ></div>
+
+    <md-button id="btnHelp"
+               class="md-fab md-mini md-primary md-button md-default-theme"
+               ng-click="onRefresh()">
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+    </md-button>
+
+    <md-button id="btnSettings" ng-hide
+               class="md-fab md-mini md-primary md-button md-default-theme"
+               ng-click="onSettings()">
+      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+    </md-button>
+
+    <span flex></span>
+    <md-button id="btnRefresh"
+               class="md-fab md-mini md-primary md-button md-default-theme" ng-click="onRefresh()">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+    </md-button>
+    <md-button id="btnNew"
+               class="md-fab md-mini md-primary md-button md-default-theme" ng-click="onNew()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </md-button>
+
+  </div>
+
+  <!-- <md-button id="btnNew" ng-click="onNew()">new</md-button>-->
+  <!--<span ng-if="isNew(dataObject, dataObject.id)" >
+    *
+  </span>-->
+
+  <div id="filterSelect" layout="row"  class="hide" layout-align="center center">
+   <div flex>
+
+       <!--<label>Filter</label>
+       <input ng-model="user.title">-->
+
+       <md-autocomplete
+         md-selected-item="selectedItem"
+         md-search-text-change="searchTextChange(searchText)"
+         md-search-text="searchText"
+         md-selected-item-change="selectedItemChange(item)"
+         md-items="item in querySearch(searchText)"
+         md-item-text="item.name"
+         md-min-length="0"
+         placeholder="Filter">
+         <md-item-template>
+           <span md-highlight-text="searchText"
+                 md-highlight-flags="^i">{{item.name}} - {{item.desc}}</span>
+         </md-item-template>
+         <md-not-found>
+           No matches found for "{{searchText}}".
+         </md-not-found>
+       </md-autocomplete>
+
+   </div>
+
+
+<!--    <span
+          class="glyphicon glyphicon-search"
+          aria-hidden="true"></span>-->
+  </div>
+
+  <div id="containerCols" class="quick-crud-container">
+    <div id="quick-crud-leftcol" class="quick-crud-leftcol">
+      <!--
+      {{vmC.selectedIndex}} {{selectedIndex}}
+       quickListConfig:
+      {{quickListConfig}}
+      -->
+      <!--
+      QLC:{{quickListConfig}}
+      -->
+      <quick-list
+        padding-left="5px"
+        style="height: 300px; overflow:hidden; overflow-y:scroll;"
+        items="listData"
+        selected-index="selectedIndex"
+        _selected-index2="selectedIndex"
+        fx-item-selected="onSelectListItem"
+        panel="false"
+        config="quickListConfig"
+        >
+        <list>
+          <!--length: {{vmC.items.length}}-->
+          <ul id="listHolder"
+              class="quick-crud-list" >
+            <li ng-repeat="item in vmC.items"  >
+              {{item.name}}
+              <div ng-click="goTo(item)"
+                   class="sideNavTextRow2">{{item.first_name}}
+                {{item.last_name}}
+              </div>
+              <div ng-click="vmC.$scope.$parent.deleteItem(item)">x</div>
+              <div ng-if="item.selected==true">selected</div>
+            </li>
+          </ul>
+
+          <!--<li ng-repeat="item in vmC.items" class="" >
+            {{item.name}}
+            <div ng-click="goTo(item)"
+                 class="sideNavTextRow2">{{item.first_name}}
+              {{item.last_name}}
+            </div>
+            <div ng-click="vmC.$scope.$parent.deleteItem(item)">x</div>
+
+            <div ng-click="vmC.$scope.$parent.deleteItem(item)">yx</div>
+            <div ng-if="item.selected==true">selected</div>
+          </li>-->
+
+        </list>
+      </quick-list>
+
+
+      <!-- <div>Pagination</div> -->
+      <quick-paginate config="paginatorConfig" >
+
+      </quick-paginate>
+    </div>
+
+
+    <!--
+    <div  id="colRight" class="quick-crud-rightcol">
+      <quick-form
+        title="formForCrud"
+        _data-object="dataObject"
+        _data-object2="dataObject"
+        form-object="vm.formObject"
+        config="vm.config"
+        fx-save="saveFormObject"
+        ></quick-form>
+    </div>
+    -->
+
+    <!--
+    <div  id="colRight" class="quick-crud-rightcol">
+      <quick-form
+        title="formForCrud"
+        data-object="vm.config.dataObject"
+        form-object="vm.config.formObject"
+        config="vm.config.quickFormConfig"
+        fx-save="saveFormObject"
+        ></quick-form>
+    </div>
+    -->
+
+
+    <div id="colRight" class="quick-crud-rightcol">
+
+      <!--   <br />
+
+         dataObject:
+         {{dataObject}} <br />
+         formObject:
+         {{formObject}} <br />
+         <br />-->
+      <!--
+      <br/>
+      {{config.name}}
+      {{vm.config.name}} {{vm.config.dataObject}}
+      {{refresh}}
+      <br/>
+      -->
+
+      <!--  <div>
+       formObject:
+       {{formObject}} <br />
+       </div>-->
+      <quick-form
+        titlex="formForCrud"
+        data-object="dataObject"
+        form-data="dataObject"
+        form-object="formObject"
+        config="quickFormConfig"
+        fx-save="saveFormObject"
+        refresh="refresh"
+        >
+      </quick-form>
+
+    </div>
+
+  </div>
+</div>

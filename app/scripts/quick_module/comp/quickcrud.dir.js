@@ -1,0 +1,676 @@
+'use strict';
+
+(function(){
+
+  var app = angular.module('com.sync.quick');
+  /*
+   Example Usage:
+   This component lets the user define different content
+   group areas
+
+   <div id="testComp"  class="_hide" >
+   <test-comp></test-comp>
+   </div>
+   <div id="testComp2"  class="_hide" >
+   move here:
+   </div>
+   */
+
+  /**
+   * Component verifies directive can be moved, and bindings will still work
+   * @param $templateRequest
+   * @param $compile
+   * @param $interpolate
+   * @param transcludeHelper
+   * @returns {{scope: {title: string, fxItemSelected: string}, controller: string, controllerAs: string, bindToController: boolean, compile: Function}}
+   * @private
+   */
+  var quickCrud = function quickCrud($templateRequest,
+                                     $compile,
+                                     $interpolate,
+                                     transcludeHelper
+  ) {
+
+    var utils = transcludeHelper.new();
+
+    function link(scope, element, attrs){
+      $templateRequest('scripts/quick_module/comp/quickcrud.dir.html').then(
+        function(html) {
+          var $scope = scope;
+          scope.refresh = 'ggg';
+
+          utils.loadTemplate(html, element, attrs);
+
+          var config = scope.vm.config;
+          if (config == null) {
+            config = {}
+          } else {
+            config.fxRefresh = function onRefresh() {
+
+              var config = scope.vm.config;
+              console.log('refresh', config.dataObject);
+
+              if (config.dataObject != null) {
+                scope.dataObject = config.dataObject;
+              }
+              ;
+              if (config.formObject != null) {
+                scope.formObject = config.formObject;
+              }
+              ;
+
+
+              if (config.quickFormConfig != null) {
+                scope.quickFormConfig = config.quickFormConfig;
+              } ;
+              if (config.quickListConfig != null) {
+                scope.quickListConfig = config.quickListConfig;
+              } ;
+
+              //do not need this, set defaults instead
+              //scope.formObject.reload = true;
+              scope.refresh = Math.random();
+
+
+              setTimeout(function () {
+                console.log('refresh later')
+                scope.$apply(function () {
+                });
+                return;
+              }, 200);
+              /*
+               setTimeout(function () {
+               console.log('refresh later')
+               scope.$apply(function () {
+               scope.refresh = Math.random();
+               });
+               return;
+               }, 200);
+               */
+            }
+
+            config.fxSaveCurrentItem = function fxSaveCurrentItem(newItem) {
+              if ( newItem != null ) {
+                config.dataObject = newItem;
+                $scope.dataObject = newItem;
+              };
+
+
+              return $scope.saveFormObject($scope.dataObject);
+
+
+            }
+          }
+          ;
+
+
+
+          if ( attrs.showTitle != null ) {
+            attrs.showTitle = attrs.showTitle
+              .split('[[').join('{{')
+              .split(']]').join('}}');
+          }
+
+          utils.ifContentDefinedAddTo(attrs.showTitle,
+            '#qCTitle', null, true, true );
+          utils.ifContentDefinedAddTo(config.title,
+            '#qCTitle', null, true, true );
+          console.debug('showtitle', attrs.showTitle)
+
+          function removeLayoutCols() {
+            utils.templateContent.find('#containerCols').removeClass('quick-crud-container');
+          }
+          utils.ifFalseHide(config.showList, '#quick-crud-leftcol');
+          utils.ifFalse(config.showList, removeLayoutCols);
+          utils.ifFalseHide(config.showList, '#btnRefresh');
+          utils.ifFalseHide(config.canCreate, '#btnNew');
+
+          utils.ifFalseHide(config.showForm, '#colRight');
+          utils.ifFalse(config.showForm, removeLayoutCols);
+
+          utils.ifTrueShow(config.showFilter,
+            '#filterSelect');
+          utils.ifTrueShow(config.showSettings,
+            '#btnSettings');
+
+          /*
+           utils.transclude('item-renderer', '#listHolder', true,
+           function (str) {
+
+           }, true, false
+           );
+           */
+
+          utils.transclude('item-renderer', '#listHolder', true,
+            null, false, false
+          );
+
+
+          var config = scope.vm.config;
+          if ( config != null ) {
+            if (config.dataObject != null) {
+              console.debug('setting data object', config.dataObject)
+              //scope.vm.dataObject = config.dataObject;
+              scope.dataObject = config.dataObject;
+            }
+            ;
+            if (config.formObject != null) {
+              console.debug('setting formObject', config.formObject)
+
+              //scope.vm.formObject = config.formObject;
+              scope.formObject = config.formObject;
+            }
+            ;
+            if (config.quickFormConfig != null) {
+              scope.quickFormConfig = config.quickFormConfig;
+            };
+            if (config.quickListConfig != null) {
+              scope.quickListConfig = config.quickListConfig;
+            };
+
+
+          }
+
+          function createWatchers() {
+            /*     scope.$watch('vm.formObject', function (v, oldVal) {
+             if (scope.vm.formObject != null) {
+             console.log('scope.vm.formObject... changed: ',
+             scope.vm.formObject, v);
+             }
+             console.log('quickCrud',
+             'scope.vm.formObject... changed: ',
+             scope.vm, v,oldVal);
+             });
+
+             scope.$watch('vm.formObject2', function (v, oldVal) {
+             if (scope.vm.formObject2 != null) {
+             console.log('scope.vm.formObject2... changed: ',
+             scope.vm.formObject2, v);
+             }
+             console.log('quickCrud',
+             'scope.vm.formObject2... changed: ',
+             scope.vm, v,oldVal);
+             });*/
+            /*
+
+             //when data input is from parent ... copy object to
+             //scope
+             scope.$watch('vm.datainput', function (v, oldVal) {
+             if (scope.vm.datainput != null) {
+             console.log('scope.vm.datainput... changed: ',
+             scope.vm.datainput, v);
+             //scope.vm.dataObject = v;
+             scope.dataObject = v;
+             }
+             console.log('quickCrud',
+             'scope.vm.datainput... changed: ',
+             scope.vm, v,oldVal);
+             });
+
+             scope.$watch('vm.dataObjectB', function (v, oldVal) {
+             if (scope.vm.dataObjectB != null) {
+             console.log('scope.vm.dataObject... changed: ',
+             scope.vm.dataObjectB, v);
+             //scope.vm.dataObject = v;
+             scope.dataObject = v;
+             }
+             console.log('quickCrud',
+             'scope.vm.dataObjectB... changed: ',
+             scope.vm, v,oldVal);
+             });
+             */
+
+            /*
+             scope.$watch('vm.formObject', function (v, oldVal) {
+             if (scope.vm.formObject != null) {
+             console.log('scope.vm.formObject... changed: ',
+             scope.vm.formObject, v);
+             }
+             console.log('quickCrud',
+             'scope.vm.formObject... changed: ',
+             scope.vm, v,oldVal);
+             });
+             */
+            utils.$scope = scope;
+            utils.watch_copyToScope('vm.formObject', 'formObject');
+            utils.watch_copyToScope('vm.dataObject', 'dataObject');
+
+            //copy form config from objects
+            scope.$watch('vm.config', function (v, oldVal) {
+              if (v != null) {
+                console.log('config changed', v);
+                var config = v;
+                if (config.dataObject != null) {
+                  console.error('setting data object', config.dataObject)
+                  //scope.vm.dataObject = config.dataObject;
+                  scope.dataObject = config.dataObject;
+                }
+                ;
+                if (config.formObject != null) {
+                  scope.vm.formObject = config.formObject;
+                  scope.formObject = config.formObject;
+                };
+                if (config.quickFormConfig != null) {
+                  scope.quickFormConfig = config.quickFormConfig;
+                };
+                if (config.quickListConfig != null) {
+                  scope.quickListConfig = config.quickListConfig;
+                };
+              }
+              ;
+              /*
+               console.log('quickCrud',
+               'scope.vm.dataObjectB... changed: ',
+               scope.vm, v,oldVal);
+               */
+            });
+
+            scope.$watch('vm.refresh', function (v, oldVal) {
+              if (v != null) {
+                console.log('config refresh', v);
+                var c = scope.config;
+                scope.config = null;
+                scope.config = c;
+              }
+              ;
+              /*
+               console.log('quickCrud',
+               'scope.vm.dataObjectB... changed: ',
+               scope.vm, v,oldVal);
+               */
+            });
+
+
+            /*scope.$watch('vm.config.dataObject', function (v, oldVal) {
+             if (v != null) {
+             console.log('config dataObject changed', v);
+             };
+             });*/
+          }
+          //createWatchers();
+
+          html = utils.getFinalTemplate();
+
+
+
+          //var html = utils.templateContent[0];
+          //console.log('quickcrud pre-html output', utils.templateContent.clone()[0] ); //.toString() ); //.clone());
+          // console.log('quickcrud pre-html output', utils.templateContent.clone()[0].toString() ); //.toString() ); //.clone());
+          function outerHTML(node){
+            return node.outerHTML || new XMLSerializer().serializeToString(node);
+          }
+          //console.log('quickcrud pre-html output', outerHTML(utils.templateContent.clone()[0]) ); //.clone());
+          //console.log('quickcrud pre-html output', attrs.id, outerHTML(utils.templateContent.clone().find('#listHolder')[0]) ); //.clone());
+          //console.log('quickcrud pre-html output', attrs.id, outerHTML(utils.templateContent.clone()[0])  ); //.clone());
+
+          element.append($compile(html)(scope));
+          scope.element = element;
+          console.log('', 'html output', html);
+
+        }
+
+      )
+
+    };
+
+    var compile = function (tElem, attrs) {
+      utils.storeTemplate(tElem, attrs);
+
+      function defineDirectiveDefaults() {
+        if ( attrs.selectedIndex === null  ) {
+          attrs['selectedIndex'] = "-1";
+        };
+        if ( attrs.views == null  ) {
+          attrs['views'] = {
+            'a': 'comp:#viewA',
+            'b': '<test-comp id="viewB">View B</test-comp>',
+            'c': 'dom:#viewC'
+          };
+        };
+      }
+      defineDirectiveDefaults();
+      utils.defaultAttr('testAttr', '5', attrs)
+      utils.storeUserContent(tElem);
+      //console.log('fxCompile','url',attrs);
+      return {
+        pre: function(scope, element, attrs, controller){
+          return;
+        },
+        post: link
+      };
+    }
+    return {
+      scope: {
+        urlSrc:'@',
+        title: '@',
+        showTitle2: '@',
+        fxItemSelected: '&',
+        fxItemSaved: '&',
+        fxsaved: '&',
+        //  testAttr: '@',
+        // datainput: '=',
+        formObject: '=',
+        dataObject:'=',
+        config: '=',
+        refresh: '='
+        //id: '@',
+
+        //where objects come from
+      },
+      controller: 'QuickCrudController',
+      controllerAs: 'vm',
+      bindToController:true,
+      compile: compile
+    };
+  };
+
+  app.directive('quickCrud', quickCrud);
+
+  var QuickCrudController =
+    function QuickCrudController ($scope,
+                                  $log,
+                                  $restHelper,
+                                  sh,
+                                  dialogService
+    ) {
+      this.$scope = $scope;
+      var ctrl = this;
+
+      var config = $scope.vm.config;
+      if ( config == null ) { config = {} };
+      console.log('QuickCrudController', 'url', $scope.vm);
+      // dialogService.openDialog('testCrudDialog')
+
+      $scope.url = 'http://127.0.0.1:10001/api/test_contacts';
+      function loadUrl() {
+        if ( $scope.vm.urlSrc != null ) {
+          $scope.url = $scope.vm.urlSrc;
+        }
+      }
+      loadUrl();
+
+
+      //  $scope.dataObject = {test:'y'};
+      $scope.selectedIndex = 0;
+
+
+      var restHelper = $restHelper.create();
+      var pg = config.paginatorConfig;
+      pg = sh.dv(pg, {});
+      $scope.paginatorConfig = pg;
+      restHelper.fxListResults = function results(objs) {
+        pg.paginator = restHelper.paginator;
+        pg.restHelper = restHelper;
+        //console.error('fx results...')
+        sh.callIfDefined(pg.fxRefresh, objs);
+        $scope.updateListData(objs)
+        $scope.selectedIndex = 0;
+      };
+
+      restHelper.url = $scope.url;
+      if ( /*config.remote == false ||*/
+      config.restHelperConfig != null ) {
+        // restHelper.inMemory = true;
+        var restHelperConfig = config.restHelperConfig;
+        if ( restHelperConfig == null ) { restHelperConfig = {}}
+
+        restHelper.config = restHelperConfig;
+        if ( restHelperConfig.dataSrc != null ) {
+          restHelper.$http = restHelperConfig.dataSrc;
+        }
+
+        //config.dataSrc = self.dataSrc;
+      };
+      restHelper.initRestHelper();
+
+
+      $scope.updateListData = function (data ) {
+        $scope.listData = data;
+        config.list = data;
+        if ( config.quickListConfig) {
+          config.quickListConfig.list = data;
+        }
+        //persist selected item
+        if ( $scope.selectedItem == null )
+          return
+        sh.each($scope.listData, function(i,obj){
+          if ( obj.id == $scope.selectedItem.id ) {
+            $scope.onSelectListItem(obj);
+          }
+        })
+      }
+
+      function initList() {
+        console.log('init list',  config.name, config)
+        if ( config.paginate != false ) {
+          restHelper.list2(0,10,{}).success(
+            function (data) {
+              $scope.updateListData(data)
+              $scope.selectedIndex = 0;
+              $scope.paginator = restHelper.paginator
+            });
+        } else {
+          restHelper.list().success(function (data) {
+            /* data = [{
+             first_name: 'sean'
+             }, {
+             first_name: 'daktos'
+             }];*/
+            if ( config.listResultListProp != null ){
+              data = data[config.listResultListProp];
+            }
+            $scope.updateListData(data)
+            $scope.selectedIndex = 0;
+          });
+        }
+
+
+      }
+      // if ( config.remote != false ) {
+      if ( config.noRemote != true ) {
+        initList();
+      }
+      //} else {
+      //   $scope.listData = config.list;
+      $scope.selectedIndex = 0;
+      // }
+
+
+
+
+      $scope.clickListItem = function (item ) {
+        scope.item = item;
+        //update quick-form;
+      }
+
+      $scope.onRefresh = function onRefresh() {
+        initList();
+      }
+
+      $scope.onNew = function onNew() {
+        //restHelper.get();
+        console.log('new');
+        $scope.newMode = true;
+        $scope.dataObject = {};
+        $scope.selectedIndex = -1;
+        if ( config.fxNew != null ) {
+          config.fxNew($scope.dataObject);
+        }
+
+      }
+
+
+      $scope.isNew = function isNew(o) {
+        if ( config.showNewIndicator != true  ) {
+          return false;
+        }
+        if ( $scope.dataObject.id == 0
+          || $scope.dataObject.id == null ) {
+          return true
+        }
+        return false;
+      }
+
+      $scope.onSettings = function onSettings() {
+        sh.callIfDefined(config.fxSettings);
+      };
+
+
+      $scope.saveFormObject = function saveFormObject(o) {
+        $log.log('save', o);
+
+        if ( config.fxSave == null ) {
+          if ($scope.newMode == true || o.id == null) {
+            restHelper.save(o,false)
+              .success(function onSaved(id) {
+                console.log('saved', id);
+                //sh.copyProps(data, o);
+                sh.callIfDefined(config.fxSaveTemp, o);
+                config.fxSaveTemp = null;
+                initList();
+                $scope.newMode = false
+              }).error(function oError(data) {
+                console.log('error', data)
+              })
+          } else {
+            restHelper.update(o).success(function onSaved(data) {
+              console.log('updated');
+              sh.callIfDefined(config.fxSaveTemp, o);
+              config.fxSaveTemp = null;
+              initList();
+            }).error(function oError(data) {
+              console.log('error', data);
+            })
+          }
+
+          if ($scope.vm.fxItemSaved != null &&
+            $scope.vm.fxItemSaved() != null) {
+            $scope.vm.fxItemSaved()(o);
+          }
+        } else {
+          //will handle externally
+          config.fxSave(o);
+          $scope.newMode = false
+        }
+      }
+
+      $scope.deleteItemC = function deleteItemC(item) {
+        //console.log('delete', item)
+        restHelper.delete(item.id).success(function onSaved(data) {
+          //console.log('deleted');
+          initList();
+        }).error(function oError(data, status) {
+          if ( status== 410 ) { //(gone)
+            initList();
+            return;
+          }
+          console.log('error', data)
+        });
+      };
+
+
+      $scope.deleteItem = function deleteItem(item) {
+        dialogService.showConfirm(
+          'Are you sure you want to delete?',
+          'This cannot be undone', $scope.deleteItemC);
+      };
+
+      $scope.onSelectListItem = function onSelectListItem(item) {
+        //$scope.dataObject=item;
+        //$scope.formObject2 = item;
+        console.debug('on selected', 'quick', item);
+        $scope.testBind = {test:'y99'};
+        var yyy = angular.copy(item);
+        yyy = item;
+        //delete yyy['$$hashKey'];
+        //var yyy = {};
+        // angular.extend(yyy, item);
+        $scope.selectedItem = yyy;
+        if ( config.fxClick ) {
+          config.fxClick(yyy, item);
+        }
+        //asdf.g
+        $scope.testBind = yyy;
+        $scope.dataObject = yyy;
+      };
+
+
+
+
+
+
+      function autoComplete() {
+        var self = $scope;
+        self.simulateQuery = false;
+        self.isDisabled    = false;
+        // list of `state` value/display objects
+        self.states        = loadAll();
+        self.querySearch   = querySearch;
+        self.selectedItemChange = selectedItemChange;
+        self.searchTextChange   = searchTextChange;
+        // ******************************
+        // Internal methods
+        // ******************************
+        /**
+         * Search for states... use $timeout to simulate
+         * remote dataservice call.
+         */
+        function querySearch (query) {
+          self.states =  $scope.listData;
+          $log.info('query ...');
+          var results = query ? self.states.filter( createFilterFor(query) ) : self.states
+          return results;
+        }
+        function searchTextChange(text) {
+          $log.info('Text changed to ' + text);
+        }
+        function selectedItemChange(item) {
+          $log.info('Item changed to ' + JSON.stringify(item));
+          sh.callIfDefined(config.fxFilterSelect, item)
+        }
+        /**
+         * Build `states` list of key/value pairs
+         */
+        function loadAll() {
+          return  $scope.listData;
+
+          var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
+              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
+              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
+              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
+              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
+              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
+              Wisconsin, Wyoming';
+          return allStates.split(/, +/g).map( function (state) {
+            return {
+              value: state.toLowerCase(),
+              display: state
+            };
+          });
+
+
+         // sh.each()
+
+
+        }
+        /**
+         * Create filter function for a query string
+         */
+        function createFilterFor(query) {
+          var lowercaseQuery = angular.lowercase(query);
+          return function filterFn(state) {
+            return (angular.lowercase(state.name)
+              .indexOf(lowercaseQuery) != -1);
+          };
+        }
+      }
+      autoComplete();
+
+
+
+    };
+
+  app
+    .controller('QuickCrudController', QuickCrudController);
+
+}());

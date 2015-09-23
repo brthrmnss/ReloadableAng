@@ -1,0 +1,308 @@
+'use strict';
+
+(function(){
+
+  var app = angular.module('74App');
+
+  /**
+   * Component take data form and data object
+   * @param $templateRequest
+   * @param $compile
+   * @param $interpolate
+   * @param transcludeHelper
+   * @returns {{scope: {title: string, fxItemSelected: string}, controller: string, controllerAs: string, bindToController: boolean, compile: Function}}
+   * @private
+   */
+  var quickForm = function quickForm_($templateRequest, $compile, $interpolate, transcludeHelper) {
+
+    var utils = transcludeHelper.new();
+
+    function link(scope, element, attrs){
+      $templateRequest('scripts/core/quick/quickform.dir.html').then(
+        function(html){
+          var ctrl = scope.vmC;
+          var templateContent = angular.element(html);
+          utils.templateContent = templateContent;
+          utils.userTemplateContent = templateOriginal;
+          utils.userTemplateContent = dictTemplates[attrs.title]
+          utils.userContent = element;
+
+
+
+
+
+
+          var formObject = {}
+          formObject.firstName = {};
+          formObject.lastName = {};
+          formObject.product = {type:'select',
+            options:[
+              {name:'Forex', value:'forex'},
+              {name:'Forex2', value:'forex2'},
+            ]}
+          formObject.product2 = {type:'radio',
+            options:[
+              {name:'Forex', value:'forex'},
+              {name:'Forex2', value:'forex2'},
+            ]}
+
+
+          var dataObject = {}
+          dataObject.firstName = 'Jack';
+          dataObject.lastName = 'Smith';
+
+          scope.dataObject= dataObject;
+          scope.formObject= formObject;
+
+          var cursor = {};
+
+
+          var form = angular.element('<form></form>');
+
+
+          form.attr('name', 'userForm2');
+          $.each(formObject,
+            function addFormElement(index, value) {
+
+
+              var fieldInfo = value || {};
+
+              if ( fieldInfo.label == null ) {
+                fieldInfo.label = index;
+                // insert a space before all caps
+                fieldInfo.label =  fieldInfo.label.replace(/([A-Z])/g, ' $1')
+                  // uppercase the first character
+                  .replace(/^./, function(str){ return str.toUpperCase(); })
+                //fieldInfo.label = fieldInfo.label.charAt(0).toUpperCase() + fieldInfo.label.slice(1);
+              }
+
+              var types = {}
+              types.textArea = 'textarea'
+              types.input = 'input'
+              types.radio = 'radio'
+              types.select = 'select'
+
+              if ( fieldInfo.type == types.input || fieldInfo.type == null ) {
+                //<md-input-container>
+                var container = angular.element('<md-input-container />');
+                form.append(container);
+
+                //<label>Email</label>
+                var label = angular.element('<label/>');
+                label.html(fieldInfo.label);
+                container.append(label); //.html(index);
+
+                //<input ng-model="user.email" type="email">
+                var input = angular.element('<input/>');
+                input.attr('ng-model', 'dataObject.' + index);
+                container.append(input);
+              }
+
+              if ( fieldInfo.type == types.textArea ) {
+                //<md-input-container>
+                var container = angular.element('<md-input-container />');
+                form.append(container);
+
+                //<label>Email</label>
+                var label = angular.element('<label/>');
+                label.html(fieldInfo.label);
+                container.append(label); //.html(index);
+
+                //<input ng-model="user.email" type="email">
+                var input = angular.element('<input/>');
+                input.attr('ng-model', 'dataObject.' + index);
+                container.append(input);
+              }
+
+              /*
+               <md-select placeholder="Pick" ng-model="someVal">
+               <md-option value="1">One</md-option>
+               <md-option value="2">Two</md-option>
+               </md-select>
+               */
+              if ( fieldInfo.type == types.select ) {
+                // <md-select placeholder="Pick" ng-model="someVal">
+                var container = angular.element('<md-select />');
+                container.attr('ng-model', 'dataObject.' + index);
+                container.attr('placeholder', fieldInfo.label);
+                form.append(container);
+
+                //<md-option ng-repeat="selectOption in formObject.index.options" value="selectOption.value">
+                //{{selectOption.name}}
+                // </md-option>
+                /*container.html('<md-option ng-repeat="selectOption in formObject.'+index+'.options" value="selectOption.value">' +
+                 '{{selectOption.name}}'+
+                 '</md-option>');
+                 container.html('<md-option ng-repeat="selectOption in formObject.'+index+
+                 '.options" value="selectOption.value">' +
+                 '{{selectOption.name}}'+
+                 '</md-option>');*/
+                container.html('<span ng-repeat="selectOption in formObject.'+index+
+                  '.options">'+'<md-option  value="{{selectOption.value}}">' +
+                  '{{selectOption.name}}'+
+                  '</md-option>'+'</span>');
+                //<md-option value="1">One</md-option>
+              }
+
+              /*
+               <p>Selected Value: <span class="radioValue">{{ data.group1 }}</span> </p>
+               <md-radio-group ng-model="data.group1">
+               <md-radio-button value="Apple" class="md-primary">Apple</md-radio-button>
+               <md-radio-button value="Banana"> Banana </md-radio-button>
+               <md-radio-button value="Mango">Mango</md-radio-button>
+               </md-radio-group>
+               <hr />
+               */
+              if ( fieldInfo.type == types.radio ) {
+                //<md-radio-group ng-model="data.group1">
+                var container = angular.element('<md-radio-group />');
+                container.attr('ng-model', 'dataObject.' + index);
+                container.attr('placeholder', fieldInfo.label);
+                form.append(container);
+
+                container.html('<span ng-repeat="radioOption in formObject.'+index+
+                  '.options">'+'<md-radio-button  value="{{radioOption.value}}">' +
+                  '{{radioOption.name}}'+
+                  '</md-radio-button>'+'</span>');
+              }
+
+
+
+              /*
+               <md-input-container>
+               <label>Email</label>
+               <input ng-model="user.email" type="email">
+               </md-input-container>
+               */
+
+              /*
+               <div layout layout-sm="column">
+               <md-input-container style="width:80%">
+               <label>Company (Disabled)</label>
+               <input ng-model="user.company" disabled>
+               </md-input-container>
+               <md-input-container flex>
+               <label>Submission Date</label>
+               <input type="date" ng-model="user.submissionDate">
+               </md-input-container>
+               </div>
+               */
+
+
+              /*
+               <md-input-container flex>
+               <label>Biography</label>
+               <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea>
+               </md-input-container>
+               */
+
+
+              /*
+               <p>Selected Value: <span class="radioValue">{{ data.group1 }}</span> </p>
+               <md-radio-group ng-model="data.group1">
+               <md-radio-button value="Apple" class="md-primary">Apple</md-radio-button>
+               <md-radio-button value="Banana"> Banana </md-radio-button>
+               <md-radio-button value="Mango">Mango</md-radio-button>
+               </md-radio-group>
+               <hr />
+               */
+
+
+              /*
+               <md-select placeholder="Pick" ng-model="someVal">
+               <md-option value="1">One</md-option>
+               <md-option value="2">Two</md-option>
+               </md-select>
+               */
+
+            });
+
+          utils.templateContent.find('#bodyContent').append(form);
+
+          html = utils.templateContent[0];
+          element.append($compile(html)(scope));
+          scope.element = element;
+          //console.log('html output', html)
+
+          angular.element('#btnSave').on('click', function () {
+            //console.log('click ... save');
+            console.log('on save');
+            scope.saveFormData();
+            //$rootScope.$broadcast('global:resize');
+          })
+        }
+      )
+
+      controllerReference.$id = Math.random();
+      console.log('top', controllerReference.$id, controllerReference.title, controllerReference.items, controllerReference.items2 );
+    };
+
+    var templateOriginal = null;
+    var dictTemplates = {};
+    var controllerReference = null;
+    var compile = function (tElem, attrs) {
+
+      templateOriginal = tElem.clone();
+      dictTemplates[attrs.title] = templateOriginal;
+      function defineDirectiveDefaults() {
+        if ( attrs.selectedIndex === null  ) {
+          attrs['selectedIndex'] = "-1";
+        };
+      }
+      defineDirectiveDefaults();
+
+      return {
+        pre: function(scope, element, attrs, controller){
+          controllerReference = controller;
+          return;
+        },
+        post: link
+      };
+    }
+    return {
+      scope: {
+        title: '@',
+        fxItemSelected: '&',
+        fxSave: '&'
+      },
+      controller: 'QuickFormController',
+      controllerAs: 'vm',
+      bindToController:true,
+      compile: compile
+    };
+  };
+  app.directive('quickForm', quickForm);
+
+  var QuickFormController = function QuickFormController_ ($scope, transcludeHelper) {
+
+    this.$scope = $scope;
+
+    $scope.count = 1;
+    $scope.increment  =function increment() {
+      $scope.count++;
+    }
+    $scope.move  =function moveElement() {
+      transcludeHelper.move('#testComp', '#testComp2');
+      $scope.count++;
+    }
+
+    $scope.saveFormData = function saveFormData() {
+      if ( $scope.vm.fxSave != null ){
+        //$scope.vm.fxSave()($scope.dataObject);
+        $scope.vm.fxSave()($scope.dataObject);
+        //console.log('...')
+      }
+    }
+
+    $scope.validateFormData = function validateFormData() {
+
+    }
+
+
+
+  }
+  app
+    .controller('QuickFormController', QuickFormController);
+
+
+}());
