@@ -90,6 +90,8 @@
               scope.formData = v;
               scope.dataObject = v;
 
+
+u
               scope.setDefaults();
             }
             /*console.log('quickform',

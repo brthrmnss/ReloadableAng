@@ -61,6 +61,7 @@ sh.x = function () {
  * why: When you want to reload services with your apps
  */
 ( function() {
+  return;
   function AngFunc() {
     var self = this;
     var p = this;

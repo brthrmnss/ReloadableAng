@@ -55,6 +55,7 @@ if ( typeof sh == 'undefined ') {
       if ( contents )
         el.append(contents);
       self.element = el;
+      return el;
     }
 
 
@@ -98,30 +99,17 @@ if ( typeof sh == 'undefined ') {
       }
 
 
-      self.padding = function padding(pad) {
+     /* self.padding = function padding(pad) {
         var cssObj = self.ccss({
           "padding-left":pad,
         })
         self.element.css(cssObj);
-      }
+      }*/
       self.margin = function margin(left, top, right, bottom) {
         /*left = sh.dv(left , '10px')
          top = sh.dv(top , left)
          top = sh.dv(top , left)
          top = sh.dv(top , left)*/
-        function ifUndef_IfNull_defaultProp(val, ifUndef, ifNull, obj, prop) {
-          if ( val == undefined) {
-            val = ifUndef;
-          }
-          if ( val == null) {
-            if ( ifNull == undefined ) {
-              return null; //no chnage
-            }
-            val = ifNull;
-          }
-          obj[prop] = val;
-          return val;
-        }
         var cssObj = self.ccss({
 
         })
@@ -133,21 +121,22 @@ if ( typeof sh == 'undefined ') {
         self.element.css(cssObj);
       };
 
+      function ifUndef_IfNull_defaultProp(val, ifUndef, ifNull, obj, prop) {
+        if ( val == undefined) {
+          val = ifUndef;
+        }
+        if ( val == null) {
+          if ( ifNull == undefined ) {
+            return null; //no chnage
+          }
+          val = ifNull;
+        }
+        obj[prop] = val;
+        return val;
+      }
 
       self.padding = function padding(left, top, right, bottom) {
-        function ifUndef_IfNull_defaultProp(val, ifUndef, ifNull, obj, prop) {
-          if ( val == undefined) {
-            val = ifUndef;
-          }
-          if ( val == null) {
-            if ( ifNull == undefined ) {
-              return null; //no chnage
-            }
-            val = ifNull;
-          }
-          obj[prop] = val;
-          return val;
-        }
+
         var cssObj = self.ccss({
 
         })
@@ -158,6 +147,18 @@ if ( typeof sh == 'undefined ') {
         self.element.css(cssObj);
       }
 
+
+
+      self.shadow = function shadow(left, top, right, bottom) {
+        var cssObj = self.ccss({
+          'box-shadow': "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+        })
+        var cssObj = self.ccss({
+          'filter': "drop-shadow(12px 12px 7px rgba(0,0,0,0.5))",
+          '-webkit-filter': 'drop-shadow(12px 12px 7px rgba(0,0,0,0.5))'
+        })
+        self.element.css(cssObj);
+      }
 
 
 
@@ -242,6 +243,7 @@ if ( typeof sh == 'undefined ') {
         self.element.append(el);
         self.baseElement = sh.dv(self.element);
         self.element = el;
+
       }
 
       p.makeInnerDiv = function makeInnerDiv(elementId, contents, attrs) {
@@ -252,6 +254,7 @@ if ( typeof sh == 'undefined ') {
         if ( contents )
           el.append(contents);
         self.element = el;
+        return el;
       }
 
       p.utils = {};

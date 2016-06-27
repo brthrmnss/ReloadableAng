@@ -71,7 +71,7 @@
                                                           $templateCache,
                                                           reloadableHelperTestService,
                                                           quickUI,
-                                                          angFunc,
+                                                          /*angFunc,*/
                                                           xUI
   ) {
 
@@ -84,26 +84,49 @@
         function(html){
           reloadableHelperTestService = reloadableHelperTestService.create();
 
-          angFunc = angFunc.create();
+          /*angFunc = angFunc.create();*/
           var xUIHelper = xUI.create();
 
           scope.$on(
             "$destroy",
             function handleDestroyEvent() {
-              console.log( 'destroy', angFunc );
-              angFunc.disposeAllChains();
+              //console.log( 'destroy', angFunc );
+              //angFunc.disposeAllChains();
+              scope.destroyed = true;
+              console.log('destroy')
             }
 
           );
 
           element.on('$destroy', function(){
             //alert('destroyed');
+            scope.destroyStreams = true;
+            scope.destroyed = true;
             scope.$destroy();
           })
-//return;
+          //return;
           //
-
+          scope.destroyStreams = false
           //var down = angFunc.createDS(angFunc.decrementCounter()).log('down');
+
+
+          function createStream( fx, time) {
+            time = sh.dv(time, 100);
+            var inc = 0 ;
+            var stream = Bacon.fromPoll(1000, function generatorFx() {
+              inc++
+              if ( scope.destroyStreams ) {
+                return Bacon.End();
+              }
+              return fx(inc)
+            })
+
+            return stream;
+          }
+
+          var s = createStream(function (i) {
+            //console.log('scope', scope.id)
+            return Math.sin(i)} , 250)
 
 
           /*
@@ -133,8 +156,6 @@
           scope.render(utils);
 
 
-
-
           var x = xUIHelper;
           x.startOn('#divOutput2',utils.templateContent)
           x.size('100%')//, '200px')
@@ -145,7 +166,6 @@
           x.size('100%', '100%');
           x.background('red');
 
-
           x.makeInnerDiv('#output1Val', 'output here')
           x.setElement();
           x.makeInnerDiv('#chainOutput', 'chain here')
@@ -154,45 +174,47 @@
           x.makeAbsContainer();
 
           x.makeInnerDiv('#paper', 'chain here')
-          angFunc.createDS(angFunc.sin(0.1)).decimals(2).abs().logx('sin wave')
-            .bindToUI('#output1Val', 'html', element, false)
-            .threshold(0.3, 'gt', false, function toggleLight(){
-              scope.lb1.toggle();
 
-            })
-            .makeCache('lastVals', {
-              count:5,
-              fxOverflow:function removedItem(el) {
-                var root = element.find('#chainOutput');
-                $(el).remove();
-                //  debugger
-                //  root.remove($(el));
+          function createAngFx2X() {
+            angFunc.createDS(angFunc.sin(0.1)).decimals(2).abs().logx('sin wave')
+              .bindToUI('#output1Val', 'html', element, false)
+              .threshold(0.3, 'gt', false, function toggleLight() {
+                scope.lb1.toggle();
 
-              },
-              fxAdd:function addItem(item, h) {
-                var root = element.find('#chainOutput');
-                var el = $('<div />')
-                el.html(item)
-                root.append(el);
+              })
+              .makeCache('lastVals', {
+                count: 5,
+                fxOverflow: function removedItem(el) {
+                  var root = element.find('#chainOutput');
+                  $(el).remove();
+                  //  debugger
+                  //  root.remove($(el));
 
-
-                var x = xUI.create();
-                x.startOn(el)
-                x.background('#f7f7f7');
-                x.padding('10px')
-                x.margin('10px', null, null, null)
-                x.size.min( '60px');
-                //h.dataCache.add(el)
-
-                return el;
-              }
-            })
-            //.fx(function addToCache(val){
-
-            //})
-            .addToCache('lastVals')
+                },
+                fxAdd: function addItem(item, h) {
+                  var root = element.find('#chainOutput');
+                  var el = $('<div />')
+                  el.html(item)
+                  root.append(el);
 
 
+                  var x = xUI.create();
+                  x.startOn(el)
+                  x.background('#f7f7f7');
+                  x.padding('10px')
+                  x.margin('10px', null, null, null)
+                  x.size.min('60px');
+                  //h.dataCache.add(el)
+
+                  return el;
+                }
+              })
+              //.fx(function addToCache(val){
+
+              //})
+              .addToCache('lastVals')
+
+          }
 
           function lb() {
             var self = this;
@@ -239,16 +261,44 @@
           lb1.init();
           scope.lb1 = lb1;
 
-          angFunc.createDS(angFunc.sin(0.1))//.decimals(2)
-            .abs().logx('sin wave')
-            .fx(function(val){
-              console.log('x...', val)
-              scope.lb1.x.x(val*100,'%')
-            })
+          function testBaconJS() {
+
+            var up   = $('#up').asEventStream('click');
+            var down = $('#down').asEventStream('click');
+
+            var counter =
+              // map up to 1, down to -1
+              up.map(1).merge(down.map(-1))
+                // accumulate sum
+                .scan(0, function(x,y) { return x + y });
+
+// assign observable value to jQuery pr
+            var up   = $('#up').asEventStream('click');
+            var down = $('#down').asEventStream('click');
+
+            var counter =
+              // map up to 1, down to -1
+              up.map(1).merge(down.map(-1))
+                // accumulate sum
+                .scan(0, function(x,y) { return x + y });
+
+// assign observable value to jQuery property text
+            counter.assign($('#counter'), 'text');
+
+          }
+          testBaconJS();
+
+          function testAngFunc() {
+            angFunc.createDS(angFunc.sin(0.1))//.decimals(2)
+              .abs().logx('sin wave')
+              .fx(function(val){
+                console.log('x...', val)
+                scope.lb1.x.x(val*100,'%')
+              })
             //.endAt(1)
-          //.oneRun(1);
-
-
+            //.oneRun(1);
+          }
+          //testAngFunc();
 
           var x = xUI.create();
           x.startOn('#divOutput2',utils.templateContent)
@@ -278,10 +328,10 @@
             var self = this;
           }
           Panel.p = Panel.prototype;
-          Panel.p.init = function initPanel(name, content) {
+          Panel.p.init = function initPanel(name, content, divId) {
             var x = xUI.create();
             x.startOn('#divOutput2',utils.templateContent)
-            x.size('100%', '150px')//,'40px');
+            x.size('100%')//, '150px')//,'40px');
             x.makeInnerDiv('#containerPanel' );
             x.css({'border-radius': '4px',
               'margin-bottom': '16px',
@@ -298,13 +348,12 @@
             x.goToTop();
             x.add('md-content')
               .attr('flex', null)
+              .attr('id', divId)
               // .class('md-toolbar-tools')
               .content(content);
           }
 
 
-          var p = new Panel();
-          p.init('title', 'content')
 
 
 
@@ -409,8 +458,157 @@
               link.set('connector', { name: connector });
             });
           }
-          createGraph();
+          //createGraph();
 
+
+
+          var slide = [];
+          slide = [
+            {t:"img", src:"asdf.jpg"},
+            {t:"char", name:"andre", pos:"left"}
+          ]
+          function renderSlide() {
+
+            var p = new Panel();
+            p.init('Slide 1', null, "divSlideContent")
+
+
+            var x = xUI.create();
+            x.startOn('#divSlideContent',utils.templateContent)
+            //x.size('100%', '150px')//,'40px');
+            x.makeInnerDiv('#containerPanel3')
+
+            //.append("YO YO YO");
+            x.addImage( "images/anime/f_tool.jpg" )
+            x.css('max-width', '100%')
+
+            var x = xUI.create();
+            x.startOn('#divSlideContent',utils.templateContent)
+            x.makeInnerDiv('#characterHolder')
+            x.addImage( "images/anime/peter_glad.png" );
+            x.attr("id", 'characterAndre')
+            x.css({'max-height': '60%',
+              'top': '0px',
+              'position': 'absolute' })
+            x.margin(60,0)
+            x.shadow();
+
+
+            s.subscribe(function(i) {
+              //console.log('push', i)
+              $('#characterAndre').css({left:i*Math.random()+'px'})
+            });
+
+            s.subscribe(function(i) {
+              //console.log('push', i)
+              $('#characterAndre').css({top:i*Math.random()+'px'})
+            });
+
+            var pics= ["images/anime/peter_angry.png",
+              "images/anime/peter_smile.png",
+              "images/anime/peter_neutral.png",
+              "images/anime/peter_glad.png"]
+            rotatePics({pics:pics,
+              interval:500,
+              id:'#characterAndre'})
+            function rotatePics(config)
+            {
+              function flipPic() {
+                var picSrc = config.pics[Math.floor(Math.random()*config.pics.length)];
+                $(config.id ).attr('src',picSrc);
+              }
+
+              function run() {
+                flipPic();
+                if( scope.destroyed ) {
+                  return;
+                }
+                setTimeout(run, 1500+Math.random()*1000)
+              }
+              run();
+            }
+
+
+            function TextArea() {
+              var self = this;
+            }
+            TextArea.p = TextArea.prototype;
+            TextArea.p.init = function initPanel(name, content, divId) {
+              var x = xUI.create();
+              //x.startOn('#divOutput2',utils.templateContent)
+              // x.size('100%')//, '150px')//,'40px');
+              x.startOn('#divSlideContent',utils.templateContent)
+              x.makeInnerDiv('#'+divId );
+              //
+              self.divId = divId;
+              x.attr("id", divId)
+              x.css({'height': '60%',
+                //'top': '0px',
+                fontSize:'24px',
+                fontWeight:'bold',
+                'position': 'absolute' })
+              //x.margin(60,0)
+              x.shadow();
+              x.content(content);
+              x.background('white')
+              x.size('60%','70%')
+              x.positionAbs('null',20,20,20)
+              x.padding('20px')
+
+            }
+
+            TextArea.p.text = function text(txt) {
+              function rerunText(txt_) {
+
+                var lastTxt = '';
+                var txtSize = 0
+                function runTxtAni(){
+                  txtSize++
+                  var length = lastTxt.length;
+                  if ( txtSize >= txt_.length) {
+                    lastTxt = '';
+                    txtSize = 0
+                  }
+                  var newTxt = txt_.slice(0,txtSize+1)
+                  lastTxt = newTxt
+                  if( scope.destroyed ) {
+                    return;
+                  }
+                  //console.log('newTxt', newTxt, self.divId)
+                  $('#'+self.divId).text(newTxt)
+                  var extra = 0
+                  if ( newTxt.length >= txt_.length ) { extra = 2400 }
+                  //console.log('newTxt', newTxt, self.divId)
+                  setTimeout(runTxtAni, 150+extra)
+                }
+
+                runTxtAni() ;
+              }
+              rerunText(txt)
+              $().text()
+            }
+
+            var p = new TextArea();
+            p.init('Slide 1', null, "textArea")
+            p.text('Hello Ranger .... what you up to? ')
+
+            /*  //http://codepen.io/turbohz/pen/jFxqw
+             setTimeout(function () {
+             console.log('gooo.....')
+             $('#characterAndre').attr('src',"images/anime/peter_angry.png");
+             }, 500 )
+
+             setTimeout(function () {
+             $('#characterAndre').attr('src',"images/anime/peter_smile.png");
+             }, 5000 )
+
+
+             setTimeout(function () {
+             $('#characterAndre').attr('src',"images/anime/peter_glad.png");
+             }, 1000 )*/
+
+          }
+          renderSlide();
           scope.$watch('vm.config',
             function (v, oldVal) {
               if ( v != null ) {

@@ -169,6 +169,9 @@
 
 
       var server = 'http://10.211.55.4'
+      server = 'http://127.0.0.1'
+      var urlDataServer = server+':10001/';
+
       evernoteHelper = evernoteHelper.new();
       evernoteHelper.server = server;
       evernoteHelper.types = types;
@@ -503,7 +506,7 @@
       if ( inMemory ) {
         rHC.dataSrc = t;
       } else {
-        rHC.url = 'http://10.211.55.4:10001/api/prompt'
+        rHC.url = urlDataServer+'api/prompt'
         rHC.flatten = true;
       }
       qCListPrompts.formObject = angular.copy(formObject2);
@@ -915,7 +918,7 @@
       if ( inMemory ) {
         rHC.dataSrc = t;
       } else {
-        rHC.url = 'http://10.211.55.4:10001/api/promptlog'
+        rHC.url = urlDataServer+'api/promptlog'
       }
       qCrudLogList.restHelperConfig = rHC;
 

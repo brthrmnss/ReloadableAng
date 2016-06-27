@@ -55,6 +55,8 @@
         id: '@',
         views: '@',
         views2: '@',
+        reloadDir:'@',
+        reloadAny:'@'
 
       },
       controller: 'QuickReloadDemoController',
@@ -84,7 +86,10 @@
     ) {
       var types = {};
       var count = 0;
+      //alert('s')
+      //console.error('who is this', $scope.dirFx, $scope.ddd)
       $scope.render = function render(utils) {
+
         if ($scope.utils == null) {
           $scope.utils = utils;
           $scope.templateContent = utils.templateContent.clone();
@@ -105,154 +110,156 @@
         count++
         utils.templateContent.find('#area3').html(count)
 
+        var userContent = utils.userTemplateContent.html().trim();
+        if ( userContent != ''  ) {
+          utils.templateContent.find('#area').html(userContent)
+        }
+
 
 
         var html = utils.getFinalTemplate();
         element.html($compile(html)(scope));
       };
-      if ( window.fxInvoke == null ) {
-        window.fxInvoke = function (classToUpdate) {
-          var str = classToUpdate.split('/').slice(-1)[0]
-          $rootScope.$emit(classToUpdate, classToUpdate)
-          $rootScope.$emit(str, classToUpdate)
-          window.fxInvoke.checkAll(classToUpdate)
-        }
-        window.fxInvoke.sets = [];
-        window.fxInvoke.includes = function includes(addOnLink, fx) {
-          window.fxInvoke.sets.push([addOnLink, fx])
-        };
-        window.fxInvoke.checkAll = function(s) {
-          $.each(window.fxInvoke.sets, function findMatch(i, set) {
-
-            var file = set[0]
-            var fx = set[1];
-            var fileMatched = s.toLowerCase().indexOf(file.toLowerCase()) != -1;
-            console.log('checking...', file, fileMatched, 'in >>>', s.toLowerCase());
-            if ( fileMatched ) {
-              fx(s);
-            }
-          })
-        }
-      };
 
 
-      $scope.watchFile = function watchFile(file) {
-        if ( $scope.watchingFiles == null ) {
-          $scope.watchingFiles = [];
-        }
-        if ( $scope.watchingFiles.indexOf(file) != -1 ) {
-          return false;
-        }
-        $scope.watchingFiles.push(file);
-        window.fxInvoke.includes(file, function (fileMatch) {
-          console.log('found match', fileMatch);
-          $scope.onReload2()
-        })
-
-      };
-
-      /**
-       * More abstract ...
-       * @param file
-       */
-      $scope.watchDir = function watchDir(dir) {
-        $scope.watchDirs = sh.dv($scope.watchDirs, []);
-        if ( $scope.watchDirs.indexOf(dir) != -1 ) {
-          return;
-        }
-        $scope.watchDirs.push(dir);
-        //load the file if matched in the dir
-        window.fxInvoke.includes(dir, function (file_in_dirMatch) {
-          ///Users/user2/Dropbox/projects/learn angular/port3/app/scripts/quick_module/services/uiXService.js
-
-          var loadFile = file_in_dirMatch.split(dir)[1];
-          loadFile = dir + '/' + loadFile;
-          console.log('found dirMatch', file_in_dirMatch, loadFile);
-          $scope.onReload2(loadFile )
-        })
-
-      };
-
-      window.fxInvoke.includes('quick/quickreloadable.dir', function (fileMatch) {
-        console.log('found match', fileMatch);
-        $scope.onReload2();
-      })
-
-      $scope.watchFile("/scripts/quick_module/services/reloadableHelperTestService.js")
-      //$scope.watchFile("/scripts/quick_module/services/quickUIService.js")
-      //$scope.watchFile("/scripts/quick_module/services/angFuncService.js")
-      $scope.watchDir("/scripts/quick_module/services/")
+      /*     $scope.onReload = function onReload() {
+       console.log('...');
+       jQuery.ajax({
+       url: "/scripts/quick_module/quick/quickreloadable.dir.js",
+       dataType: "script",
+       cache: true
+       }).done(function() {
+       console.log('updated')
+       $templateCache.removeAll();
+       $scope.render();
+       //jQuery.cookie("cookie_name", "value", { expires: 7 });
+       });
+       }
 
 
-      $scope.reloadFile = function reloadFile(file, fx) {
-        $scope.watchFile(file)
-        console.log('reloadFile', file);
-        jQuery.ajax({
-          url: file,
-          dataType: "script",
-          cache: true
-        })
-          .error(function(s, b) {
-            alert('error loading ' +  file)
-          })
-          .done(function() {
-            sh.callIfDefined(fx)
-          });
-      }
-
-      $scope.onReload = function onReload() {
-        console.log('...');
-        jQuery.ajax({
-          url: "/scripts/quick_module/quick/quickreloadable.dir.js",
-          dataType: "script",
-          cache: true
-        }).done(function() {
-          console.log('updated')
-          $templateCache.removeAll();
-          $scope.render();
-          //jQuery.cookie("cookie_name", "value", { expires: 7 });
-        });
-      }
-
-
-      /*
+       /!*
        Uses template thing
        same as onReload but, ???
-       */
-      $scope.onReload2 = function onReload_redraw(addFile) {
+       *!/
+       $scope.onReload2 = function onReload_redraw(addFile) {
 
-        if (addFile) {
-          console.log('addfile', addFile)
-          $scope.reloadFile(addFile);
-        } else {
-          sh.each($scope.watchingFiles, function (i,file) {
-            $scope.reloadFile(file);
-            // $scope.reloadFile("/scripts/quick_module/services/reloadableHelperTestService.js")
-            // $scope.reloadFile("/scripts/quick_module/services/reloadableHelperTestService.js")
-          });
-        }
+       if (addFile) {
+       console.log('addfile', addFile)
+       $scope.reloadFile(addFile);
+       } else {
+       sh.each($scope.watchingFiles, function (i,file) {
+       $scope.reloadFile(file);
+       // $scope.reloadFile("/scripts/quick_module/services/reloadableHelperTestService.js")
+       // $scope.reloadFile("/scripts/quick_module/services/reloadableHelperTestService.js")
+       });
+       }
 
-        console.log('...');
-        jQuery.ajax({
-          url: "/scripts/quick_module/quick/quickreloadable.dir.js?q="+Math.random(),
-          dataType: "script",
-          cache: false
-        })
-          .error(function(s, b) {
-            alert('error loading ' +  addFile)
-          })
-          .done(function(s, b) {
-            console.log('updated', $cacheFactory)
-            $templateCache.removeAll();
-            $scope.render()
-            //jQuery.cookie("cookie_name", "value", { expires: 7 });
-          });
-      }
+       console.log('...');
+       jQuery.ajax({
+       url: "/scripts/quick_module/quick/quickreloadable.dir.js?q="+Math.random(),
+       dataType: "script",
+       cache: false
+       })
+       .error(function(s, b) {
+       console.error('error loading ' +  addFile)
+       })
+       .done(function(s, b) {
+       console.log('updated', $cacheFactory)
+       $templateCache.removeAll();
+       $scope.render()
+       //jQuery.cookie("cookie_name", "value", { expires: 7 });
+       });
+       }*/
 
       $scope.triggerRelink = function() {
         $rootScope.$broadcast('testRelink');
 
       };
+
+      $scope.rerenderDirective = function rerenderDirective() {
+        $templateCache.removeAll();
+        $scope.render()
+      }
+
+      $scope.reloadFile = function reloadFile(file){
+        console.log('reloadFile', file);
+        if (file.endsWith('.html')) {
+          console.info('html file', file)
+          file = file.substr(0, file.lastIndexOf(".")) + ".js";
+          //return;
+        }
+        jQuery.ajax({
+          url: file,
+          dataType: "script",
+          cache: true
+        })
+          .error(function(s, b,c) {
+            console.error('error loading ' +  file,b, c)
+          })
+          .done(function() {
+            // sh.callIfDefined(fx)
+            $scope.rerenderDirective();
+          });
+      }
+
+      $scope.reloadContent = function reloadContent(addFile){
+        if (addFile.endsWith('.html')) {
+          console.info('html file', addFile)
+          setTimeout(function reloadDirLater() {
+            $scope.rerenderDirective();
+          }, 350)
+          return;
+        }
+        return;
+        jQuery.ajax({
+          url: "/scripts/quick_module/quick/quickreloadable.dir.js?q="+Math.random(),
+          dataType: "script",
+          cache: false
+        })
+          .error(function(s, b,c) {
+            console.error('error loading ' +  addFile,b,c)
+          })
+          .done(function(s, b) {
+            console.log('updated', $cacheFactory)
+            $templateCache.removeAll();
+            $scope.render()
+          });
+      }
+
+
+
+
+      /**
+       * function to load a given css file
+       */
+      var loadCSS = function(href) {
+        $('link[href$="'+href+'"]').remove();
+        var cssLink = $("<link rel='stylesheet' type='text/css' href='"+href+"'>");
+        $("head").append(cssLink);
+      };
+
+
+
+      window.fxInvoke2 = function fxInvoke2(file) {
+        if ( $scope.vm.reloadAny == 'true') {
+          if ( file.indexOf('.css')== - 1) {
+            $scope.reloadContent(file);
+            $scope.reloadFile(file);
+          } else {
+            loadCSS(file)
+          }
+
+
+
+
+
+
+
+        }
+      }
+
+      if ( window.fxInvokes == null ) window.fxInvokes = [] ;
+      window.fxInvokes.push(window.fxInvoke2)
 
     }
   app

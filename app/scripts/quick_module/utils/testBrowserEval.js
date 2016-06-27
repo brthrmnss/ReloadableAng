@@ -82,6 +82,10 @@ console.log(' inside ... .... test ....');
 
         var baseUrl = 'https://local.helloworld3000.com:8043/apps/speak/'
         var baseBaseUrl = 'https://local.helloworld3000.com:8043/'
+
+      var baseUrl = 'https://127.0.0.1:8043/apps/speak/'
+      var baseBaseUrl = 'https://127.0.0.1:8043/'
+
         var loadEval = true
         if ( loadEval ) {
             function loadEvalApp(){

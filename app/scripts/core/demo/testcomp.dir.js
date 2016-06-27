@@ -38,12 +38,10 @@
           utils.userTemplateContent = dictTemplates[attrs.title]
           utils.userContent = element;
 
-
           var bodyContent = utils.templateContent.find('#bodyContent');
           if ( bodyContent.length ==0 ) {
             //if body content not defined, grab all children as a tranclude ...
             //this is the default behavior
-
           }
 
           //show angularjs is working
