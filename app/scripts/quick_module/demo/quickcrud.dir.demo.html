@@ -144,6 +144,9 @@
         <item-renderer>
           <li ng-repeat="item in vmC.items" class="" layout="row">
             <h3 ng-click="goTo(item)" class="prompt-title">
+              {{item.prompt_name}}
+              {{item.data}}
+              {{item.name}}
               {{item.title}}
             </h3>
             <span flex/>

@@ -361,7 +361,7 @@ if ( typeof sh == 'undefined ') {
   var wrapperService_UIX = function wrapperService_UIX( sh  ) {
     function createServiceInstance() {
       var service = new UIX();
-      console.log('making service', UIX==window.UIX)
+      //console.log('making service', UIX==window.UIX)
       if ( window.UIX != null ) {
         service = new window.UIX();
       };

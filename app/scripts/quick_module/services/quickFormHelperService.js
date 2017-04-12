@@ -22,6 +22,7 @@
       types.number = 'number';
       types.stepper = 'stepper';
       types.lbl = 'label';
+      types.br = 'br';
       types.label  = 'label'
       types.button = 'button';
       types.buttonroll = 'buttonroll';
@@ -465,6 +466,16 @@
 
   quickFormHelperService.$inject = ['sh', 'pubSub'];
 
-  angular.module('com.sync.quick').factory('quickFormHelper', quickFormHelperService );
-  angular.module('com.sync.quick').factory('qFH', quickFormHelperService );
+
+
+  if ( window.reloadableHelper ) {
+    debugger;
+    var wrapperRelodableService = window.reloadableHelper.makeServiceReloadable('quickFormHelper', quickFormHelperService)
+    angular.module('com.sync.quick').factory('quickFormHelper', wrapperRelodableService );
+    angular.module('com.sync.quick').factory('qFH', wrapperRelodableService );
+  } else {
+    angular.module('com.sync.quick').factory('quickFormHelper', quickFormHelperService );
+    angular.module('com.sync.quick').factory('qFH', quickFormHelperService );
+  }
+
 }());

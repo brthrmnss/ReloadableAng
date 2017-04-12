@@ -47,9 +47,13 @@
         if (v.prompt_type == self.types.prompt_types.daily_log) {
           noteTitle = noteTitle+dateMarker
         }
+        if (v.prompt_type == self.types.prompt_types.counter) {
+          var counter_count = v.count;
+          noteTitle = noteTitle+dateMarker+counter_count
+        }
         /*if (v.prompt_type == self.types.evernote_actions.checklist) {
-          noteTitle = noteTitle+dateMarker
-        }*/
+         noteTitle = noteTitle+dateMarker
+         }*/
         if (v.prompt_type == self.types.prompt_types.one_off) {
           //noteTitle = 'log__|time|'
           //complain if noteittle not set
@@ -61,15 +65,14 @@
         }
         //var noteTitle = 'log__' + sh.getDateStamp();
         //want ot use underscore template
+        noteTitle = noteTitle.toString();
         noteTitle = noteTitle.replace(dateMarker, sh.getDateStamp() )
-
-
 
         //var name = '';
         return noteTitle;
       }
 
-      p.searchFor = function searchFor(title, jsonMode, fx) {
+      p.searchFor = function searchFor(title, jsonMode, fx, sendIfError) {
         var note = {};
         note.title = title;
         //note.newContents = content;
@@ -87,9 +90,16 @@
             };
           }
         ).error(function (err){
-            console.error('done', 'error', err)
-            l();
-          });
+          console.error('done', 'error', err)
+          l();
+          if ( sendIfError ) {
+            if (jsonMode) {
+              sh.callIfDefined(fx, null)
+            } else {
+            }
+            ;
+          }
+        });
         //do a search for it
         function fxSearchDone(contents) {
           var soFar = JSON.parse(contents);
@@ -121,9 +131,9 @@
             //   $scope.loading = false;
           }
         ).error(function (err){
-            console.error('done', 'error', err)
-            //  $scope.loading = false;
-          });
+          console.error('done', 'error', err)
+          //  $scope.loading = false;
+        });
       }
 
       p.appendNote = function appendNote(guid, contents, fx, getContentsOnly) {
@@ -140,9 +150,9 @@
             sh.callIfDefined(fx, data.data)
           }
         ).error(function onNoteApended_Fault(err){
-            console.error('done', 'error', err)
-            l();
-          });
+          console.error('done', 'error', err)
+          l();
+        });
       }
 
 

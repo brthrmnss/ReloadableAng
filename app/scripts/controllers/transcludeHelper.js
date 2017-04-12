@@ -71,7 +71,7 @@
        * @param html
        * @param element
        */
-      utils.loadTemplate = function loadTemplate(html, element, oldAttrs) {
+      utils.loadTemplate = function loadTemplate(html, elementPostProcessed, oldAttrs) {
         var templateContent = angular.element(html);
         self.templateContent = templateContent;
         //utils.userTemplateContent = templateOriginal;
@@ -86,8 +86,6 @@
           //keyTemplate = self.lastKey;
         };
 
-
-
         if ( keyTemplate == null  ) {
           throw new Error('template key is null');
         }
@@ -96,14 +94,47 @@
           throw new Error('userTemplateContent is null')
         }
 
+        utils.element = elementPostProcessed;
+        self.userContent = elementPostProcessed;
 
+        self.contentTarget;//
+        //this is the template element
+        self.contentTemplate = self.directiveTemplate = self.templateContent;
 
-        utils.element = element;
-        self.userContent = element;
+        //why: this shows what angularjs would expet the componnet to be
+        self.devContentPost = self.contentCurrent = self.currentContent =
+          self.contentPost = self.userContent;
+        //why: rarely used shows what angularjs has done to content ....
+        //why: not sure if this should be used ...
+        //this is what dev specified, ang-expressions have been processed
+
+        //wh: this is what the user specified inside the directive in the parent dom
+        self.devContent = self.contentDev = self.contentDom = self.userTemplateContent;
+
+        //self.contentDevContents =
+        // self.contentDevOuterHTML = element.html() //this is html of entire outer component
       }
+
 
       utils.getFinalTemplate = function getFinalTemplate() {
         return utils.templateContent[0];
+      }
+
+
+      utils.setupTransclution = function setupTransclution(scope, $compile, element) {
+        self.directivesElement = element;
+        self.$compile = $compile;
+        self.scope = scope;
+      }
+      utils.finishContent = function finishContent(htmlFinalized, scope , target) {
+        if ( htmlFinalized ) {
+          htmlFinalized = utils.getFinalTemplate();
+        }
+        var directiveElements = self.$compile(htmlFinalized)(self.scope)
+        if ( target ) {
+          //todo
+        }
+        self.directivesElement.html(directiveElements);
       }
 
       /**

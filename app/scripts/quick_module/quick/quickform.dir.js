@@ -22,7 +22,7 @@
         function(html){
 
           element.on('$destroy', function(){
-            alert('destroyed');
+            //alert('qf destroyed');
           })
           scope.id = Math.random();
           //alert('created ' +  scope.id);
@@ -51,7 +51,7 @@
               console.log('quickform',
                 'scope.vm.dataObject... changed: ',
                 scope.vm.dataObject, v);
-             // asdf.g
+              // asdf.g
               scope.dataObject = v;
             }
             console.log('quickform',
@@ -91,7 +91,6 @@
               scope.dataObject = v;
 
 
-u
               scope.setDefaults();
             }
             /*console.log('quickform',
@@ -192,7 +191,7 @@ u
         if ( attrs.selectedIndex === null  ) {
           attrs['selectedIndex'] = "-1";
         };
-         if ( attrs.formObject == null  ) {
+        if ( attrs.formObject == null  ) {
           console.log('...?')
           attrs['formObject'] = "{}";
           attrs['form-object'] = "{}";
@@ -429,7 +428,7 @@ u
             fieldInfo.label = index;
             // insert a space before all caps
             fieldInfo.label =  fieldInfo.label.replace(/([A-Z])/g, ' $1')
-              // uppercase the first character
+            // uppercase the first character
               .replace(/^./, function(str){ return str.toUpperCase(); })
             //fieldInfo.label = fieldInfo.label.charAt(0).toUpperCase() + fieldInfo.label.slice(1);
           }
@@ -477,6 +476,14 @@ u
             }
             fieldInfo.options = options_;
           }
+          function ifPropDefAddAttr(obj, prop, toObj, storeAs) {
+            var val = obj[prop];
+            if ( val ) {
+              storeAs = sh.dv(storeAs, prop);
+              toObj.attr(prop, val)
+            }
+          }
+
 
 
           if ( fieldInfo.type == types.input || fieldInfo.type == null ) {
@@ -492,6 +499,12 @@ u
 
             //<input ng-model="user.email" type="email">
             var input = angular.element('<input/>');
+
+
+
+            ifPropDefAddAttr(fieldInfo, 'tooltip',input, 'title')
+
+
             input.attr('ng-model', 'dataObject.' + index);
             container.append(input);
           }
@@ -509,13 +522,13 @@ u
 
             //<input ng-model="user.email" type="email">
             var input = angular.element('<textarea/>');
+            ifPropDefAddAttr(fieldInfo, 'tooltip',input, 'title')
             input.attr('ng-model', 'dataObject.' + index);
             container.append(input);
           };
 
 
-          if ( fieldInfo.type == types.lbl ) {
-
+          if ( fieldInfo.type == types.lbl || fieldInfo.type == types.label ) { //
             helper.handled();
             if ( fieldInfo.plain == false ) {
               var container = angular.element('<md-input-container />');
@@ -539,6 +552,12 @@ u
               }
               accShowElementOnFieldInfo(label)
               form.append(label);
+
+              if ( fieldInfo.addBrAfter != false ) { //why: if plain, needs a br
+                var hr = angular.element('<hr/>');
+                accShowElementOnFieldInfo(hr)
+                form.append(hr);
+              }
             }
 
             if ( fieldInfo.hr ) {
@@ -546,6 +565,23 @@ u
               accShowElementOnFieldInfo(hr)
               form.append(hr);
             }
+
+
+          }
+
+
+          if ( fieldInfo.type == types.br ) { //types.label
+
+            helper.handled();
+            var label = angular.element('<label/>');
+            if (fieldInfo.label != null) {
+              label.html(fieldInfo.label);
+            }
+            if (fieldInfo.field != null) {
+              label.html('' + '{{' + 'dataObject.' + fieldInfo.field + '}}');
+            }
+            accShowElementOnFieldInfo(label)
+            form.append(label);
 
           }
 
@@ -591,6 +627,8 @@ u
           if ( fieldInfo.type == types.select ) {
             helper.handled();
             var container = angular.element('<md-input-container />');
+
+
 
             // <md-select placeholder="Pick" ng-model="someVal">
             var mdSelect = angular.element('<md-select />');
@@ -731,7 +769,7 @@ u
             var buttonRollHTML = "<md-input-container "+hide+repeater+ containerCss + " >" +
               '<md-button '+ngClick+ngClass+buttonCss + '>'+
               '{{radioOption.name}}' + //+'{{formObject.' + index+'.fxDefault}}' +
-                //'<br />{{formObject.' + index+'}}' +
+              //'<br />{{formObject.' + index+'}}' +
               '<span ng-if="radioOption.selected"> (selected)</span>' +
               '</md-button>'+
               "</md-input-container>";
@@ -1360,7 +1398,7 @@ u
               if ( fieldInfo.setProp ) {
                 val = $scope.dataObject[fieldInfo.setProp];
               }
-              fieldInfo.fxChange($scope.dataObject, fieldInfo, val);
+              fieldInfo.fxChange($scope.dataObject, fieldInfo, val, $scope.formObject);
             };
 
             /**
@@ -1404,7 +1442,12 @@ u
             var blank = val == null || val == ''
             if ( fieldInfo.required && blank && fieldInfo.hiddenComponent == false ) {
               //console.log('x', val)
-              fieldInfo.msgs.push('This field is required');
+              var requiredMsg = 'This field is required';
+              if ( fieldInfo.requiredMsg ) {
+                //debugger;
+                requiredMsg = fieldInfo.requiredMsg;
+              }
+              fieldInfo.msgs.push(requiredMsg);
               $scope.errors.push({fieldInfo:fieldInfo})
             };
 
@@ -1535,7 +1578,7 @@ u
   }
   app
     .controller('QuickFormController',
-    QuickFormController);
+      QuickFormController);
 
 
 }());

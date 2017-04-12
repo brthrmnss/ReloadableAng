@@ -91,6 +91,7 @@
       <quick-list
         padding-left="5px"
         style="height: 300px; overflow:hidden; overflow-y:scroll;"
+        ng-style="vm.colLeftStyle"
         items="listData"
         selected-index="selectedIndex"
         _selected-index2="selectedIndex"
@@ -162,8 +163,9 @@
     -->
 
 
-    <div id="colRight" class="quick-crud-rightcol">
-
+    <div id="colRight"
+         ng-style="vm.colRightStyle"
+         class="quick-crud-rightcol">
       <!--   <br />
 
          dataObject:

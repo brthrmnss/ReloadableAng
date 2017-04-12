@@ -117,12 +117,15 @@
 
           html = utils.templateContent[0];
 
-          console.log('asdf', ctrl.title, ctrl.grid);
+          console.log('QuickList.init', ctrl.title, ctrl.grid);
 
           element.append($compile(html)(scope));
 
           //will set the selected index based on value, of not already set
-          if ( selectedIndex != null && scope.setOnce != true ) {
+          if ( selectedIndex != null &&
+            scope.setOnce != true &&
+            config.autoSelectOnRefresh != false
+            ) {
             $timeout(function setItem() {
               if ( scope._selectedItem != selectedItem) {
                 return;

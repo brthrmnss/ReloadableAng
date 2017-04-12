@@ -56,6 +56,7 @@
 
 
 
+
     function link(scope, element, attrs){
       $templateRequest('scripts/quick_module/demo/quickcrud.dir.demo.html').then(
         function(html){
@@ -153,58 +154,98 @@
       };
 
 
-      var types = {};
+      function QuickAppCtrl() {
+        var self = this;
+        var p = this;
+
+        self.data = [];
+
+        p.init = function init(config) {
+          self.settings = config;
+          self.adf();
+        }
+
+        p.defineTypes = function defineTypes() {
+          var types = {};
+          types.evernote_actions = {};
+          types.evernote_actions.todays_log = 'todays_log';
+          types.evernote_actions.daily_log = 'daily_log';
+          types.evernote_actions.one_off = 'one_off';
+
+          types.prompt_types = {};
+          types.prompt_types.prompt = 'prompt';
+          types.prompt_types.checklist_single = 'checklist-single';
+          types.prompt_types.checklist = 'checklist';
+          types.prompt_types.counter = 'counter';
+
+          return types;
+        };
+
+        p.adf = function adf() {
+          var server = 'http://10.211.55.4'
+          server = 'http://127.0.0.1'
+          var urlDataServer = server+':10001/';
+          self.data.server = server;
+          self.data.urlDataServer = urlDataServer;
+        }
+
+        p.makeHelpers = function makeHelpers() {
+          var qf = quickFormHelper.new();
+        }
+
+        p.defineViews = function defineViews() {
+          var viewConfig  = {};
+          viewConfig.views  = [];
+          viewConfig.appArea = 'topA';
+          viewConfig.Edit = 'Edit';
+          viewConfig.Create = 'Create';
+          return viewConfig;
+        }
 
 
-      types.evernote_actions = {};
-      types.evernote_actions.todays_log = 'todays_log';
-      types.evernote_actions.daily_log = 'daily_log';
-      types.evernote_actions.one_off = 'one_off';
+        function defineUtils(){
+          var utils = {};
+          self.utils = utils;
+          utils.getObjectValues = function getObjectValues(a) {
+            return Object.keys(a).map(function(key){return a[key]});
+          };
+        }
+        defineUtils();
 
-      types.prompt_types = {};
-      types.prompt_types.prompt = 'prompt';
-      types.prompt_types.checklist_single = 'checklist-single';
-      types.prompt_types.checklist = 'checklist';
+      }
 
 
+      var app = new QuickAppCtrl();
+      app.init();
+      var types = app.defineTypes();
 
-      var server = 'http://10.211.55.4'
-      server = 'http://127.0.0.1'
-      var urlDataServer = server+':10001/';
+
+      var server = app.data.server;
+      var urlDataServer = app.data.urlDataServer;
 
       evernoteHelper = evernoteHelper.new();
       evernoteHelper.server = server;
       evernoteHelper.types = types;
 
       var qf = quickFormHelper.new();
-      /*
-       setTimeout(function setupDialog() {
-       var opts = {}
-       opts.elementQuery = '#crudDialog'
-       opts.name = 'testCrudDialog';
-       opts.title = 'test'
-       opts.content = 'test'
-       opts.contentJquery = angular.element('#crudDialog');
-       dialogService.createDialog2(opts);
 
+      function defineSaveHelper() {
+        var utils = {}
+        utils.saveLog = function saveLog(o, prompt) {
+          //why: send log here before saving ...
+          //filter method
 
-       opts.contentJquery.find('#btnClose')
+          if ( prompt.prompt_type == types.prompt_types.counter ) {
+            qCListPrompts.fxSaveCurrentItem(prompt) //save prompt with new count
+          }
 
-       dialogService.openDialog(opts);
+        }
+        return utils;
+      }
+      var saveUtils = defineSaveHelper()
 
+      var viewConfig = app.defineViews()
 
-       $scope.showPopup = function showPopup() {
-       dialogService.openDialog(opts);
-       }
-       }, 1000);
-       */
-
-
-      var viewConfig = {};
-      viewConfig.views  = [];
-      viewConfig.appArea = 'topA';
-      viewConfig.Edit = 'Edit';
-      viewConfig.Create = 'Create';
 
       var formObject = {};
       $scope.formObject = formObject;
@@ -213,19 +254,9 @@
       formObject.first_name = {label:'First Name'};
       formObject.last_name = {};
 
-
       var formObject2 = {}
-      $scope.formObject2 = formObject2
-      /*
-       formObject2.first_name = {label:'First Name'};
-       formObject2.start = {
-       label:'start_date2',
-       type:'stepper',
-       min:0,
-       max:3000
-       };
-       formObject2.last_name = {};
-       */
+      $scope.formObject2 = formObject2;
+
       formObject2.name = {label:'Prompt Name'};
       formObject2.name.required = true;
 
@@ -233,9 +264,10 @@
       formObject2.prompt_type = {label:'Type',
         type:'select',
         defaultValue:'checklist',
-        options: [
+        _options: [
           'prompt', 'checklist-single', 'checklist'
-        ]
+        ],
+        options:  app.utils.getObjectValues(types.prompt_types)
       };
 
       qf.form = formObject2;
@@ -271,6 +303,15 @@
       })
 
 
+      /*  qf.addSection(function () {
+       qf.showIf=[
+       "object.prompt_type=="+ "'"+
+       types.prompt_types.counter+"'"
+       ]
+       qf.addLabel('Input Counter')
+
+       })*/
+
       qf.loadForm(formObject2);
       //qf.form = formObject2;
       qf.showIf = ["object.prompt.prompt_type=='prompt'"]
@@ -296,7 +337,7 @@
         //qf.showIf=["object.prompt_type=='checklist'",
         //  "object.prompt_type=='prompt'"]
 
-        qf.addLabel('Evernote Settings')
+        qf.addLabel('Evernote SettingsV')
         qf.addCheckbox('store_in_evernote', 'Store in evernote');
         qf.defaultValue(true);
         //qf.showIf=[qf.ifCase('store_in_evernote', true )] '"object.store_in_evernote=='true'",
@@ -339,6 +380,19 @@
         qf.addCheckbox('keep_open_until_cancel', 'Create new one when saved');
 
       })
+
+      //why: with counter, show counter
+      qf.addSection(function addConditinalCounterFields() {
+        //qf.addLabel('count--' );
+        qf.addShowIf('prompt_type',types.prompt_types.counter, true);
+        qf.addLabel('count--2' );
+        qf.addLabelField('count' );
+        qf.addHelp('Test to see if count works ' );
+        //qf.addCheckbox('save_on_click', 'Save on click');
+        //qf.addHelp('When a checklist is selected, will automatically save prompt')
+        //qf.addCheckbox('keep_open_until_cancel', 'Create new one when saved');
+      })
+
 
       //store log name .... 'ie' log_today or something else
 
@@ -386,33 +440,6 @@
       qf.listenForChange(function onChange_SingleCheckList(val){
 
       });
-      /*qf.mixLast({
-       fxChange2:function onChangeSingleSelectList(o, fieldInfo, val) {
-       if ( val == null ) {
-       return;
-       }
-       if ( $scope.qCrudCreateLog.quickFormConfig.isActive != true ) {
-       return;
-       }
-
-       if (o.prompt.save_on_click) {
-       //config.fxSave();
-       $scope.qCrudCreateLog.quickFormConfig.isActive = false;
-       $scope.qCrudCreateLog.quickFormConfig.fxSave2(
-       function onTryToRecreate() {
-       console.log('recreate...')
-       setTimeout(function () {
-       if (o.prompt.keep_open_until_cancel ) {
-       console.log('try to save again')
-       qCListPrompts.qLC.fxAddItem(o.prompt);
-       }
-       },500)
-       }
-       );
-       }
-       }
-       })*/
-
 
       var qCrudCreateLog_QuickFormConfig = {};
       qf.loadConfig(qCrudCreateLog_QuickFormConfig);
@@ -484,6 +511,7 @@
       qCListPrompts.help = 'List all of the prompts you have defined'
 
       qCListPrompts.canCreate = true;
+      qCListPrompts.autoSelectOnRefresh = false;
       qCListPrompts.dataObject =
       {first_name:'Rachel2'};
       qCListPrompts.showForm = false;
@@ -507,7 +535,7 @@
         rHC.dataSrc = t;
       } else {
         rHC.url = urlDataServer+'api/prompt'
-        rHC.flatten = true;
+        //rHC.flatten = true; store property as data_json
       }
       qCListPrompts.formObject = angular.copy(formObject2);
       qCListPrompts.fxNew = function onNewPrompt(o ) {
@@ -538,10 +566,11 @@
       }
 
       $scope.appArea = appAreaService.
-        createAARouter(viewConfig.appArea);
+      createAARouter(viewConfig.appArea);
 
       qCListPrompts.qLC = {};
       qCListPrompts.quickListConfig = qCListPrompts.qLC
+      qCListPrompts.quickListConfig.autoSelectOnRefresh = false;
       qCListPrompts.qLC.fxEditItem = function onEditPrompt(o) {
         console.log('edit item', o);
         qC4.dataObject = o;
@@ -557,10 +586,15 @@
 
       };
       qCListPrompts.qLC.fxAddItem = function onCreatePromptLog(o) {
+        if (qCListPrompts.qLC.firstOnSkipped!=true) {
+          qCListPrompts.qLC.firstOnSkipped = true;
+          console.warn('skipped invoation of add item')
+          return; //why: skip first invocation, as it comes from angularjs
+        }
         console.log('add item', o);
-        var newItem = {}
+        var newItem = {};
         newItem.prompt = o;
-        newItem.prompt_id = o.id
+        newItem.prompt_id = o.id;
         newItem.first_name  = 'sdfsdf';
         qf.loadForm(sh.clone($scope.qCrudCreateLog.formObject));
         qf.utils.clearTemps();
@@ -624,6 +658,44 @@
           return;
         }
 
+        //why: if counter, update prompt
+        if ( o.prompt_type == types.prompt_types.counter ) {
+          if ( o.count ==null )
+            o.count = 0;
+          o.count++;
+          var name = evernoteHelper.getNameFromPrompt(o);
+          evernoteHelper.searchFor(name, true ,
+            function fxSearchDone(json) {
+              if (json == null )
+                json = {};
+              newItem = json;
+              newItem.prompt = o;
+              newItem.prompt_id = o.id;
+
+
+
+
+              qCrudCreateLog.dataObject = newItem;
+              qCrudCreateLog.fxRefresh();
+
+              newItem.count = o.count;
+              if ( newItem.data == null ) {
+                newItem.data = '';
+              }
+              newItem.data += ' ' + newItem.count
+              // debugger;
+              //newItem.description
+
+              newItem.fxEvernoteSave = function (o, flat) {
+                o = sh.clone(o)
+                delete o['data_json']
+                evernoteHelper.createNote(name, null, true, o);
+              }
+
+              $scope.goToCreate(newItem)
+            }, true)
+          return;
+        }
 
 
         //if task list, then retrieve
@@ -667,7 +739,7 @@
       };
 
       qCListPrompts.qLC.label = 'j';
-
+      qCListPrompts.reloadOnRefresh = false
 
       //REQ: When user filters, create new prompt from log
       qCListPrompts.fxFilterSelect = qCListPrompts.qLC.fxAddItem
@@ -699,7 +771,7 @@
       qC4.showNewIndicator = true
 
       qC4.viewAARouter = appAreaService.
-        createAAReceiver(viewConfig.appArea,
+      createAAReceiver(viewConfig.appArea,
         viewConfig.Edit, function onLeave(o) {
           console.log('leaving edit view')
         } ,
@@ -772,8 +844,13 @@
       //console.error('form', qCrudCreateLog.formObject)
       //asdf.g
       qCrudCreateLog.silent = true;
-      qCrudCreateLog.fxSave = function(o) {
+      qCrudCreateLog.fxSave = function onSavePromptLog(o) {
         console.log('saved--- log-creator', o)
+        if ( o.prompt_name == null)
+          o.prompt_name = o.prompt.name;
+
+        saveUtils.saveLog(o, o.prompt)
+
         qCrudLogList.fxSaveCurrentItem(o);
 
 
@@ -782,6 +859,7 @@
           console.log('fxSavetemp', o)
           $scope.active = 'List'
           $scope.appArea.goTo('List', o);
+          qCrudLogList.fxRefreshList();
         }
         //})
 
@@ -853,9 +931,9 @@
             $scope.loading = false;
           }
         ).error(function (err){
-            console.error('done', 'error', err)
-            $scope.loading = false;
-          });
+          console.error('done', 'error', err)
+          $scope.loading = false;
+        });
       }
 
       function addToLog(content) {
@@ -866,7 +944,7 @@
 
 
       qCrudCreateLog.viewAARouter = appAreaService.
-        createAAReceiver(viewConfig.appArea,
+      createAAReceiver(viewConfig.appArea,
         viewConfig.Create, function onLeave(o) {
           console.log('leaving create view')
         } ,
@@ -942,12 +1020,16 @@
           rHC.dataSrc = t;
         } else {
           rHC.url = server+':5556'+'/notes'
-          rHC.paginate = false; // = true;
+          rHC.url = server+':5556'+'/api/promptlog'
+          rHC.url = urlDataServer+'api/promptlog'
+          //rHC.paginate = false; // = true;
           //paginateWithoutCount ... no local filtering
         }
         quickCrud_RecentNotes.restHelperConfig = rHC;
-        quickCrud_RecentNotes.paginate = false;
-        quickCrud_RecentNotes.listResultListProp = 'notes'
+        //quickCrud_RecentNotes.paginate = false;
+        //quickCrud_RecentNotes.listResultListProp = 'notes'
+        //quickCrud_RecentNotes.listResults_ItemProp = 'data'
+
         quickCrud_RecentNotes.showForm = false;
 
 
@@ -976,10 +1058,10 @@
             evernoteHelper.appendNote(
               $scope.dialogQuickEditConfig.note.guid,
               $scope.dialogQuickEditConfig.txtAppend + "\n",
-            function onNoteSaved(){
-              //dialogService.openDialog($scope.dialogQuickEdit);
-              $scope.dialogQuickEditConfig.reloadEntry();
-            }
+              function onNoteSaved(){
+                //dialogService.openDialog($scope.dialogQuickEdit);
+                $scope.dialogQuickEditConfig.reloadEntry();
+              }
             );
 
           };
@@ -1006,15 +1088,15 @@
           $scope.dialogQuickEditConfig.reloadEntry = function reloadEntry() {
 
 
-          evernoteHelper.appendNote(
-            $scope.dialogQuickEditConfig.note.guid,
-            null,
-            function onNoteLoaded(data){
-              console.log('loaded....', data)
-              data = sh.replace(data, "\n", "<br clear='none'/>")
-              $scope.dialogQuickEditConfig.content = data;
-            },
-            true );
+            evernoteHelper.appendNote(
+              $scope.dialogQuickEditConfig.note.guid,
+              null,
+              function onNoteLoaded(data){
+                console.log('loaded....', data)
+                data = sh.replace(data, "\n", "<br clear='none'/>")
+                $scope.dialogQuickEditConfig.content = data;
+              },
+              true );
 
           }
           $scope.dialogQuickEditConfig.reloadEntry()
@@ -1030,9 +1112,6 @@
 
       }
       defineRecentEntries();
-
-
-
 
       types.menu = {};
       types.menu.List = 'List';
@@ -1128,7 +1207,6 @@
         vC.holderId = 'holder'
 
       }
-
       defineMenu();
 
 

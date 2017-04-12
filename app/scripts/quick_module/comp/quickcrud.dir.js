@@ -115,7 +115,7 @@
             '#qCTitle', null, true, true );
           utils.ifContentDefinedAddTo(config.title,
             '#qCTitle', null, true, true );
-          console.debug('showtitle', attrs.showTitle)
+          console.debug('showtitle', attrs.showTitle);
 
           function removeLayoutCols() {
             utils.templateContent.find('#containerCols').removeClass('quick-crud-container');
@@ -237,32 +237,14 @@
 
             //copy form config from objects
             scope.$watch('vm.config', function (v, oldVal) {
-              if (v != null) {
-                console.log('config changed', v);
-                var config = v;
-                if (config.dataObject != null) {
-                  console.error('setting data object', config.dataObject)
-                  //scope.vm.dataObject = config.dataObject;
-                  scope.dataObject = config.dataObject;
-                }
-                ;
-                if (config.formObject != null) {
-                  scope.vm.formObject = config.formObject;
-                  scope.formObject = config.formObject;
-                };
-                if (config.quickFormConfig != null) {
-                  scope.quickFormConfig = config.quickFormConfig;
-                };
-                if (config.quickListConfig != null) {
-                  scope.quickListConfig = config.quickListConfig;
-                };
+
+              if (v == null) {
+                return
               }
-              ;
-              /*
-               console.log('quickCrud',
-               'scope.vm.dataObjectB... changed: ',
-               scope.vm, v,oldVal);
-               */
+              $scope.initQCrud()
+              $scope.onRefresh();
+              $scope.setFormOnListToggle = true
+              return;//
             });
 
             scope.$watch('vm.refresh', function (v, oldVal) {
@@ -287,7 +269,7 @@
              };
              });*/
           }
-          //createWatchers();
+          createWatchers();
 
           html = utils.getFinalTemplate();
 
@@ -378,6 +360,7 @@
 
       var config = $scope.vm.config;
       if ( config == null ) { config = {} };
+      $scope.vm.config = config;
       console.log('QuickCrudController', 'url', $scope.vm);
       // dialogService.openDialog('testCrudDialog')
 
@@ -394,60 +377,109 @@
       $scope.selectedIndex = 0;
 
 
-      var restHelper = $restHelper.create();
-      var pg = config.paginatorConfig;
-      pg = sh.dv(pg, {});
-      $scope.paginatorConfig = pg;
-      restHelper.fxListResults = function results(objs) {
-        pg.paginator = restHelper.paginator;
-        pg.restHelper = restHelper;
-        //console.error('fx results...')
-        sh.callIfDefined(pg.fxRefresh, objs);
-        $scope.updateListData(objs)
-        $scope.selectedIndex = 0;
-      };
+      $scope.initQCrud = function initQCrud() {
+        var config = $scope.vm.config;
+        if ( config == null ) { config = {} };
+        if ( config.reloadOnRefresh == null){
+          config.reloadOnRefresh = true;
+        }
+        config.fxRefreshList = $scope.onRefresh
+        $scope.vm.config = config;
+        if ( $scope.restHelper == null) {
+          var restHelper = $restHelper._create();
+          $scope.restHelper =
+            restHelper ;
+        } else {
+          restHelper = $scope.restHelper;
+        };
 
-      restHelper.url = $scope.url;
-      if ( /*config.remote == false ||*/
-      config.restHelperConfig != null ) {
-        // restHelper.inMemory = true;
-        var restHelperConfig = config.restHelperConfig;
-        if ( restHelperConfig == null ) { restHelperConfig = {}}
 
-        restHelper.config = restHelperConfig;
-        if ( restHelperConfig.dataSrc != null ) {
-          restHelper.$http = restHelperConfig.dataSrc;
+
+        var pg = config.paginatorConfig;
+        pg = sh.dv(pg, {});
+        $scope.paginatorConfig = pg;
+        restHelper.fxListResults = function results(objs) {
+          pg.paginator = restHelper.paginator;
+          pg.restHelper = restHelper;
+          //console.error('fx results...')
+          sh.callIfDefined(pg.fxRefresh, objs);
+          $scope.updateListData(objs)
+          $scope.selectedIndex = 0;
+        };
+
+        restHelper.url = $scope.url;
+        if ( /*config.remote == false ||*/
+        config.restHelperConfig != null ) {
+          // restHelper.inMemory = true;
+          var restHelperConfig = config.restHelperConfig;
+          if ( restHelperConfig == null ) { restHelperConfig = {}}
+
+          restHelper.config = restHelperConfig;
+          if ( restHelperConfig.dataSrc != null ) {
+            restHelper.$http = restHelperConfig.dataSrc;
+          }
+
+          //config.dataSrc = self.dataSrc;
+        };
+        restHelper.initRestHelper();
+        if ( config.formWidth != null  ) {
+          $scope.vm.colRightStyle = {};
+          //debugger;
+          // $scope.vm.colRightStyle = {'background-color':'blue'}
+          $scope.vm.colRightStyle['flex'] = '0 1 '+config.formWidth+'';
         }
 
-        //config.dataSrc = self.dataSrc;
-      };
-      restHelper.initRestHelper();
+
+        return restHelper;
+      }
+      var restHelper = $scope.initQCrud()
 
 
-      $scope.updateListData = function (data ) {
+
+
+      $scope.updateListData = function updateListData(data ) {
+        //why: when list updated,
         $scope.listData = data;
+        var config = $scope.vm.config;
         config.list = data;
         if ( config.quickListConfig) {
           config.quickListConfig.list = data;
         }
-        //persist selected item
+        //why: persist selected item (refresh item in form)
         if ( $scope.selectedItem == null )
           return
         sh.each($scope.listData, function(i,obj){
+
           if ( obj.id == $scope.selectedItem.id ) {
-            $scope.onSelectListItem(obj);
+            if ( config.reloadOnRefresh
+              && config.autoSelectOnRefresh != false )
+              $scope.onSelectListItem(obj);
           }
         })
       }
 
-      function initList() {
-        console.log('init list',  config.name, config)
+      function initCrudList(refreshMode) {
+        if ( config != $scope.vm.config && $scope.vm.config ) {
+          console.warn('replacing null config with non-null config')
+          config = $scope.vm.config
+          if ( restHelper.url == null )
+            restHelper.url = config.restHelperConfig.url;
+        }
+        console.log('init crud list',  config.name, config)
         if ( config.paginate != false ) {
           restHelper.list2(0,10,{}).success(
             function (data) {
-              $scope.updateListData(data)
+              $scope.updateListData(data, refreshMode)
               $scope.selectedIndex = 0;
               $scope.paginator = restHelper.paginator
+              //debugger;
+              if ( $scope.setFormOnListToggle ) {
+                //debugger;
+                $scope.setFormOnListToggle = false;
+                if ( data.length > 0 )
+                  $scope.onSelectListItem(data[0]);
+              }
+
             });
         } else {
           restHelper.list().success(function (data) {
@@ -457,8 +489,27 @@
              first_name: 'daktos'
              }];*/
             if ( config.listResultListProp != null ){
+              var dataOrig = data;
               data = data[config.listResultListProp];
+              if ( data == null ) {
+                console.warn('listResultsListProp' ,
+                  'ruined, did not have prop',
+                  data,config.listResultListProp, dataOrig )
+              }
             }
+
+            if ( config.listResults_ItemProp != null ) {
+              var y = [];
+              $.each(data, function copyProp(k, v) {
+                var dataModified = data[config.listResults_ItemProp];
+                y.push(dataModified);
+              });
+              /// debugger
+              data = y;
+            }
+
+
+
             $scope.updateListData(data)
             $scope.selectedIndex = 0;
           });
@@ -468,15 +519,12 @@
       }
       // if ( config.remote != false ) {
       if ( config.noRemote != true ) {
-        initList();
+        initCrudList();
       }
       //} else {
       //   $scope.listData = config.list;
       $scope.selectedIndex = 0;
       // }
-
-
-
 
       $scope.clickListItem = function (item ) {
         scope.item = item;
@@ -484,7 +532,7 @@
       }
 
       $scope.onRefresh = function onRefresh() {
-        initList();
+        initCrudList(true);
       }
 
       $scope.onNew = function onNew() {
@@ -527,17 +575,17 @@
                 //sh.copyProps(data, o);
                 sh.callIfDefined(config.fxSaveTemp, o);
                 config.fxSaveTemp = null;
-                initList();
+                $scope.onRefresh();
                 $scope.newMode = false
               }).error(function oError(data) {
-                console.log('error', data)
-              })
+              console.log('error', data)
+            })
           } else {
             restHelper.update(o).success(function onSaved(data) {
               console.log('updated');
               sh.callIfDefined(config.fxSaveTemp, o);
               config.fxSaveTemp = null;
-              initList();
+              $scope.onRefresh();
             }).error(function oError(data) {
               console.log('error', data);
             })
@@ -558,10 +606,10 @@
         //console.log('delete', item)
         restHelper.delete(item.id).success(function onSaved(data) {
           //console.log('deleted');
-          initList();
+          $scope.onRefresh();
         }).error(function oError(data, status) {
           if ( status== 410 ) { //(gone)
-            initList();
+            $scope.onRefresh();
             return;
           }
           console.log('error', data)
@@ -572,7 +620,10 @@
       $scope.deleteItem = function deleteItem(item) {
         dialogService.showConfirm(
           'Are you sure you want to delete?',
-          'This cannot be undone', $scope.deleteItemC);
+          'This cannot be undone', function onDeleteItem() {
+            //TODO fix implementation so it can pass objects
+            $scope.deleteItemC(item)
+          });
       };
 
       $scope.onSelectListItem = function onSelectListItem(item) {
@@ -649,7 +700,7 @@
           });
 
 
-         // sh.each()
+          // sh.each()
 
 
         }
@@ -659,8 +710,15 @@
         function createFilterFor(query) {
           var lowercaseQuery = angular.lowercase(query);
           return function filterFn(state) {
-            return (angular.lowercase(state.name)
-              .indexOf(lowercaseQuery) != -1);
+            var query = state.name;
+            if (query == null) {
+              query = ''
+            }
+            query = query.toString()
+            var result  =  query.toLowerCase()
+              .indexOf(lowercaseQuery.toLowerCase()) != -1 ;
+            return result
+
           };
         }
       }

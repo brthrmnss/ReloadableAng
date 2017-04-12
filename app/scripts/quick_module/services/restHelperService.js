@@ -192,6 +192,7 @@
       self.$http = $http;
 
       self.initRestHelper = function initRestHelper(config) {
+        //debugger
         if ( config != null ) {
           self.config = config;
         }
@@ -259,6 +260,18 @@
 
           console.log('get', self.paginationSettings )
 
+          if ( self.url == undefined ){
+            console.warn('resthelper', 'list', 'undefined url', self);
+            var q2 = self.utils.createPromise()
+            setTimeout(function returnNothing(){
+              var item = [];
+              q2.resolve(item);
+              sh.callIfDefined(q2.promise.fxSuccess, item);
+              sh.callIfDefined(self.fxListResults, item);
+              console.warn('resthelper', 'list', 'undefined url', self);
+            },10)
+            return q2.promise;
+          }
           self.count(query).success(function (count) {
             //not proper linking?
 
@@ -278,24 +291,24 @@
               self.paginator.page_index =
                 Math.ceil(
                   self.paginationSettings.offset /
-                self.paginationSettings.limit
-            )
+                  self.paginationSettings.limit
+                )
             };
 
             self.$http.get(url,
               {params:self.paginationSettings}
             )
               .success(function (item) {
-                self.utils.unflattenList(item)
-                q.resolve(item);
-                sh.callIfDefined(q.promise.fxSuccess, item);
-                sh.callIfDefined(self.fxListResults, item);
-              }
-            ).error(function (err) {
-                q.reject(err)
-                q.promise.fxError(err);
-                //sh.callIfDefined(q.promise.fxError, err);
-              })
+                  self.utils.unflattenList(item)
+                  q.resolve(item);
+                  sh.callIfDefined(q.promise.fxSuccess, item);
+                  sh.callIfDefined(self.fxListResults, item);
+                }
+              ).error(function (err) {
+              q.reject(err)
+              q.promise.fxError(err);
+              //sh.callIfDefined(q.promise.fxError, err);
+            })
           }).error(function (err) {
             q.reject(err)
             sh.callIfDefined(q.promise.fxError, err);
@@ -333,7 +346,7 @@
       }
       definePagination();
 
-      restHelper.create = function create(obj) {
+      restHelper._create = function create(obj) {
         var url =  '';
         url = self.url  + '/create';
         obj.timestamp = '?'+new Date().getTime();
@@ -361,12 +374,14 @@
 
         }
         self.utils.flatten(obj)
+        //debugger
         var promise = self.$http.get(url, {params:obj});
         if ( raw == true ) {
           return promise;
         }
         //return promise;
 
+        console.info('restHelper', 'save', obj, self)
         var d = $q.defer();
         promise
           .success(function onSaved(data,_p, headers) {
@@ -387,12 +402,12 @@
             }
             d.resolve(obj)
           }).error(function oError(data) {
-            console.log('error', data)
-            if (d.promise.fxError == null) {
-              d.promise.fxError(data);
-            }
-            d.reject(obj)
-          });
+          console.log('error', data)
+          if (d.promise.fxError == null) {
+            d.promise.fxError(data);
+          }
+          d.reject(obj)
+        });
 
         self.utils.decoratePromiseForAng(d)
 
@@ -405,15 +420,19 @@
         url = self.url  + '/update';
         obj.timestamp = '?'+new Date().getTime();
         self.utils.flatten(obj);
-        var promise = self.$http.get(url, {params:obj});
-        if ( raw == true ) {
-          return promise;
-        }
+
 
         if ( obj.id == null ) {
           console.error('cannot update object without id')
         }
 
+        console.info('restHelper', 'url', obj, self)
+
+        // url = self.url  + '/update' + '/'+obj.id;
+        var promise = self.$http.get(url, {params:obj});
+        if ( raw == true ) {
+          return promise;
+        }
         var d = $q.defer();
         promise
           .success(function onSaved(data,_p, headers) {
@@ -426,12 +445,12 @@
             }
             d.resolve(obj)
           }).error(function oError(data) {
-            self.error('error', data)
-            if (d.promise.fxError == null) {
-              d.promise.fxError(data);
-            }
-            d.reject(data)
-          });
+          self.error('error', data)
+          if (d.promise.fxError == null) {
+            d.promise.fxError(data);
+          }
+          d.reject(data)
+        });
 
         self.utils.decoratePromiseForAng(d)
 
@@ -439,11 +458,14 @@
       };
 
       restHelper.delete = function deleteId(id) {
+        if ( id == null )
+          throw new Error('id is null on item')
         var url =  '';
         url = self.url  + '/delete';
         var obj = {};
         obj.id = id;
         obj.timestamp = '?'+new Date().getTime();
+        console.info('restHelper', 'delete', obj, self)
         return self.$http.get(url, {params:obj});
       };
 
@@ -476,6 +498,7 @@
           if ( self.config.flatten = true ) {
             var clone = sh.clone(obj)
             delete clone['data_json'] //clone.data_json = null;
+            //debugger
             obj.data_json = JSON.stringify(clone);
           }
         };
@@ -490,6 +513,9 @@
 
         self.utils.unflatten = function flatten(obj) {
           if ( self.config.flatten = true ) {
+            if ( obj.data_json == null ) {
+              return; //why: redieved vanilla json objects, nothing to parse
+            }
             var live = JSON.parse(obj.data_json);
             for ( var k in live ) {
               if ( k == 'id ') continue;
@@ -515,7 +541,7 @@
 
     var service  = new RestHelper();
 
-    service.create = function create(config) {
+    service._create = function create(config) {
       var rH = new RestHelper(config); //?
       rH.initRestHelper(config)
       return rH;
@@ -536,6 +562,22 @@
 
   RestHelper.$inject = ['$http', '$q', 'sh'];
   var module =  angular.module('com.sync.quick');
-  module.factory('restHelper', RestHelper );
-  module.factory('$restHelper', RestHelper );
+
+
+  //function hitThem() {
+    if (window.reloadableHelper) {
+      var wrapperRelodableService = window.reloadableHelper.makeServiceReloadable(
+        'restHelper', RestHelper)
+      angular.module('com.sync.quick').factory('restHelper', wrapperRelodableService);
+      angular.module('com.sync.quick').factory('$restHelper', wrapperRelodableService);
+    } else{
+      module.factory('restHelper', RestHelper );
+      module.factory('$restHelper', RestHelper );
+
+    }
+ // }
+ // setTimeout(hitThem, 10)
+
+
+
 }());
