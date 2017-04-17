@@ -470,5 +470,21 @@
     return helper;
 
   }
-  angular.module('74App').factory('transcludeHelper', transcludeHelper );
+
+  if ( window.reloadableHelper ) {
+    function defineQuickReloadingDir() {
+      var app = angular.module('com.sync.quick');
+      window.reloadableHelper.upgradeApp(app)
+      return app;
+    }
+    var app = defineQuickReloadingDir();
+    var wrapperRelodableService = window.reloadableHelper
+      .makeServiceReloadable('transcludeHelper', transcludeHelper);
+    app.factory('transcludeHelper', wrapperRelodableService);
+  } else {
+    var app = angular.module('com.sync.quick');
+    app.factory('transcludeHelper', transcludeHelper);
+  }
+
+  //angular.module('74App').factory('transcludeHelper', transcludeHelper );
 }());

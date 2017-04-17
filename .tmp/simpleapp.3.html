@@ -1,0 +1,205 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <title>Tester App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+  <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+  <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css"/>
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+<!--  <linkx rel="stylesheet" href="styles/prod-plan-css.css"/>
+  &lt;!&ndash; endbuild &ndash;&gt;
+  &lt;!&ndash; build:css(.tmp) styles/main.css &ndash;&gt;
+  <linkx rel="stylesheet" href="styles/filemon.css"/>
+  &lt;!&ndash; endbuild &ndash;&gt;
+  &lt;!&ndash; #build:css(.tmp) styles/main.css &ndash;&gt;
+  <link rel="stylesheet" href="styles/list_styles.css"/>
+  &lt;!&ndash; endbuild &ndash;&gt;
+  &lt;!&ndash; #build:css(.tmp) styles/main.css &ndash;&gt;
+  <link rel="stylesheet" href="styles/material_styles.css"/>
+  &lt;!&ndash; endbuild &ndash;&gt;-->
+
+  <script>
+    window.skipDefaultErrorAlerter = true;
+    window.onerror = function onError(errorMsg, url, lineNumber,d,e) {
+      //debugger;
+      if ( errorMsg.includes('app is not defined')) {
+        console.warn('ignore app')
+        return;
+      }
+
+      var msg = [errorMsg, url, lineNumber].join(' ')
+      console.log('error', errorMsg, url, lineNumber)
+      if ( errorMsg.includes('Uncaught SyntaxError:')) {
+        alert(msg, 'syntax error')
+      }
+
+      return;
+
+
+      document.getElementById("p1").innerHTML = [errorMsg, url, lineNumber
+        ,
+        e.stack].join('<br />');
+      //  alert('issue with this page ' + errorMsg + ' ' + lineNumber)
+    }
+  </script>
+</head>
+<body ng-app="74App">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!--
+ This app is designed to demonstrate
+ advanced quickforom functionality
+-->
+<!--Tester App-->
+<!--
+<quick-pagination-demo>
+</quick-pagination-demo>
+-->
+
+<quick-crud-demo>
+</quick-crud-demo>
+<!--
+
+
+
+
+
+<quick-form-demo>
+</quick-form-demo>
+<!--
+-->
+
+
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<!--<script src="bower_components/es5-shim/es5-shim.js"></script>-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+<script src="bower_components/angular-ui-map/ui-map.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
+<!--<script src="bower_components/ui-select/dist/select.js"></script>-->
+<script src="bower_components/angular.pubsub/src/angular-pubsub.js"></script>
+<script src="bower_components/bacon/dist/Bacon.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/quick_module/quick.js"></script>
+<script src="scripts/appSimple.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/about.js"></script>
+<!-- endbuild -->
+
+
+<!-- entry point -->
+
+<!--include everything in scripts/ except files directly inside scripts (without subdirectory) -->
+<script src="/scripts/cc/controllers/mainCCController.js"></script>
+<script src="/scripts/controllers/about.js"></script>
+<!--<script src="/scripts/controllers/appConfigFactory.js"></script>-->
+<script src="/scripts/controllers/config.js"></script>
+<!--<script src="/scripts/controllers/customersController.js"></script>
+<script src="/scripts/controllers/customersFactory.js"></script>
+<script src="/scripts/controllers/customersFactoryInMemory.js"></script>
+<script src="/scripts/controllers/main.js"></script>
+<script src="/scripts/controllers/mainDialogController.js"></script>-->
+<!--
+12/11/2016
+Quick Fix to ignore these lines ... could have targeted them in GHS .. but didn't feel like it
+<script src="/scripts/quick_module/1st_load/shelpersService.js"></script>
+<script src="/scripts/controllers/transcludeHelper.js"></script>
+-->
+
+<script src="/scripts/quick_module/1st_load/shelpersService.js"></script>
+<script src="/scripts/controllers/transcludeHelper.js"></script>
+
+<script src="/scripts/core/comp/analytics.glance.dir.js"></script>
+<script src="/scripts/core/comp/listFlowUtilsService.js"></script>
+<script src="/scripts/core/comp/listflow.dir.js"></script>
+<script src="/scripts/core/demo/listflow.dir.demo.js"></script>
+<script src="/scripts/core/demo/movieSearchService.js"></script>
+<script src="/scripts/core/demo/testcomp.dir.js"></script>
+<script src="/scripts/core/demo/tileSearchController.js"></script>
+<script src="/scripts/core/demo/tileSearchService.js"></script>
+<script src="/scripts/core/demo/tilesearch.dir.demo.js"></script>
+<script src="/scripts/core/header.ctrl.js"></script>
+<script src="/scripts/core/header.dir.js"></script>
+<script src="/scripts/core/list1.js"></script>
+<script src="/scripts/core/snippets.js"></script>
+<script src="/scripts/logger/LoggerCtrl.js"></script>
+
+<script src="/scripts/quick_module/comp/quickcol.dir.js"></script>
+<script src="/scripts/quick_module/comp/quickcrud.dir.js"></script>
+<script src="/scripts/quick_module/demo/appareacomp.dir.demo.js"></script>
+<script src="/scripts/quick_module/demo/quickcrud.dir.demo.js"></script>
+<script src="/scripts/quick_module/demo/quickdialog.dir.demo.js"></script>
+<script src="/scripts/quick_module/demo/quickform.dir.demo.js"></script>
+<script src="/scripts/quick_module/demo/quickpagination.dir.demo.js"></script>
+<script src="/scripts/quick_module/demo/quickreload.dir.demo.js"></script>
+<script src="/scripts/quick_module/demo/quickreloadable.dir.example.js"></script>
+<script src="/scripts/quick_module/quick.js"></script>
+<script src="/scripts/quick_module/quick/appAreaService.js"></script>
+<script src="/scripts/quick_module/quick/appareacomp.dir.js"></script>
+<script src="/scripts/quick_module/quick/dialogService.js"></script>
+<script src="/scripts/quick_module/quick/panel.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickRouter.js"></script>
+<script src="/scripts/quick_module/quick/quickchecklist.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickdialog.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickform.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickformStrToFormJSONGenerator.js"></script>
+<script src="/scripts/quick_module/quick/quicklist.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickpaginate.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickreloadable.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickreloadable.reload.dir.js"></script>
+<script src="/scripts/quick_module/quick/quickview.dir.js"></script>
+<script src="/scripts/quick_module/services/PromiseHelperV3.js"></script>
+<script src="/scripts/quick_module/services/angFuncService.js"></script>
+<script src="/scripts/quick_module/services/evernoteHelperService.js"></script>
+<script src="/scripts/quick_module/services/googleCalendarHelperService.js"></script>
+<script src="/scripts/quick_module/services/pubsubHelper.js"></script>
+<script src="/scripts/quick_module/services/quickChecklistHelperService.js"></script>
+<script src="/scripts/quick_module/services/quickFormHelperService.js"></script>
+<script src="/scripts/quick_module/services/quickUIService.js"></script>
+<script src="/scripts/quick_module/services/reloadableHelperTestService.js"></script>
+<script src="/scripts/quick_module/services/restHelperService.js"></script>
+<script src="/scripts/quick_module/services/uiXService.js"></script>
+<script src="/scripts/quick_module/services/workChainService.js"></script>
+<script src="/scripts/quick_module/utils/dataGenService.js"></script>
+<script src="/scripts/quick_module/utils/testBrowserEval.js"></script>
+
+<!-- endbuild -->
+
+</div>
+</body>
+</html>

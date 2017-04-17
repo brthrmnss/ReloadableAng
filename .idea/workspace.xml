@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2403d80-9436-4497-9e83-ecac5e13e926" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.tmp/simpleapp.3.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/app.js" afterPath="$PROJECT_DIR$/app/scripts/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/transcludeHelper.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/transcludeHelper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.html" afterPath="$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.js.bak" afterPath="$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.js.bak" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/demo/quickcrud.dir.demo.html" afterPath="$PROJECT_DIR$/app/scripts/quick_module/demo/quickcrud.dir.demo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/demo/quickcrud.dir.demo.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/demo/quickcrud.dir.demo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/quick/quickform.dir.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/quick/quickform.dir.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/quick/quicklist.dir.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/quick/quicklist.dir.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/services/evernoteHelperService.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/services/evernoteHelperService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/services/quickFormHelperService.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/services/quickFormHelperService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/services/restHelperService.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/services/restHelperService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/services/uiXService.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/services/uiXService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/main.scss" afterPath="$PROJECT_DIR$/app/styles/main.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/quick_module/demo/quickreload.dir.demo.js" afterPath="$PROJECT_DIR$/app/scripts/quick_module/demo/quickreload.dir.demo.js" />
     </list>
     <ignored path="port3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,9 +26,9 @@
     <favorites_list name="port3" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.47405967">
+    <splitter split-orientation="horizontal" split-proportion="0.6410761">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.28055078">
+        <splitter split-orientation="horizontal" split-proportion="0.45594263">
           <split-first>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
               <file leaf-file-name="quickform_tester.html" pinned="false" current-in-tab="true">
@@ -144,131 +135,105 @@
           </split-first>
           <split-second>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-              <file leaf-file-name="quickcrud.dir.demo.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/demo/quickcrud.dir.demo.js">
+              <file leaf-file-name="simpleapp.3.html" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/.tmp/simpleapp.3.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="5220">
-                      <caret line="493" column="30" selection-start-line="493" selection-start-column="30" selection-end-line="493" selection-end-column="30" />
+                    <state relative-caret-position="230">
+                      <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
                       <folding>
-                        <element signature="e#4443#4972#0" expanded="false" />
-                        <element signature="e#6261#6617#0" expanded="false" />
-                        <element signature="e#7451#8357#0" expanded="false" />
-                        <element signature="e#7699#8243#0" expanded="false" />
-                        <element signature="e#8733#8854#0" expanded="false" />
-                        <element signature="e#8891#9044#0" expanded="false" />
-                        <element signature="e#9077#9169#0" expanded="false" />
-                        <element signature="e#9227#9966#0" expanded="false" />
-                        <element signature="e#10024#10397#0" expanded="false" />
-                        <element signature="e#10450#10610#0" expanded="false" />
-                        <element signature="e#10714#11024#0" expanded="false" />
-                        <element signature="e#11125#11587#0" expanded="false" />
-                        <element signature="e#11889#12042#0" expanded="false" />
-                        <element signature="e#12246#12311#0" expanded="false" />
-                        <element signature="e#12352#12478#0" expanded="false" />
-                        <element signature="e#13441#14177#0" expanded="false" />
-                        <element signature="e#15961#16535#0" expanded="false" />
-                        <element signature="e#16580#16756#0" expanded="false" />
-                        <element signature="e#17053#17401#0" expanded="false" />
-                        <element signature="e#17469#22498#0" expanded="false" />
-                        <element signature="e#21377#22263#0" expanded="false" />
-                        <element signature="e#23566#23620#0" expanded="false" />
-                        <element signature="e#23653#23960#0" expanded="false" />
-                        <element signature="e#30342#33635#0" expanded="false" />
-                        <element signature="e#31256#32331#0" expanded="false" />
-                        <element signature="e#33782#36278#0" expanded="false" />
-                        <element signature="e#34679#34731#0" expanded="false" />
+                        <marker date="1492358567808" expanded="true" signature="2262:9451" ph="..." />
                       </folding>
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="redeyed-function-config-extra-params.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/node_modules/grunt-google-cdn/node_modules/bower/node_modules/cardinal/node_modules/redeyed/test/redeyed-function-config-extra-params.js">
+              <file leaf-file-name="transcludeHelper.js" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/app/scripts/controllers/transcludeHelper.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="525">
-                      <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="shelpersService.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/1st_load/shelpersService.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="4215">
-                      <caret line="281" column="9" selection-start-line="281" selection-start-column="9" selection-end-line="281" selection-end-column="9" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="quickFormHelperService.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/services/quickFormHelperService.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="360">
-                      <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="quickUIServiceTest.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/services/quickUIServiceTest.js">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="345">
-                      <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+                    <state relative-caret-position="210">
+                      <caret line="481" column="65" selection-start-line="481" selection-start-column="65" selection-end-line="481" selection-end-column="65" />
                       <folding>
-                        <marker date="1460924495000" expanded="true" signature="451:474" ph="..." />
+                        <element signature="e#85#14219#0" expanded="false" />
                       </folding>
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="reloadableHelperTestService.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/services/reloadableHelperTestService.js">
+              <file leaf-file-name="props.js" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/app/scripts/scripts_homer/filters/props.js">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="0">
+                      <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/app/scripts/scripts_homer/app.js">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="435">
+                      <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/app/scripts/controllers/config.js">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="315">
+                      <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="appConfigFactory.js" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/app/scripts/controllers/appConfigFactory.js">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="70">
+                      <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/app/scripts/controllers/main.js">
                   <provider selected="true" editor-type-id="text-editor">
                     <state relative-caret-position="405">
-                      <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+                      <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
                       <folding />
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="quickcrud.dir.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.js">
+              <file leaf-file-name="vendor.js" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/.tmp/concat/scripts/vendor.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="2010">
-                      <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+                    <state relative-caret-position="358">
+                      <caret line="12015" column="13099" selection-start-line="12015" selection-start-column="13099" selection-end-line="12015" selection-end-column="13099" />
                       <folding />
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="appareacomp.dir.js" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/appareacomp.dir.js">
+              <file leaf-file-name="themes.html" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/bower_components/summernote/themes.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="143">
-                      <caret line="270" column="29" selection-start-line="270" selection-start-column="29" selection-end-line="270" selection-end-column="29" />
+                    <state relative-caret-position="630">
+                      <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
                       <folding />
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="quickpagination.dir.demo.js" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/demo/quickpagination.dir.demo.js">
+              <file leaf-file-name="appSimple.js" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/app/scripts/appSimple.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="1590">
-                      <caret line="106" column="44" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="44" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="quickstart.html" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/app/scripts/logger/quickstart.html">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="3060">
-                      <caret line="204" column="43" selection-start-line="204" selection-start-column="43" selection-end-line="204" selection-end-column="43" />
+                    <state relative-caret-position="255">
+                      <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
                       <folding />
                     </state>
                   </provider>
@@ -367,8 +332,8 @@
               <file leaf-file-name="quickpaginate.dir.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/quickpaginate.dir.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="94">
-                      <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
+                    <state relative-caret-position="446">
+                      <caret line="107" column="8" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
                       <folding>
                         <element signature="e#1025#1188#0" expanded="false" />
                       </folding>
@@ -453,8 +418,8 @@
               <file leaf-file-name="quickform.dir.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/quickform.dir.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="514">
-                      <caret line="1408" column="23" selection-start-line="1408" selection-start-column="23" selection-end-line="1408" selection-end-column="23" />
+                    <state relative-caret-position="169">
+                      <caret line="1385" column="0" selection-start-line="1385" selection-start-column="0" selection-end-line="1385" selection-end-column="0" />
                       <folding>
                         <element signature="e#18474#19734#0" expanded="false" />
                         <element signature="e#21349#23129#0" expanded="false" />
@@ -502,14 +467,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/scripts/quick_module/demo/quickform.dir.demo.js" />
-        <option value="$PROJECT_DIR$/app/scripts/quick_module/quick/quicklist.dir.html" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/quick/quickchecklist.dir.js.basic.bak" />
-        <option value="$PROJECT_DIR$/app/scripts/app.js" />
         <option value="$PROJECT_DIR$/bower_components/angular.pubsub/src/angular-pubsub.js" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/services/pubsubHelper.js" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/quick/dialogService.js" />
-        <option value="$PROJECT_DIR$/app/scripts/controllers/transcludeHelper.js" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/services/quickChecklistHelperService.js" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/quick/quickchecklist.dir.html" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/quick/quickchecklist.dir.js" />
@@ -553,6 +514,10 @@
         <option value="$PROJECT_DIR$/app/scripts/quick_module/services/quickFormHelperService.js" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/quick/quickform.dir.js" />
         <option value="$PROJECT_DIR$/app/scripts/quick_module/comp/quickcrud.dir.js" />
+        <option value="$PROJECT_DIR$/app/scripts/app.js" />
+        <option value="$PROJECT_DIR$/app/scripts/appSimple.js" />
+        <option value="$PROJECT_DIR$/.tmp/simpleapp.3.html" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/transcludeHelper.js" />
       </list>
     </option>
   </component>
@@ -628,6 +593,9 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Project Files" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -643,6 +611,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="summernote" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -675,6 +675,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts_homer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts_homer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="filters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -726,10 +774,91 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".tmp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="port3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".tmp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="concat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files" />
       </pane>
     </panes>
   </component>
@@ -737,7 +866,7 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/dist/index_campaign_content.html" />
     <property name="recentsLimit" value="5" />
@@ -749,18 +878,18 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\user1\Dropbox\projects\learn angular\port3\app\scripts\quick_module\demo" />
-      <recent name="C:\Users\user1\Dropbox\projects\learn angular\port3\app\scripts\quick_module\comp" />
-      <recent name="$PROJECT_DIR$/app/scripts" />
-      <recent name="$PROJECT_DIR$/app/scripts/quick_module/quick" />
-      <recent name="$PROJECT_DIR$/.tmp" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/scripts/quick_module/1st_load" />
       <recent name="$PROJECT_DIR$/app/scripts/quick_module/demo" />
       <recent name="$PROJECT_DIR$/app/scripts/quick_module/services" />
       <recent name="$PROJECT_DIR$/app/scripts/quick_module/utils" />
+      <recent name="$PROJECT_DIR$/app/scripts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user1\Dropbox\projects\learn angular\port3\app\scripts" />
+      <recent name="C:\Users\user1\Dropbox\projects\learn angular\port3\.tmp" />
+      <recent name="C:\Users\user1\Dropbox\projects\learn angular\port3\app\scripts\quick_module\demo" />
+      <recent name="C:\Users\user1\Dropbox\projects\learn angular\port3\app\scripts\quick_module\comp" />
       <recent name="$PROJECT_DIR$/app/scripts" />
     </key>
   </component>
@@ -880,12 +1009,21 @@
       <workItem from="1475597823158" duration="1196000" />
       <workItem from="1475896807978" duration="599000" />
       <workItem from="1475967885179" duration="822000" />
-      <workItem from="1491998134149" duration="280000" />
+      <workItem from="1491998134149" duration="1911000" />
+      <workItem from="1492355591239" duration="4439000" />
     </task>
+    <task id="LOCAL-00001" summary="go">
+      <created>1491998845034</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1491998845034</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93009000" />
+    <option name="totallyTimeSpent" value="99079000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -901,24 +1039,24 @@
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18550107" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18763326" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299539" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33117485" sideWeight="0.5021299" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5397891" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25069124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3345622" sideWeight="0.4978701" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39896372" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25069124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5406977" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39896372" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299539" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -952,6 +1090,12 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="go" />
+    <option name="LAST_COMMIT_MESSAGE" value="go" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1131,106 +1275,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/utils/testBrowserEval.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="104" column="29" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ghs_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.tmp/ghs_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.homer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="40" column="40" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/quickreloadable.dir.js.b4.clean.bak">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bower_components/angular/angular.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="7873" column="6" selection-start-line="7873" selection-start-column="6" selection-end-line="7873" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.tmp/quickform_tester.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="58" column="3" selection-start-line="58" selection-start-column="3" selection-end-line="58" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/demo/quickreload.dir.demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="202" column="7" selection-start-line="202" selection-start-column="7" selection-end-line="202" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/quickreloadable.dir.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="64" column="60" selection-start-line="64" selection-start-column="60" selection-end-line="64" selection-end-column="60" />
-          <folding>
-            <element signature="e#352#524#0" expanded="false" />
-            <element signature="e#527#611#0" expanded="false" />
-            <element signature="e#675#1065#0" expanded="false" />
-            <element signature="e#7073#8266#0" expanded="false" />
-            <element signature="e#8381#9176#0" expanded="false" />
-            <element signature="e#9236#9532#0" expanded="false" />
-            <element signature="e#19222#19835#0" expanded="false" />
-            <element signature="e#23246#30240#0" expanded="false" />
-            <element signature="e#25890#26675#0" expanded="false" />
-            <element signature="e#26733#27150#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/quickform_tester.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/demo/quickreload.dir.demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/quickcrud_tester.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/jquery-1.11.1.js." />
     <entry file="file://$PROJECT_DIR$/.tmp/quickcrud_tester.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1242,14 +1286,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1377">
           <caret line="81" column="18" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/transcludeHelper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2618">
-          <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1458,8 +1494,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/demo/quickcrud.dir.demo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5220">
-          <caret line="493" column="30" selection-start-line="493" selection-start-column="30" selection-end-line="493" selection-end-column="30" />
+        <state relative-caret-position="7665">
+          <caret line="856" column="16" selection-start-line="856" selection-start-column="16" selection-end-line="856" selection-end-column="16" />
           <folding>
             <element signature="e#4443#4972#0" expanded="false" />
             <element signature="e#6261#6617#0" expanded="false" />
@@ -1536,26 +1572,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/appareacomp.dir.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="270" column="29" selection-start-line="270" selection-start-column="29" selection-end-line="270" selection-end-column="29" />
+        <state relative-caret-position="368">
+          <caret line="285" column="9" selection-start-line="285" selection-start-column="9" selection-end-line="285" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/quickpaginate.dir.js">
+    <entry file="file://$PROJECT_DIR$/.tmp/quickcrud_tester.2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
-          <folding>
-            <element signature="e#1025#1188#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.tmp/styles/list_styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3219">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/quickform.dir.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="1408" column="23" selection-start-line="1408" selection-start-column="23" selection-end-line="1408" selection-end-column="23" />
+        <state relative-caret-position="169">
+          <caret line="1385" column="0" selection-start-line="1385" selection-start-column="0" selection-end-line="1385" selection-end-column="0" />
           <folding>
             <element signature="e#18474#19734#0" expanded="false" />
             <element signature="e#21349#23129#0" expanded="false" />
@@ -1567,6 +1609,116 @@
             <element signature="e#34077#36030#0" expanded="false" />
             <element signature="e#36083#36517#0" expanded="false" />
             <marker date="1474834045996" expanded="true" signature="39452:39464" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/appSimple.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.tmp/concat/scripts/vendor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="12015" column="13099" selection-start-line="12015" selection-start-column="13099" selection-end-line="12015" selection-end-column="13099" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/appConfigFactory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower_components/summernote/themes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/scripts_homer/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/scripts_homer/filters/props.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/cc/controllers/mainCCController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.tmp/simpleapp.3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+          <folding>
+            <marker date="1492358567808" expanded="true" signature="2262:9451" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/transcludeHelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="481" column="65" selection-start-line="481" selection-start-column="65" selection-end-line="481" selection-end-column="65" />
+          <folding>
+            <element signature="e#85#14219#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/quick_module/quick/quickpaginate.dir.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="107" column="8" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+          <folding>
+            <element signature="e#1025#1188#0" expanded="false" />
           </folding>
         </state>
       </provider>

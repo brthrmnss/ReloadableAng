@@ -189,9 +189,9 @@
           //return;
         }
         jQuery.ajax({
-          url: file,
+          url: file, //+'?rev='+Math.random(),
           dataType: "script",
-          cache: true
+          cache: false
         })
           .error(function(s, b,c) {
             console.error('error loading ' +  file,b, c)
